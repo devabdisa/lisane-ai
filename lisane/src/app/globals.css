@@ -87,9 +87,4 @@
     font-family: var(--font-sans);
     -webkit-tap-highlight-color: transparent;
   }
-
-  :lang(am),
-  :lang(ti) {
-    font-family: var(--font-ethiopic);
-  }
 }

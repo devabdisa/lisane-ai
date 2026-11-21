@@ -3,7 +3,8 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useId, useTransition } from "react";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { localeNativeNames, routing, type AppLocale } from "@/i18n/routing";
+import { fontClassNames, getLanguage } from "@/config/languages";
+import { routing, type AppLocale } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
 
 function LanguageSwitcher({ className }: { className?: string }) {
@@ -30,12 +31,15 @@ function LanguageSwitcher({ className }: { className?: string }) {
       <legend className="sr-only">{t("label")}</legend>
       {routing.locales.map((locale) => {
         const selected = locale === currentLocale;
+        const language = getLanguage(locale);
         return (
           <label
             key={locale}
             lang={locale}
+            dir={language.dir}
             className={cn(
               "flex min-h-12 cursor-pointer items-center justify-between gap-4 rounded-8 p-3 text-label text-fg has-focus-visible:outline-2 has-focus-visible:outline-fg",
+              fontClassNames[language.font],
               selected && "bg-field font-semibold",
             )}
           >
@@ -48,7 +52,7 @@ function LanguageSwitcher({ className }: { className?: string }) {
               onChange={() => selectLocale(locale)}
               className="sr-only"
             />
-            <span>{localeNativeNames[locale]}</span>
+            <span>{language.nativeName}</span>
             {selected && <span aria-hidden>✓</span>}
           </label>
         );

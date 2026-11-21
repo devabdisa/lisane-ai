@@ -42,7 +42,7 @@ export default function FoundationsPreview() {
       <header className="flex flex-col gap-6">
         <p className="text-caption font-semibold tracking-wide">{t("eyebrow")}</p>
         <p className="text-title font-semibold">
-          <span lang="am" className="font-normal">ልሳኔ</span> · Lisane AI
+          <span lang="am" className="font-ethiopic font-normal">ልሳኔ</span> · Lisane AI
         </p>
         <h1 className="text-title font-semibold sm:text-display">
           {t.rich("headline", { br: () => <br /> })}
@@ -109,7 +109,7 @@ export default function FoundationsPreview() {
           {typeScale.map((row) => (
             <div key={row.spec} className="grid gap-2 border-b border-line pb-6 lg:grid-cols-2 lg:gap-8">
               <p lang="en" className={`${row.size} ${row.weight}`}>{row.en}</p>
-              <p lang="am" className={row.size}>{row.am}</p>
+              <p lang="am" className={`font-ethiopic ${row.size}`}>{row.am}</p>
               <p className="text-caption text-fg-muted lg:col-span-2">{row.spec}</p>
             </div>
           ))}

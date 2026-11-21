@@ -1,0 +1,48 @@
+{
+  "Metadata": {
+    "title": "Lisane AI",
+    "description": "Shaakala dubbii Ingiliffaa dhuunfaa deeggarsa afaan keetiitiin."
+  },
+  "LanguageSwitcher": {
+    "label": "Afaan"
+  },
+  "Foundations": {
+    "eyebrow": "LISANE AI / LOOMII HALKAN WALAKKAA / BU'UURAALEE",
+    "headline": "Bakka callisaa.<br></br>Sagalee caalaatti ofitti amanamummaa qabu.",
+    "intro": "Shaakala Afaan Ingiliffaa dhuunfaa. Kaanaavaasii halkan walakkaa, tarkaanfii itti aanu kan ifa ta'e, fi iddoo irra deebisanii yaaluuf ta'u.",
+    "principles": {
+      "private": "Dhuunfaa, agarsiisaaf kan hin taane",
+      "progress": "Guddina malee mudaa-maleessummaa miti",
+      "clarity": "Faaya irra iftooma"
+    },
+    "colors": {
+      "title": "01 / Halluwwan sadii. Kaayyoo ifa ta'e.",
+      "description": "Dhaabbataan dukkana. Dirreen hundi 'Midnight' fi 'White' irraa kan maddaniidha. 'Lime'n bakka isaa argata.",
+      "midnight": "Kaanvaasii callisaa",
+      "white": "Gosa ifa ta'e + mallattoolee",
+      "lime": "Akkaataa dubbii itti yaadamee tokko",
+      "dark": "Dukkanaawaa / Durtii",
+      "light": "Ifa / Kontiraastii-mira",
+      "canvas": "Shiraa",
+      "surface": "Gubbaa {level}",
+      "accentRule": "Laayimiin yeroo hunda halkan walakkaa waliin wal arga."
+    },
+    "type": {
+      "title": "02 / Barreeffamoota lama. Sagalee tokko.",
+      "description": "Ingiliffaaf Inter. Afaan Amaaraatiif Noto Sans Ethiopic. Hammamiinsa waloo, jijjiiramoota maatii foontii adda addaa."
+    },
+    "controls": {
+      "title": "04 / Tarkaanfiiwwan itti aanan ifa",
+      "description": "Halluu laayimii gocha ijoo qofaaf. Sarara alaa filannoo biroof. Xiyyeeffannoo giddu-galeessaa fi fuullee galtee.",
+      "buttons": "Qulfiiwwan",
+      "buttonsNote": "Olka'iinsa xiqqaa 48px · Raadiyaasii guutuu · Moggaasa gulaalamuu danda'u",
+      "startSpeaking": "Dubbachuu jalqabi",
+      "maybeLater": "Tarii booda",
+      "textInput": "Galchee barreeffamaa",
+      "topicLabel": "Maal shaakaluu barbaadda?",
+      "topicPlaceholder": "fkn. of beeksisuu",
+      "topicHint": "Mata-duree siif fayyadaa ta'e filadhu.",
+      "languageSwitcher": "Jijjiiraa Afaanii"
+    }
+  }
+}

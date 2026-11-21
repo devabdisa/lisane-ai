@@ -2,15 +2,31 @@ import { hasLocale } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
 import { notFound } from "next/navigation";
 import * as rootParams from "next/root-params";
+import { defaultLocale } from "@/config/languages";
 import { routing } from "./routing";
 
-async function loadMessages(locale: string) {
-  try {
-    return (await import(`../../messages/${locale}.json`)).default;
-  } catch {
-    // am/om message files are drafted in step 04; until then those locales render English.
-    return (await import("../../messages/en.json")).default;
+type Messages = { [key: string]: string | Messages };
+
+// Keys not yet translated in a locale fall back to the English source string.
+function withFallback(base: Messages, override: Messages): Messages {
+  const merged: Messages = { ...base };
+  for (const [key, value] of Object.entries(override)) {
+    const baseValue = base[key];
+    merged[key] =
+      typeof value === "object" && typeof baseValue === "object"
+        ? withFallback(baseValue, value)
+        : value;
   }
+  return merged;
+}
+
+async function loadMessages(locale: string): Promise<Messages> {
+  const source: Messages = (await import(`../../messages/${defaultLocale}.json`)).default;
+  if (locale === defaultLocale) {
+    return source;
+  }
+  const translated: Messages = (await import(`../../messages/${locale}.json`)).default;
+  return withFallback(source, translated);
 }
 
 export default getRequestConfig(async ({ locale }) => {

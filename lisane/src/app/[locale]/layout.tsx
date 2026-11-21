@@ -3,6 +3,7 @@ import { Inter, Noto_Sans_Ethiopic } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { fontClassNames, getLanguage } from "@/config/languages";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
@@ -43,10 +44,13 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
     notFound();
   }
 
+  const language = getLanguage(locale);
+
   return (
     <html
       lang={locale}
-      className={`${inter.variable} ${notoSansEthiopic.variable} h-full antialiased`}
+      dir={language.dir}
+      className={`${inter.variable} ${notoSansEthiopic.variable} ${fontClassNames[language.font]} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-canvas text-fg">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
