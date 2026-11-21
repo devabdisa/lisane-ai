@@ -12,18 +12,19 @@ import {
 import {
   LIVE_MIN_TRANSCRIPT_LENGTH,
   isLikelyWrongScriptTranscript,
-  isMeaningfulUserTranscript,
   isStableEnoughForFallbackFinalization,
   isUsableEnglishTranscript,
   mergeStreamingTranscript,
   normalizeTranscriptText,
 } from "@/lib/live-transcript";
+import { countAudiblePcm16Windows, MIN_AUDIBLE_WINDOWS } from "@/lib/voice-evidence";
 import { buildLiveSystemInstruction, type LiveProfileContext } from "@/prompts/speak-live";
-import type {
-  LiveConnectionStatus,
-  LiveRelayEvent,
-  LiveTurnMode,
-  StartLiveSessionResponse,
+import {
+  DEFAULT_LIVE_AUDIO_INPUT_MIME_TYPE,
+  type LiveConnectionStatus,
+  type LiveRelayEvent,
+  type LiveTurnMode,
+  type StartLiveSessionResponse,
 } from "@/schemas/live";
 import { GEMINI_LIVE_MODEL, getGeminiLive, toModelResource } from "@/server/ai/gemini";
 import { getPrisma } from "@/server/db";
@@ -37,7 +38,6 @@ const LIVE_RECONNECT_MAX_ATTEMPTS = 2;
 const LIVE_RECONNECT_BASE_DELAY_MS = 3000;
 const LIVE_FALLBACK_FINAL_DELAY_MS = 2200;
 const LIVE_ASSISTANT_FALLBACK_FINAL_DELAY_MS = 1800;
-const LIVE_MIN_MEANINGFUL_AUDIO_BYTES = 1600;
 const LIVE_DUPLICATE_WINDOW_MS = 4000;
 const LIVE_RECENT_TRANSCRIPT_LIMIT = 20;
 const LIVE_MAX_OUTPUT_TOKENS = 380;
@@ -104,12 +104,10 @@ type LiveSessionState = {
   pendingAssistantTranscript: string | null;
   pendingUserFinalTimer: ReturnType<typeof setTimeout> | null;
   pendingAssistantFinalTimer: ReturnType<typeof setTimeout> | null;
-  hasSentInitialAssistantTurn: boolean;
   assistantTurnInProgress: boolean;
-  userInputSinceLastAssistantTurn: boolean;
-  userAudioBytesSinceLastAssistantTurn: number;
-  lastMeaningfulUserInputAt: number | null;
-  lastAssistantTurnStartedAt: number | null;
+  discardAssistantTurn: boolean;
+  audibleInputWindows: number;
+  userTranscriptClosed: boolean;
   recentUserFinalTranscripts: Array<{ text: string; at: number }>;
   recentAiFinalTranscripts: Array<{ text: string; at: number }>;
   currentUserTurnId: string | null;
@@ -296,12 +294,10 @@ export class LiveSessionManager {
       pendingAssistantTranscript: null,
       pendingUserFinalTimer: null,
       pendingAssistantFinalTimer: null,
-      hasSentInitialAssistantTurn: false,
       assistantTurnInProgress: false,
-      userInputSinceLastAssistantTurn: false,
-      userAudioBytesSinceLastAssistantTurn: 0,
-      lastMeaningfulUserInputAt: null,
-      lastAssistantTurnStartedAt: null,
+      discardAssistantTurn: false,
+      audibleInputWindows: 0,
+      userTranscriptClosed: false,
       recentUserFinalTranscripts: [],
       recentAiFinalTranscripts: [],
       currentUserTurnId: null,
@@ -391,11 +387,13 @@ export class LiveSessionManager {
         throw new LiveSessionManagerError("LIVE_AUDIO_SEND_FAILED", "Audio payload was empty.");
       }
 
-      if (params.audioBase64) {
-        state.userAudioBytesSinceLastAssistantTurn += Math.floor((params.audioBase64.length * 3) / 4);
+      if (params.audioBase64 && !state.assistantTurnInProgress) {
         state.connection.sendRealtimeInput({
           audio: { data: params.audioBase64, mimeType: params.audioMimeType },
         });
+        if (params.audioMimeType === DEFAULT_LIVE_AUDIO_INPUT_MIME_TYPE && state.audibleInputWindows < MIN_AUDIBLE_WINDOWS) {
+          state.audibleInputWindows += countAudiblePcm16Windows(Buffer.from(params.audioBase64, "base64"));
+        }
       }
 
       // The phone stops sending during silence; without this marker the
@@ -596,45 +594,30 @@ export class LiveSessionManager {
     logInfo("session.connected", { liveSessionId, speakSessionId: latest.speakSessionId });
   }
 
-  private markMeaningfulUserInput(state: LiveSessionState, reason: string) {
-    state.userInputSinceLastAssistantTurn = true;
-    state.lastMeaningfulUserInputAt = Date.now();
-    logInfo("voice.meaningful_user_input", { liveSessionId: state.id, reason });
-  }
-
   private shouldAcceptAssistantOutput(state: LiveSessionState) {
     if (state.assistantTurnInProgress) return true;
+    if (state.discardAssistantTurn) return false;
 
-    const hasUserSignal =
-      state.userInputSinceLastAssistantTurn ||
-      state.userAudioBytesSinceLastAssistantTurn >= LIVE_MIN_MEANINGFUL_AUDIO_BYTES;
-
-    if (!state.hasSentInitialAssistantTurn || hasUserSignal) {
-      this.closeUserTurn(state, "assistant_started");
-      state.assistantTurnInProgress = true;
-      state.lastAssistantTurnStartedAt = Date.now();
-      state.turnCounter += 1;
-      state.currentAssistantTurnId = `t-${state.turnCounter}`;
-      return true;
+    // A provider transcript is not evidence that the learner spoke.
+    if (state.audibleInputWindows < MIN_AUDIBLE_WINDOWS) {
+      state.discardAssistantTurn = true;
+      logInfo("voice.assistant_turn_blocked_no_user_input", { liveSessionId: state.id });
+      return false;
     }
 
-    logInfo("voice.assistant_turn_blocked_no_user_input", {
-      liveSessionId: state.id,
-      userAudioBytesSinceLastAssistantTurn: state.userAudioBytesSinceLastAssistantTurn,
-      lastMeaningfulUserInputAt: state.lastMeaningfulUserInputAt,
-      lastAssistantTurnStartedAt: state.lastAssistantTurnStartedAt,
-    });
-
-    return false;
+    this.closeUserTurn(state, "assistant_started");
+    state.assistantTurnInProgress = true;
+    state.turnCounter += 1;
+    state.currentAssistantTurnId = `t-${state.id}-${state.turnCounter}`;
+    return true;
   }
 
   private markAssistantTurnComplete(state: LiveSessionState) {
-    if (!state.assistantTurnInProgress) return;
-
+    this.closeUserTurn(state, "assistant_started");
     state.assistantTurnInProgress = false;
-    state.hasSentInitialAssistantTurn = true;
-    state.userInputSinceLastAssistantTurn = false;
-    state.userAudioBytesSinceLastAssistantTurn = 0;
+    state.audibleInputWindows = 0;
+    state.userTranscriptClosed = false;
+    state.currentUserTurnId = null;
   }
 
   private handleServerMessage(liveSessionId: string, message: LiveServerMessage) {
@@ -666,17 +649,14 @@ export class LiveSessionManager {
       logInfo("voice.transcript_flagged_wrong_script", { liveSessionId, textLength: rawUserChunk.length });
     }
 
-    if (rawUserChunk.trim()) {
+    if (rawUserChunk.trim() && state.audibleInputWindows >= MIN_AUDIBLE_WINDOWS && !state.userTranscriptClosed) {
       if (!state.pendingUserTranscript) {
         state.turnCounter += 1;
-        state.currentUserTurnId = `t-${state.turnCounter}`;
+        state.currentUserTurnId = `t-${state.id}-${state.turnCounter}`;
       }
 
       state.pendingUserTranscript = mergeStreamingTranscript(state.pendingUserTranscript, rawUserChunk);
       const normalizedUserTranscript = normalizeTranscriptText(state.pendingUserTranscript);
-      if (isMeaningfulUserTranscript(normalizedUserTranscript)) {
-        this.markMeaningfulUserInput(state, "transcript");
-      }
       const isExplicitFinal = Boolean(serverContent.inputTranscription?.finished);
       this.publish(state, {
         type: "transcript",
@@ -691,6 +671,7 @@ export class LiveSessionManager {
       if (isExplicitFinal) {
         this.clearPendingUserFinalTimer(state);
         state.pendingUserTranscript = null;
+        state.userTranscriptClosed = true;
         void this.finalizeUserTranscript(liveSessionId, normalizedUserTranscript, state.currentUserTurnId);
       } else if (serverContent.turnComplete && isStableEnoughForFallbackFinalization(normalizedUserTranscript)) {
         this.scheduleFallbackUserTranscriptFinalization(liveSessionId, state.pendingUserTranscript);
@@ -718,7 +699,10 @@ export class LiveSessionManager {
         return Boolean(text || (audioData && audioMimeType && audioMimeType.toLowerCase().startsWith("audio/")));
       });
 
-    if (hasAssistantPayload && !this.shouldAcceptAssistantOutput(state)) return;
+    if (hasAssistantPayload && !this.shouldAcceptAssistantOutput(state)) {
+      if (serverContent.turnComplete) state.discardAssistantTurn = false;
+      return;
+    }
 
     const rawAiChunk = serverContent.outputTranscription?.text ?? "";
     if (rawAiChunk.trim()) {
@@ -771,8 +755,11 @@ export class LiveSessionManager {
     }
 
     if (serverContent.turnComplete) {
-      this.markAssistantTurnComplete(state);
-      this.publish(state, { type: "assistant_turn_complete" });
+      state.discardAssistantTurn = false;
+      if (state.assistantTurnInProgress) {
+        this.markAssistantTurnComplete(state);
+        this.publish(state, { type: "assistant_turn_complete" });
+      }
     }
   }
 
@@ -812,6 +799,7 @@ export class LiveSessionManager {
 
     this.clearPendingUserFinalTimer(state);
     state.pendingUserTranscript = null;
+    state.userTranscriptClosed = true;
     const text = normalizeTranscriptText(pending);
     if (!text) return;
 

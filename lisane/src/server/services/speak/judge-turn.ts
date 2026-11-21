@@ -58,6 +58,9 @@ export async function judgeSpeakTurn(params: {
     return null;
   }
   if (!judgment.hasCorrection || !judgment.corrected.trim()) return null;
+  const spokenWords = comparableWords(text);
+  if (!spokenWords || comparableWords(judgment.original) !== spokenWords) return null;
+  if (comparableWords(judgment.corrected) === spokenWords) return null;
 
   const english = learnerFacingReason(judgment.reason, judgment.tip);
   if (!english) return null;
@@ -68,7 +71,7 @@ export async function judgeSpeakTurn(params: {
       targetLanguage: supportLanguage,
     });
     return {
-      original: judgment.original.trim() || text,
+      original: text,
       corrected: judgment.corrected.trim(),
       correctionType: judgment.type,
       explanation: explained.text,
@@ -78,6 +81,10 @@ export async function judgeSpeakTurn(params: {
     console.info("speak correction skipped", { reason: "explanation", error: errorName(error) });
     return null;
   }
+}
+
+function comparableWords(text: string): string {
+  return text.normalize("NFKC").toLowerCase().match(/[\p{L}\p{N}]+/gu)?.join(" ") ?? "";
 }
 
 function learnerFacingReason(reason: string, tip: string): string {

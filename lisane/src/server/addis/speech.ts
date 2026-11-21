@@ -14,13 +14,21 @@ export function speechLanguage(code: string): SpeechLanguage | null {
   return speechLanguages.find((language) => language === code) ?? null;
 }
 
-export async function transcribeSupportSpeech(pcm: Int16Array, language: SpeechLanguage): Promise<string> {
-  const result = await getAddis().scribe.transcribe({
-    audio: pcm16ToWav(pcm, 16_000),
-    language,
-    backend: "turbo",
-    requestId: randomUUID(),
-  });
+export async function transcribeSupportSpeech(params: {
+  pcm: Int16Array;
+  language: SpeechLanguage;
+  requestId: string;
+  signal?: AbortSignal;
+}): Promise<string> {
+  const result = await getAddis().scribe.transcribe(
+    {
+      audio: { data: pcm16ToWav(params.pcm, 16_000), filename: "phrase.wav", contentType: "audio/wav" },
+      language: params.language,
+      backend: "turbo",
+      requestId: params.requestId,
+    },
+    { signal: params.signal },
+  );
   return result.text.trim();
 }
 

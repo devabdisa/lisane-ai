@@ -11,6 +11,14 @@ still listed here, so reviewed text is never overwritten.
 
 | Key | English | Draft | Note |
 |---|---|---|---|
+| `Speak.helpStart` | Help me say it | በእንግሊዝኛ ለመናገር እርዳታ | machine draft |
+| `Speak.helpRecording` | Say one sentence in your support language. | በቋንቋዎ አንድ ዓረፍተ ነገር ይናገሩ። | machine draft |
+| `Speak.helpTranslate` | Translate | ተርጉም | machine draft |
+| `Speak.helpCancel` | Cancel | ሰርዝ | machine draft |
+| `Speak.helpSending` | Translating… | በመተርጎም ላይ… | machine draft |
+| `Speak.helpSayInEnglish` | Say this in English | በእንግሊዝኛ ይህን ይናገሩ | machine draft |
+| `Speak.helpQuiet` | That wasn’t clear. Try one short sentence. | በግልጽ አልተሰማም። አንድ አጭር ዓረፍተ ነገር ደግመው ይናገሩ። | machine draft |
+| `Speak.helpError` | Voice help couldn’t translate that. Try again. | አሁን መተርጎም አልተቻለም። እንደገና ይሞክሩ። | machine draft |
 | `Metadata.title` | Lisane AI | ሊሳኔ ኤ አይ | quality: high |
 | `Metadata.description` | Private English speaking practice with support in your own language. | በራስዎ ቋንቋ ድጋፍ የሚደረግበት የግል የእንግሊዝኛ ቋንቋ ልምምድ። | quality: high |
 | `LanguageSwitcher.label` | Language | ቋንቋ | quality: high |
@@ -152,6 +160,14 @@ still listed here, so reviewed text is never overwritten.
 
 | Key | English | Draft | Note |
 |---|---|---|---|
+| `Speak.helpStart` | Help me say it | Akkan Ingiliffaan jedhu na gargaari | machine draft |
+| `Speak.helpRecording` | Say one sentence in your support language. | Afaan keetiin hima tokko dubbadhu. | machine draft |
+| `Speak.helpTranslate` | Translate | Hiiki | machine draft |
+| `Speak.helpCancel` | Cancel | Haqi | machine draft |
+| `Speak.helpSending` | Translating… | Hiikamaa jira… | machine draft |
+| `Speak.helpSayInEnglish` | Say this in English | Ingiliffaan akkana jedhi | machine draft |
+| `Speak.helpQuiet` | That wasn’t clear. Try one short sentence. | Sirriitti hin dhaga’amne. Hima gabaabaa tokko irra deebi’i. | machine draft |
+| `Speak.helpError` | Voice help couldn’t translate that. Try again. | Amma hiikuun hin danda’amne. Irra deebi’ii yaali. | machine draft |
 | `Metadata.title` | Lisane AI | Lisane AI | quality: high |
 | `Metadata.description` | Private English speaking practice with support in your own language. | Shaakala dubbii Ingiliffaa dhuunfaa deeggarsa afaan keetiitiin. | quality: high |
 | `LanguageSwitcher.label` | Language | Afaan | quality: high |

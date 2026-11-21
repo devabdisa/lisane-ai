@@ -19,6 +19,14 @@
     "description": "Daandiin barumsa keetii as jiraata: barumsa gaggabaaboo dandeettii Afaan Ingiliffaa kee tarkaanfii tokkoon tokkoon ijaaran."
   },
   "Speak": {
+    "helpStart": "Akkan Ingiliffaan jedhu na gargaari",
+    "helpRecording": "Afaan keetiin hima tokko dubbadhu.",
+    "helpTranslate": "Hiiki",
+    "helpCancel": "Haqi",
+    "helpSending": "Hiikamaa jira…",
+    "helpSayInEnglish": "Ingiliffaan akkana jedhi",
+    "helpQuiet": "Sirriitti hin dhaga’amne. Hima gabaabaa tokko irra deebi’i.",
+    "helpError": "Amma hiikuun hin danda’amne. Irra deebi’ii yaali.",
     "title": "Yeroo barbaaddetti dubbadhu",
     "description": "Leenjisaa Afaan Ingiliffaa kee waliin barreeffamaan ykn sagaleen dubbadhu, akkasumas dabaree tokkoon sirreeffama gaarii tokko argadhu.",
     "you": "Ati",

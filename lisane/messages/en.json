@@ -19,6 +19,14 @@
     "description": "Your learning path will be here: short lessons that build your English one step at a time."
   },
   "Speak": {
+    "helpStart": "Help me say it",
+    "helpRecording": "Say one sentence in your support language.",
+    "helpTranslate": "Translate",
+    "helpCancel": "Cancel",
+    "helpSending": "Translating…",
+    "helpSayInEnglish": "Say this in English",
+    "helpQuiet": "That wasn’t clear. Try one short sentence.",
+    "helpError": "Voice help couldn’t translate that. Try again.",
     "title": "Speak anytime",
     "description": "Talk with your English coach by voice.",
     "you": "You",

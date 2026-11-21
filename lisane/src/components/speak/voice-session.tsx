@@ -4,10 +4,11 @@ import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Mascot } from "@/components/mascot";
 import { Button } from "@/components/ui/button";
-import { fontClassNames, getLanguage, isLanguageCode } from "@/config/languages";
+import { fontClassNames, getLanguage, isLanguageCode, usesAddisSpeech } from "@/config/languages";
 import type { SpeakScenarioId } from "@/config/scenarios";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
+import { countAudiblePcm16Windows, MIN_AUDIBLE_WINDOWS } from "@/lib/voice-evidence";
 import {
   LiveClientError,
   sendLiveActivitySignal,
@@ -23,6 +24,7 @@ import {
   type LiveTurnMode,
 } from "@/schemas/live";
 import { ScenarioPicker } from "./scenario-picker";
+import { useSpeakHelp } from "./use-speak-help";
 import {
   clearTranscriptForResume,
   loadTranscriptForResume,
@@ -124,6 +126,8 @@ function VoiceSession() {
   const [liveSessionId, setLiveSessionId] = useState<string | null>(null);
   const [transcript, setTranscript] = useState<TranscriptItem[]>([]);
   const [latestCorrection, setLatestCorrection] = useState<LiveCorrection | null>(null);
+  const [supportLanguage, setSupportLanguage] = useState("en");
+  const speakHelp = useSpeakHelp();
 
   const liveSessionIdRef = useRef<string | null>(null);
   const statusRef = useRef<"IDLE" | LiveConnectionStatus>("IDLE");
@@ -157,6 +161,7 @@ function VoiceSession() {
   const turnModeRef = useRef<LiveTurnMode>("auto");
   const manualActivityOpenRef = useRef(false);
   const hasSpokenThisManualTurnRef = useRef(false);
+  const manualAudibleWindowsRef = useRef(0);
   const isSendingActivityRef = useRef(false);
   const activityRetryAttemptedRef = useRef(false);
   const audioJitterQueueRef = useRef<{ data: string; mimeType: string }[]>([]);
@@ -243,6 +248,7 @@ function VoiceSession() {
 
   function setManualTurnSpeechDetected(value: boolean) {
     hasSpokenThisManualTurnRef.current = value;
+    if (!value) manualAudibleWindowsRef.current = 0;
     setHasSpokenThisManualTurn(value);
   }
 
@@ -440,6 +446,7 @@ function VoiceSession() {
   }
 
   async function releaseAudioResources() {
+    speakHelp.cancel();
     playbackCursorRef.current = 0;
     debugVoice("audio.release_resources");
     stopFlushLoop();
@@ -521,6 +528,8 @@ function VoiceSession() {
   }
 
   function enqueueMicAudioFrame(bytes: Uint8Array, rms: number) {
+    // Shared capture routes one frame into either the helper or the live conversation.
+    if (speakHelp.capture(bytes)) return;
     const now = Date.now();
 
     if (rms > SILENT_AUDIO_THRESHOLD) {
@@ -549,8 +558,9 @@ function VoiceSession() {
     const isSpeechFrame = rms >= AUDIO_SEND_RMS_THRESHOLD;
     if (isSpeechFrame) {
       lastForwardedSpeechAtRef.current = now;
-      if (turnModeRef.current === "manual" && manualActivityOpenRef.current) {
-        setManualTurnSpeechDetected(true);
+      if (turnModeRef.current === "manual" && manualActivityOpenRef.current && !hasSpokenThisManualTurnRef.current) {
+        manualAudibleWindowsRef.current += countAudiblePcm16Windows(bytes);
+        if (manualAudibleWindowsRef.current >= MIN_AUDIBLE_WINDOWS) setManualTurnSpeechDetected(true);
       }
     }
 
@@ -762,12 +772,10 @@ function VoiceSession() {
 
   function attachCorrection(correction: LiveCorrection, turnId?: string) {
     setTranscript((current) => {
-      let idx = turnId ? current.findIndex((item) => item.turnId === turnId && item.speaker === "USER") : -1;
-      if (idx < 0) {
-        for (idx = current.length - 1; idx >= 0; idx -= 1) {
-          if (current[idx].speaker === "USER" && current[idx].final) break;
-        }
-      }
+      const idx = current.findLastIndex((item) =>
+        item.speaker === "USER" && item.final &&
+        (turnId ? item.turnId === turnId : item.text === correction.original),
+      );
       if (idx < 0) return current;
       const updated = [...current];
       updated[idx] = { ...updated[idx], correction };
@@ -833,7 +841,13 @@ function VoiceSession() {
   }
 
   function playAssistantAudio(base64Data: string, mimeType: string) {
+    if (speakHelp.recording.current) speakHelp.cancel();
     dropPendingInputAudio("assistant_audio_received");
+    if (!isAssistantSpeakingRef.current) {
+      updateAssistantSpeaking(true);
+      updateVoiceStatus("speaking");
+      scheduleAssistantSpeakingEnd("audio_gap_fallback", SPEAKING_TIMER_GRACE_MS);
+    }
 
     // After the buffer opens for this reply, chunks play at once; the cursor keeps their order.
     if (jitterBufferReadyRef.current) {
@@ -1118,6 +1132,7 @@ function VoiceSession() {
 
       liveSessionIdRef.current = liveSession.id;
       setLiveSessionId(liveSession.id);
+      setSupportLanguage(liveSession.supportLanguage);
       updateConnectionStatus(liveSession.status);
       updateVoiceStatus(liveSession.status === "ACTIVE" ? "connected" : "connecting");
 
@@ -1169,9 +1184,17 @@ function VoiceSession() {
     }
   }
 
+  function startSpeakHelp() {
+    if (statusRef.current !== "ACTIVE" || voiceStatusRef.current !== "listening" ||
+      isAssistantSpeakingRef.current || hasSpokenThisManualTurnRef.current || speechStreamOpenRef.current ||
+      audioSendInFlightRef.current || audioRetryTimerRef.current !== null || pendingAudioChunksRef.current.length > 0) return;
+    speakHelp.start();
+  }
+
   async function handleStopVoicePractice() {
     try {
       setIsStopping(true);
+      speakHelp.cancel();
       debugVoice("session.stop_requested", { sessionId: liveSessionIdRef.current });
       await flushAudioChunk(true).catch(() => undefined);
       await releaseAudioResources();
@@ -1260,6 +1283,7 @@ function VoiceSession() {
   }, []);
 
   const isActive = Boolean(liveSessionId);
+  const latestUserTurn = transcript.findLast((item) => item.speaker === "USER" && item.final);
   const statusLabel = t(statusLabelKey[voiceStatus]);
   const voiceModeTip =
     turnMode === "manual"
@@ -1267,6 +1291,7 @@ function VoiceSession() {
         ? t("tipSpeakFirst")
         : t("tipTapDone")
       : t("tipListening");
+  const helpBusy = speakHelp.state.status === "recording" || speakHelp.state.status === "sending";
   const canUseManualDoneControl =
     turnMode === "manual" &&
     isActive &&
@@ -1274,6 +1299,7 @@ function VoiceSession() {
     isMicReady &&
     isManualActivityOpen &&
     hasSpokenThisManualTurn &&
+    !helpBusy &&
     !isSendingActivity &&
     !isStopping &&
     !isEndingTurn &&
@@ -1406,6 +1432,45 @@ function VoiceSession() {
             </div>
           ) : null}
 
+          {usesAddisSpeech(supportLanguage) ? (
+            <div className="flex w-full flex-col items-center gap-2 border-t border-line pt-4">
+              {speakHelp.state.status === "recording" ? (
+                <>
+                  <p className="text-center text-label" role="status">{t("helpRecording")}</p>
+                  <div className="flex flex-wrap justify-center gap-2">
+                    <Button onClick={() => void speakHelp.finish()}>{t("helpTranslate")}</Button>
+                    <Button hierarchy="secondary" onClick={speakHelp.cancel}>{t("helpCancel")}</Button>
+                  </div>
+                </>
+              ) : speakHelp.state.status === "sending" ? (
+                <>
+                  <p className="text-label" role="status">{t("helpSending")}</p>
+                  <Button hierarchy="secondary" onClick={speakHelp.cancel}>{t("helpCancel")}</Button>
+                </>
+              ) : (
+                <>
+                  {speakHelp.state.status === "ready" ? (
+                    <div className="w-full rounded-12 bg-field p-3" role="status">
+                      <p className="text-caption text-fg-muted">{t("helpSayInEnglish")}</p>
+                      <p lang="en" className="text-body">{speakHelp.state.english}</p>
+                    </div>
+                  ) : null}
+                  {speakHelp.state.status === "quiet" || speakHelp.state.status === "error" ? (
+                    <p className="text-center text-label" role="status">
+                      {t(speakHelp.state.status === "quiet" ? "helpQuiet" : "helpError")}
+                    </p>
+                  ) : null}
+                  <Button
+                    hierarchy="secondary"
+                    disabled={voiceStatus !== "listening" || hasSpokenThisManualTurn || isStopping || isSendingActivity}
+                    onClick={startSpeakHelp}
+                  >
+                    {t("helpStart")}
+                  </Button>
+                </>
+              )}
+            </div>
+          ) : null}
           <div className="flex w-full flex-wrap items-center justify-center gap-3 border-t border-line pt-4">
             <Button
               hierarchy="secondary"
@@ -1456,7 +1521,9 @@ function VoiceSession() {
         </p>
       ) : null}
 
-      {latestCorrection ? <LatestCorrection correction={latestCorrection} onDismiss={() => setLatestCorrection(null)} /> : null}
+      {latestCorrection && latestUserTurn?.correction?.id === latestCorrection.id ? (
+        <LatestCorrection correction={latestCorrection} onDismiss={() => setLatestCorrection(null)} />
+      ) : null}
 
       {showPostSessionPanel ? (
         <section className="flex flex-col gap-4 rounded-16 border border-line bg-card p-4">
