@@ -615,7 +615,7 @@ export class LiveSessionManager {
     state.assistantTurnInProgress = true;
     state.turnCounter += 1;
     state.currentAssistantTurnId = `t-${state.id}-${state.turnCounter}`;
-    const language = !state.scenario && !state.customIdea ? requestedSpokenSupport(state.latestAudibleTranscript) : null;
+    const language = requestedSpokenSupport(state.latestAudibleTranscript);
     const opening = language ? supportOpener(language) : null;
     if (opening) {
       state.assistantSupportReplied = true;

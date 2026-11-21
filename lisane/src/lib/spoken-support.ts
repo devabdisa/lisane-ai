@@ -3,12 +3,12 @@ import { supportLanguages, type LanguageCode } from "../config/languages.ts";
 export const spokenSupportOpeners = {
   am: {
     text: "አዎ፣ አማርኛ መናገር እችላለሁ።",
-    names: ["amharic"],
+    names: ["amharic", "አማርኛ"],
     requests: ["አማርኛ ትናገሪያለሽ", "አማርኛ መናገር ትችያለሽ", "አማርኛ ትናገራለህ", "አማርኛ መናገር ትችላለህ"],
   },
   om: {
     text: "Eeyyee, Afaan Oromoo dubbachuu nan danda’a.",
-    names: ["afaan oromoo", "afaan oromo", "afan oromo", "oromoo", "oromo"],
+    names: ["afaan oromoo", "afaan oromo", "afan oromo", "oromoo", "oromo", "a fan oromo", "a fun oromo", "a fan or a mo", "a fun or a mo"],
     requests: ["afaan oromoo dubbachuu dandeessaa", "afaan oromoo ni dubbattaa"],
   },
 } satisfies Partial<Record<LanguageCode, { text: string; names: string[]; requests: string[] }>>;
@@ -19,7 +19,9 @@ function normalizeRequest(text: string) {
   return text.normalize("NFKC").toLowerCase().replace(/[^\p{L}\p{M}]+/gu, " ").trim();
 }
 
-const switchQuestion = /^(?:(?:hey|hi|okay|so|please) )*(?:(?:can|could|do|will|would) you )?(?:also )?(?:speak|talk|chat)(?: (?:to|with) me)?(?: in)?(?: (?:some|a little|(?:other|another|different) languages? (?:like|such as)))?$/u;
+const requestLeadIn = /^(?:(?:hey|hi|okay|so|please) )*/u;
+const switchQuestion = /^(?:(?:can|could|do|will|would) (?:you|we) |i (?:want|would like) you to |let s )?(?:also )?(?:speak|talk|chat|switch)(?: (?:to|with) me)?(?: in| to)?(?: (?:some|a little|(?:other|another|different) languages? (?:like|such as)))?$/u;
+const saySomething = /^(?:(?:can|could|will|would) you )?(?:say|tell me) (?:something|a few words) in$/u;
 const switchClosing = /^(?:please|too|as well|with me|to me|for a second)$/u;
 
 export function requestedSpokenSupport(text: string): SpokenSupportLanguage | null {
@@ -32,7 +34,9 @@ export function requestedSpokenSupport(text: string): SpokenSupportLanguage | nu
 
     for (const name of opener.names) {
       const start = request.lastIndexOf(` ${name}`);
-      if (start < 0 || !switchQuestion.test(request.slice(0, start))) continue;
+      if (start < 0) continue;
+      const before = request.slice(0, start).replace(requestLeadIn, "");
+      if (!switchQuestion.test(before) && !saySomething.test(before)) continue;
       const after = request.slice(start + name.length + 1);
       const closing = after.trim();
       if (!closing || (after.startsWith(" ") && switchClosing.test(closing))) return language;
