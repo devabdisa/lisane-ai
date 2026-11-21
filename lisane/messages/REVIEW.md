@@ -170,6 +170,40 @@ still listed here, so reviewed text is never overwritten.
 | `Learn.guidebook` | Guidebook | መመሪያ መጽሐፍ | quality: high |
 | `Learn.closeGuidebook` | Close guidebook | የጉዞ መመሪያውን ዝጋ | quality: high |
 | `Learn.guidebookDraft` | This translation is still waiting for a native-speaker review. | ይህ ትርጉም አሁንም የአፍ መፍቻ ቋንቋ ተናጋሪ ግምገማ እየጠበቀ ነው። | quality: high |
+| `Learn.lessonNumber` | Lesson {number} | ትምህርት {number} | quality: high |
+| `Learn.start` | Start | ጀምር | quality: high |
+| `Learn.lockedHint` | Finish the step above to open this one. | ይህን ለመክፈት ከላይ ያለውን ደረጃ ይጨርሱ። | quality: high |
+| `Learn.lessonProgress` | Question {current} of {total} | {current} ከ {total} ጥያቄ | quality: high |
+| `Learn.check` | Check | ይመልከቱ | quality: high |
+| `Learn.continue` | Continue | ይቀጥሉ | quality: high |
+| `Learn.correct` | Nice. | ጥሩ። | quality: high |
+| `Learn.incorrect` | Not quite. | ልክ አይደለም። | quality: high |
+| `Learn.correctAnswer` | A natural way to say it: {answer} | በተፈጥሮ መንገድ ለመናገር: {answer} | quality: high |
+| `Learn.couldNotCheck` | That answer couldn't be checked. Try again. | ያ መልስ ሊረጋገጥ አልቻለም። እንደገና ይሞክሩ። | quality: high |
+| `Learn.selectPrompt` | What does this mean? | ይህ ምን ማለት ነው? | quality: high |
+| `Learn.listenPrompt` | Listen, then pick the meaning. | አድምጡ፣ ከዚያም ትርጉሙን ምረጡ። | quality: high |
+| `Learn.listenPlay` | Play again | እንደገና ይጫወቱ | quality: high |
+| `Learn.matchPrompt` | Tap the matching pairs. | ተመሳሳይ የሆኑ ጥንዶችን ይንኩ። | quality: high |
+| `Learn.matchMiss` | Those two don't match. Try another pair. | እነዚያ ሁለቱ አይዛመዱም። ሌላ ጥንድ ይሞክሩ። | quality: high |
+| `Learn.wordBankPrompt` | Put the words in order. | ቃላቶቹን በቅደም ተከተል አስቀምጥ። | quality: high |
+| `Learn.fillPrompt` | Choose the missing word. | የጎደለውን ቃል ምረጥ። | quality: high |
+| `Learn.typePrompt` | Type what you hear. | የሰማኸውን ጻፍ። | quality: high |
+| `Learn.typePlaceholder` | Type in English | በእንግሊዝኛ ይተይቡ | quality: high |
+| `Learn.speakPrompt` | Say this out loud. | ይህን ጮክ ብለህ ተናገር። | quality: high |
+| `Learn.speakStart` | Tap and say it | ይጫኑና ይናገሩት | quality: high |
+| `Learn.speakListening` | Listening… | እየሰማሁ ነው… | quality: high |
+| `Learn.speakUnavailable` | This browser can't hear the lesson. Type the sentence this once. | ይህ ማሰሻ ትምህርቱን መስማት አይችልም። ይህንን ዓረፍተ ነገር አንድ ጊዜ ይተይቡ። | quality: high |
+| `Learn.quit` | Leave lesson | ትምህርቱን ይልቀቁ | quality: high |
+| `Learn.quitTitle` | Leave this lesson? | ይህን ትምህርት ይተው? | quality: high |
+| `Learn.quitBody` | This step starts again from the first question. | ይህ እርምጃ ከመጀመሪያው ጥያቄ እንደገና ይጀምራል። | quality: high |
+| `Learn.stay` | Stay | ቆይ | quality: high |
+| `Learn.leave` | Leave | ውጣ | quality: high |
+| `Learn.completeTitle` | Step complete | እርምጃው ተጠናቋል | quality: high |
+| `Learn.completeBody` | The next step on your path is open. | በመንገድዎ ላይ ያለው ቀጣዩ እርምጃ ክፍት ነው። | quality: high |
+| `Learn.backToPath` | Back to the path | ወደ መንገዱ ተመለስ | quality: high |
+| `Learn.gateBody` | This step is not a question set. You can move on, and practise the conversation in Speak. | ይህ እርምጃ የጥያቄ ስብስብ አይደለም። መቀጠል እና ንግግሩን በ Speak ውስጥ መለማመድ ይችላሉ። | quality: high |
+| `Learn.moveOn` | Move on | እንቀጥል | quality: high |
+| `Learn.openSpeak` | Open Speak | ክፈት ስፒክ | quality: high |
 
 ## Afaan Oromo (om)
 
@@ -330,3 +364,37 @@ still listed here, so reviewed text is never overwritten.
 | `Learn.guidebook` | Guidebook | Kitaaba Qajeelfamaa | quality: high |
 | `Learn.closeGuidebook` | Close guidebook | Kitaaba qajeelfamaa cufi | quality: high |
 | `Learn.guidebookDraft` | This translation is still waiting for a native-speaker review. | Hiikkaan kun ammas gamaaggama nama afaanicha dhalootaan dubbatuu eegaa jira. | quality: high |
+| `Learn.lessonNumber` | Lesson {number} | Barumsa {number} | quality: high |
+| `Learn.start` | Start | Jalqabi | quality: high |
+| `Learn.lockedHint` | Finish the step above to open this one. | Kana banuuf tarkaanfii armaan olii xumuri. | quality: high |
+| `Learn.lessonProgress` | Question {current} of {total} | Gaaffii {current} {total} keessaa | quality: high |
+| `Learn.check` | Check | Sakatta'i | quality: high |
+| `Learn.continue` | Continue | Itti fufi | quality: high |
+| `Learn.correct` | Nice. | Gaarii | quality: high |
+| `Learn.incorrect` | Not quite. | Sirriitti miti. | quality: high |
+| `Learn.correctAnswer` | A natural way to say it: {answer} | Akkaataa uumamaa ittiin jedhamu: {answer} | quality: high |
+| `Learn.couldNotCheck` | That answer couldn't be checked. Try again. | Deebiin sun mirkaneeffamuu hin dandeenye. Irra deebi'ii yaali. | quality: high |
+| `Learn.selectPrompt` | What does this mean? | Kun maal jechuudha? | quality: high |
+| `Learn.listenPrompt` | Listen, then pick the meaning. | Dhaggeeffadhu, achiis hiika isaa filadhu. | quality: high |
+| `Learn.listenPlay` | Play again | Ammas taphadhu | quality: high |
+| `Learn.matchPrompt` | Tap the matching pairs. | Cimdiiwwan wal fakkatan tuqi. | quality: high |
+| `Learn.matchMiss` | Those two don't match. Try another pair. | Lamaan sun wal hin simatan. Cimdii biraa yaali. | quality: high |
+| `Learn.wordBankPrompt` | Put the words in order. | Jechoota tartiibaan kaa'i. | quality: high |
+| `Learn.fillPrompt` | Choose the missing word. | Jecha hir'ate filadhu. | quality: high |
+| `Learn.typePrompt` | Type what you hear. | Waan dhageessu barreessi. | quality: high |
+| `Learn.typePlaceholder` | Type in English | Afaan Ingiliffaan barreessi | quality: high |
+| `Learn.speakPrompt` | Say this out loud. | Kana sagalee ol kaaftee jedhi. | quality: high |
+| `Learn.speakStart` | Tap and say it | Tuqiitii dubbadhu | quality: high |
+| `Learn.speakListening` | Listening… | Dhaggeeffachaa jira... | quality: high |
+| `Learn.speakUnavailable` | This browser can't hear the lesson. Type the sentence this once. | Biraawuzariin kun barumsa kana dhageeffachuu hin danda'u. Hima kana yeroo tokkoof barreessi. | quality: high |
+| `Learn.quit` | Leave lesson | Barnoota gadi lakkisi | quality: high |
+| `Learn.quitTitle` | Leave this lesson? | Barumsa kana dhiisuu? | quality: high |
+| `Learn.quitBody` | This step starts again from the first question. | Tarkaanfiin kun gaaffii jalqabaa irraa deebi'ee jalqaba. | quality: high |
+| `Learn.stay` | Stay | Turi | quality: high |
+| `Learn.leave` | Leave | Dhiisi | quality: high |
+| `Learn.completeTitle` | Step complete | Tarkaanfichi xumurameera | quality: high |
+| `Learn.completeBody` | The next step on your path is open. | Tarkaanfiin itti aanu karaa kee irratti banaadha. | quality: high |
+| `Learn.backToPath` | Back to the path | Gara daandiitti deebi'uu | quality: high |
+| `Learn.gateBody` | This step is not a question set. You can move on, and practise the conversation in Speak. | Tarkaanfiin kun garee gaaffii miti. Itti fuftee Speak keessatti marii shaakaluu dandeessa. | quality: high |
+| `Learn.moveOn` | Move on | Itti fufi | quality: high |
+| `Learn.openSpeak` | Open Speak | Bana Dubbadhu | quality: high |
