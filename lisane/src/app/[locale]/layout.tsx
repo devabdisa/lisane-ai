@@ -3,6 +3,8 @@ import { Inter, Noto_Sans_Ethiopic } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { ThemeScript } from "@/components/theme-script";
+import { ThemeSync } from "@/components/theme-sync";
 import { fontClassNames, getLanguage } from "@/config/languages";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
@@ -36,6 +38,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
 
 export const viewport: Viewport = {
   themeColor: "#0b0f14",
+  viewportFit: "cover",
 };
 
 export default async function LocaleLayout({ children, params }: LayoutProps<"/[locale]">) {
@@ -50,9 +53,15 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
     <html
       lang={locale}
       dir={language.dir}
+      // Theme attributes are set by ThemeScript before paint; suppress the mismatch warning.
+      suppressHydrationWarning
       className={`${inter.variable} ${notoSansEthiopic.variable} ${fontClassNames[language.font]} h-full antialiased`}
     >
+      <head>
+        <ThemeScript />
+      </head>
       <body className="flex min-h-full flex-col bg-canvas text-fg">
+        <ThemeSync />
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>

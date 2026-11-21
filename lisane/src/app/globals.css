@@ -17,7 +17,13 @@
   --action-primary: var(--palette-lime);
   --action-on-primary: var(--palette-midnight);
   --accent-lime: var(--palette-lime);
+  --text-on-dark-secondary: #ffffff99;
 
+  color-scheme: dark;
+}
+
+/* Explicit dark keeps the resolved theme stable when the blocking script sets data-theme. */
+[data-theme="dark"] {
   color-scheme: dark;
 }
 
@@ -52,6 +58,7 @@
   --color-action: var(--action-primary);
   --color-on-action: var(--action-on-primary);
   --color-accent: var(--accent-lime);
+  --color-on-dark-muted: var(--text-on-dark-secondary);
 
   --font-sans: var(--font-inter), var(--font-ethiopic), ui-sans-serif, system-ui, sans-serif;
   --font-ethiopic: var(--font-noto-ethiopic), var(--font-inter), sans-serif;

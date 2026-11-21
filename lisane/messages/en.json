@@ -3,46 +3,46 @@
     "title": "Lisane AI",
     "description": "Private English speaking practice with support in your own language."
   },
+  "Navigation": {
+    "label": "Main",
+    "learn": "Learn",
+    "speak": "Speak",
+    "practice": "Practice",
+    "progress": "Progress",
+    "profile": "Profile"
+  },
+  "Placeholder": {
+    "status": "Coming soon"
+  },
+  "Learn": {
+    "title": "Learn step by step",
+    "description": "Your learning path will be here: short lessons that build your English one step at a time."
+  },
+  "Speak": {
+    "title": "Speak anytime",
+    "description": "Talk with your English coach by text or voice, and get one kind correction each turn."
+  },
+  "Practice": {
+    "title": "Practice",
+    "description": "Words and mistakes you are learning will come back here at the right time, so they stay with you."
+  },
+  "Progress": {
+    "title": "Your progress",
+    "description": "Your minutes spoken, finished lessons and daily streak will be here."
+  },
+  "Profile": {
+    "title": "Profile",
+    "description": "Your goals and settings will be here.",
+    "appearance": "Appearance",
+    "appLanguage": "App language"
+  },
   "LanguageSwitcher": {
     "label": "Language"
   },
-  "Foundations": {
-    "eyebrow": "LISANE AI / MIDNIGHT LIME / FOUNDATIONS",
-    "headline": "A quiet place.<br></br>A more confident voice.",
-    "intro": "Private English practice. A midnight canvas, a clear next step, and room to try again.",
-    "principles": {
-      "private": "Private, not performative",
-      "progress": "Progress, not perfection",
-      "clarity": "Clarity over decoration"
-    },
-    "colors": {
-      "title": "01 / Three colors. Clear intent.",
-      "description": "Dark by default. Every surface is derived from Midnight and White. Lime earns its place.",
-      "midnight": "The quiet canvas",
-      "white": "Clear type + icons",
-      "lime": "One deliberate accent",
-      "dark": "Dark / Default",
-      "light": "Light / Contrast-safe",
-      "canvas": "Canvas",
-      "surface": "Surface {level}",
-      "accentRule": "Lime always meets Midnight."
-    },
-    "type": {
-      "title": "02 / Two scripts. One voice.",
-      "description": "Inter for English. Noto Sans Ethiopic for Amharic. Shared sizes, separate font-family variables."
-    },
-    "controls": {
-      "title": "04 / Clear next steps",
-      "description": "Lime for the primary action. Outline for the alternative. Neutral focus and input surfaces.",
-      "buttons": "Buttons",
-      "buttonsNote": "48px minimum height · Full radius · Editable label",
-      "startSpeaking": "Start speaking",
-      "maybeLater": "Maybe later",
-      "textInput": "Text input",
-      "topicLabel": "What would you like to practise?",
-      "topicPlaceholder": "e.g. introducing yourself",
-      "topicHint": "Choose a topic that feels useful to you.",
-      "languageSwitcher": "Language switcher"
-    }
+  "ThemeSwitcher": {
+    "label": "Theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
   }
 }
