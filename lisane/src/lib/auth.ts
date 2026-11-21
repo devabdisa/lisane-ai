@@ -14,6 +14,21 @@ const google =
       }
     : null;
 
+function httpsOrigin(host: string | undefined): string | undefined {
+  if (!host) return undefined;
+  return host.startsWith("http") ? host : `https://${host}`;
+}
+
+const configuredUrl = env.BETTER_AUTH_URL ?? env.NEXT_PUBLIC_APP_URL;
+const vercelOrigins = [
+  httpsOrigin(process.env.VERCEL_PROJECT_PRODUCTION_URL),
+  httpsOrigin(process.env.VERCEL_URL),
+].filter((origin): origin is string => Boolean(origin));
+
+// Vercel sets its own host. A localhost default must not be the only trusted origin there.
+const baseURL =
+  configuredUrl.startsWith("http://localhost") && vercelOrigins[0] ? vercelOrigins[0] : configuredUrl;
+
 export const auth = betterAuth({
   database: prismaAdapter(getPrisma(), {
     provider: "postgresql",
@@ -24,8 +39,8 @@ export const auth = betterAuth({
   },
   socialProviders: google ? { google } : undefined,
   secret: requireEnv("BETTER_AUTH_SECRET"),
-  baseURL: env.NEXT_PUBLIC_APP_URL,
-  trustedOrigins: [env.NEXT_PUBLIC_APP_URL],
+  baseURL,
+  trustedOrigins: [...new Set([configuredUrl, baseURL, ...vercelOrigins])],
   plugins: [nextCookies()],
 });
 
