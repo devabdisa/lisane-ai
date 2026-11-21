@@ -12,7 +12,7 @@ export type ExplanationSource = "english" | "cache" | "addis-chat" | "addis-tran
 
 let client: AddisAI | undefined;
 
-function getAddis(): AddisAI {
+export function getAddis(): AddisAI {
   if (!client) {
     client = new AddisAI({ apiKey: requireEnv("ADDIS_API_KEY") });
   }

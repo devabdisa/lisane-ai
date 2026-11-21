@@ -15,6 +15,7 @@ export const AI_RATE_LIMIT_RULES = {
   recordedVoiceMessage: { limit: 35, windowMs: 60 * 60 * 1000 },
   sttTranscription: { limit: 40, windowMs: 60 * 60 * 1000 },
   practiceReplyTts: { limit: 30, windowMs: 60 * 60 * 1000 },
+  liveStart: { limit: 25, windowMs: 60 * 60 * 1000 },
 } as const;
 
 export class UsageLimitError extends Error {

@@ -1,22 +1,16 @@
 import { getAppUser } from "@/lib/require-app-user";
-import { stopSpeakSession } from "@/server/speak/live-session";
+import { liveErrorResponse, unauthenticatedResponse } from "@/server/speak/live-route-response";
+import { liveSessionManager } from "@/server/speak/live-session-manager";
 
 export async function POST(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   const user = await getAppUser();
-  if (!user) {
-    return Response.json(
-      { error: { code: "unauthenticated", message: "Sign in to continue." } },
-      { status: 401 },
-    );
-  }
+  if (!user) return unauthenticatedResponse();
 
   const { id } = await params;
-  const stopped = await stopSpeakSession(id, user.id);
-  if (!stopped) {
-    return Response.json(
-      { error: { code: "session_not_found", message: "This speaking session has ended." } },
-      { status: 404 },
-    );
+  try {
+    await liveSessionManager.stopSession({ liveSessionId: id, userId: user.id });
+    return new Response(null, { status: 204 });
+  } catch (error) {
+    return liveErrorResponse(error, "Failed to stop voice session.");
   }
-  return new Response(null, { status: 204 });
 }

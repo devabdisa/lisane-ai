@@ -1,36 +1,58 @@
 import { getAppUser } from "@/lib/require-app-user";
-import { ownsSpeakSession, subscribeSpeakSession, type SpeakEvent } from "@/server/speak/live-session";
+import type { LiveRelayEvent } from "@/schemas/live";
+import { unauthenticatedResponse } from "@/server/speak/live-route-response";
+import { liveSessionManager } from "@/server/speak/live-session-manager";
+
+const PING_INTERVAL_MS = 15_000;
+
+function toSsePayload(event: LiveRelayEvent) {
+  return `data: ${JSON.stringify(event)}\n\n`;
+}
 
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const user = await getAppUser();
-  if (!user) {
-    return Response.json(
-      { error: { code: "unauthenticated", message: "Sign in to continue." } },
-      { status: 401 },
-    );
-  }
+  if (!user) return unauthenticatedResponse();
 
   const { id } = await params;
-  if (!ownsSpeakSession(id, user.id)) {
-    return Response.json(
-      { error: { code: "session_not_found", message: "This speaking session has ended." } },
-      { status: 404 },
-    );
-  }
-
   const encoder = new TextEncoder();
-  let unsubscribe: (() => void) | null = null;
 
-  const stream = new ReadableStream({
+  // A session that is gone fails the stream, so the browser keeps retrying
+  // inside the screen's reconnect window instead of giving up on one blip.
+  const stream = new ReadableStream<Uint8Array>({
     start(controller) {
-      const send = (event: SpeakEvent) => {
-        controller.enqueue(encoder.encode(`data: ${JSON.stringify(event)}\n\n`));
-      };
-      unsubscribe = subscribeSpeakSession(id, user.id, send);
-      request.signal.addEventListener("abort", () => unsubscribe?.());
-    },
-    cancel() {
-      unsubscribe?.();
+      const subscription = liveSessionManager.subscribe({
+        liveSessionId: id,
+        userId: user.id,
+        onEvent: (event) => {
+          try {
+            controller.enqueue(encoder.encode(toSsePayload(event)));
+          } catch {
+            // The stream may already be closed.
+          }
+        },
+      });
+
+      const pingInterval = setInterval(() => {
+        try {
+          controller.enqueue(encoder.encode(": ping\n\n"));
+        } catch {
+          // The stream may already be closed.
+        }
+      }, PING_INTERVAL_MS);
+
+      request.signal.addEventListener(
+        "abort",
+        () => {
+          clearInterval(pingInterval);
+          subscription.unsubscribe();
+          try {
+            controller.close();
+          } catch {
+            // The stream may already be closed.
+          }
+        },
+        { once: true },
+      );
     },
   });
 
@@ -39,6 +61,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
       "Content-Type": "text/event-stream",
       "Cache-Control": "no-cache, no-transform",
       Connection: "keep-alive",
+      "X-Accel-Buffering": "no",
     },
   });
 }

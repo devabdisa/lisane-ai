@@ -313,9 +313,9 @@ Build from Duolingo's published design, not Voxa's learning module.
 - [x] 11. Addis AI client: `translate` and `chat` with registry-driven languages, caching and fallbacks
 
 ### Speak anytime
-- [ ] 12. Live voice session: microphone, small audio pieces, transcript on screen (Voxa voice practice ported)
-- [ ] 13. Weak connection: audio queue and retry, one send at a time, coach stream reconnects for 45 seconds, transcript saved on the phone
-- [ ] 14. Correction during the voice turn: Gemini English judgment, Addis support-language explanation, shown on that turn
+- [x] 12. Live voice session: microphone, small audio pieces, transcript on screen (Voxa voice practice ported)
+- [x] 13. Weak connection: audio queue and retry, one send at a time, coach stream reconnects for 45 seconds, transcript saved on the phone
+- [x] 14. Correction during the voice turn: Gemini English judgment, Addis support-language explanation, shown on that turn
 - [ ] 15. Help me say it: one support-language sentence becomes natural English, then the learner says it
 - [ ] 16. Scenarios (self-introduction, job interview, workplace, university) and the session review page
 - [ ] 17. Session memory inside the voice conversation: recent topic, weak pattern, and the next follow-up

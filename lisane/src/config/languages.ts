@@ -92,6 +92,12 @@ export function getLanguage(code: LanguageCode): LanguageDefinition {
   return languages.find((language) => language.code === code)!;
 }
 
+export function usesAddisSpeech(code: string): boolean {
+  if (!isLanguageCode(code)) return false;
+  const language = getLanguage(code);
+  return language.addis.stt && language.addis.tts && language.addis.chat;
+}
+
 export const fontClassNames: Record<LanguageFont, string> = {
   sans: "font-sans",
   ethiopic: "font-ethiopic",

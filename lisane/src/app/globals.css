@@ -85,6 +85,18 @@
   --radius-16: 16px;
 
   --shadow-raised: 0 2px 8px 0 #0b0f1452;
+
+  --animate-eq-wave: eq-wave 1.2s ease-in-out infinite;
+
+  @keyframes eq-wave {
+    0%,
+    100% {
+      transform: scaleY(0.3);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }
 }
 
 @layer base {
