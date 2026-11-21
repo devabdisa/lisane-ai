@@ -306,7 +306,7 @@ Build from Duolingo's published design, not Voxa's learning module.
 - [x] 07. Prisma (latest stable) with a hosted Postgres connection and base auth models
 - [x] 08. Better Auth port: email plus Google, login and signup pages, `requireAppUser`
 - [x] 09. `UserProfile` and onboarding: goal, English level, support language, daily goal
-- [ ] 09b. Deploy a staging environment (host and hosted Postgres chosen with the owner), so every later step is tested on real phones and networks
+- [x] 09b. Deploy a staging environment (host and hosted Postgres chosen with the owner), so every later step is tested on real phones and networks
 
 ### AI and language core
 - [ ] 10. Gemini client on the latest `@google/genai`, rate limiter, usage guardrails
