@@ -4,6 +4,7 @@ allowBuilds:
   "@prisma/engines": true
   "@swc/core": false
   prisma: true
+  protobufjs: true
   sharp: false
   unrs-resolver: false
 minimumReleaseAgeExclude:
