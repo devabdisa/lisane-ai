@@ -303,7 +303,7 @@ Build from Duolingo's published design, not Voxa's learning module.
 - [x] 06. Env validation (`src/lib/env.ts`) and the `server-only` setup
 
 ### Data and auth
-- [ ] 07. Prisma (latest stable) with a hosted Postgres connection and base auth models
+- [x] 07. Prisma (latest stable) with a hosted Postgres connection and base auth models
 - [ ] 08. Better Auth port: email plus Google, login and signup pages, `requireAppUser`
 - [ ] 09. `UserProfile` and onboarding: goal, English level, support language, daily goal
 - [ ] 09b. Deploy a staging environment (host and hosted Postgres chosen with the owner), so every later step is tested on real phones and networks
