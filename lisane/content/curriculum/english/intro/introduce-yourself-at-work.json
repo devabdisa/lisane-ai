@@ -1,0 +1,427 @@
+{
+  "id": "introduce-yourself-at-work",
+  "section": "intro",
+  "position": 1,
+  "review": {
+    "en": "draft",
+    "am": "draft",
+    "om": "draft"
+  },
+  "guidebook": {
+    "en": {
+      "title": "Introduce yourself at work",
+      "goal": "Greet a new coworker, say your name, and tell them what you do.",
+      "introduction": "Imagine it is your first day at a new job. Learn a few short phrases you can put together when you meet a coworker.",
+      "notes": [
+        {
+          "explanation": "Start with a greeting and your name. Then you can ask the other person their name or say you are glad to meet them.",
+          "examples": [
+            "say-your-name",
+            "ask-their-name",
+            "meeting-greeting"
+          ]
+        },
+        {
+          "explanation": "The first example gives a job title. The second names the kind of work, and the third names the workplace.",
+          "examples": [
+            "say-your-job",
+            "work-in-sales",
+            "work-at-a-clinic"
+          ]
+        },
+        {
+          "explanation": "When someone asks about your work, give one short answer. Use your own job or workplace when you practise aloud.",
+          "examples": [
+            "ask-about-work",
+            "work-in-customer-service",
+            "new-here"
+          ]
+        }
+      ]
+    },
+    "am": {
+      "title": "በሥራ ቦታ ራስዎን ያስተዋውቁ",
+      "goal": "አዲስ የስራ ባልደረባን ሰላም ይበሉ፣ ስምዎን ይናገሩ እና ምን እንደሚሰሩ ይንገሯቸው።",
+      "introduction": "በአዲስ ስራ የመጀመሪያ ቀንዎ እንደሆነ አስቡት። የስራ ባልደረባዎን ሲያገኙ አብረው ሊጠቀሙባቸው የሚችሉ ጥቂት አጫጭር ሀረጎችን ይማሩ።",
+      "notes": [
+        {
+          "explanation": "ሰላምታ በማቅረብ እና ስምዎን በመግለጽ ይጀምሩ። ከዚያም የሌላውን ሰው ስም መጠየቅ ወይም እሱን በማግኘቶት ደስ እንዳሎት መናገር ይችላሉ።",
+          "examples": [
+            "say-your-name",
+            "ask-their-name",
+            "meeting-greeting"
+          ]
+        },
+        {
+          "explanation": "የመጀመሪያው ምሳሌ የሥራ መጠሪያን ይሰጣል። ሁለተኛው የሥራውን ዓይነት ሲሰይም፣ ሦስተኛው ደግሞ የሥራ ቦታውን ይሰይማል።",
+          "examples": [
+            "say-your-job",
+            "work-in-sales",
+            "work-at-a-clinic"
+          ]
+        },
+        {
+          "explanation": "አንድ ሰው ስለስራዎ ሲጠይቅ፣ አንድ አጭር መልስ ይስጡ። ጮክ ብለው ሲለማመዱ የራስዎን ስራ ወይም የስራ ቦታ ይጠቀሙ።",
+          "examples": [
+            "ask-about-work",
+            "work-in-customer-service",
+            "new-here"
+          ]
+        }
+      ]
+    },
+    "om": {
+      "title": "Bakka hojiitti of beeksisuu",
+      "goal": "Hojjetaa haaraa nagaa gaafadhu, maqaa kee itti himi, akkasumas hojii kee itti himi.",
+      "introduction": "Guyyaa jalqabaa hojii haaraa kee akka ta'etti yaadi. Jechoota gabaabaa yeroo hojjetaa biroo wajjin wal bartu walitti fiduu dandeessu muraasa baradhu.",
+      "notes": [
+        {
+          "explanation": "Nagaa gaafachuu fi maqaa keetiin jalqabi. Sana booda maqaa nama sanaa gaafachuu ykn isaan arguun kee akka sitti tole itti himuu dandeessa.",
+          "examples": [
+            "say-your-name",
+            "ask-their-name",
+            "meeting-greeting"
+          ]
+        },
+        {
+          "explanation": "Fakkeenyi jalqabaa maqaa hojii kenna. Inni lammaffaan gosa hojii yoo ta'u, inni sadaffaan immoo bakka hojii ibsa.",
+          "examples": [
+            "say-your-job",
+            "work-in-sales",
+            "work-at-a-clinic"
+          ]
+        },
+        {
+          "explanation": "Namni tokko waa'ee hojii kee yoo si gaafate, deebii gabaabaa tokko kenni. Yeroo sagalee kee ol kaastee shaakaltu hojii kee ykn bakka hojii kee fayyadami.",
+          "examples": [
+            "ask-about-work",
+            "work-in-customer-service",
+            "new-here"
+          ]
+        }
+      ]
+    }
+  },
+  "phrases": [
+    {
+      "id": "say-your-name",
+      "english": {
+        "text": "Hi, I'm Hana.",
+        "alternatives": [
+          "Hi, I am Hana."
+        ]
+      },
+      "meaning": {
+        "en": {
+          "text": "Hello, my name is Hana."
+        },
+        "am": {
+          "text": "ሰላም፣ እኔ ሃና ነኝ።"
+        },
+        "om": {
+          "text": "Akkam, ani Haanaa dha."
+        }
+      },
+      "hint": {
+        "en": "Start with a greeting, then say your name.",
+        "am": "ሰላምታ በማቅረብ ይጀምሩ፣ ከዚያም ስምዎን ይናገሩ።",
+        "om": "Nagaa gaafachuun jalqabi, sana booda maqaa kee himi."
+      }
+    },
+    {
+      "id": "ask-their-name",
+      "english": {
+        "text": "What's your name?",
+        "alternatives": [
+          "What is your name?"
+        ]
+      },
+      "meaning": {
+        "en": {
+          "text": "What should I call you?"
+        },
+        "am": {
+          "text": "ስምዎ ማን ነው?"
+        },
+        "om": {
+          "text": "Maqaan kee eenyu?"
+        }
+      },
+      "hint": {
+        "en": "Use this question to learn someone's name.",
+        "am": "የአንድን ሰው ስም ለማወቅ ይህንን ጥያቄ ይጠቀሙ።",
+        "om": "Maqaa nama tokkoo baruuf gaaffii kana fayyadami."
+      }
+    },
+    {
+      "id": "meeting-greeting",
+      "english": {
+        "text": "Nice to meet you."
+      },
+      "meaning": {
+        "en": {
+          "text": "I'm glad we met."
+        },
+        "am": {
+          "text": "ስላገኘሁዎት ደስ ብሎኛል።"
+        },
+        "om": {
+          "text": "Si arguu kootti gammadeera."
+        }
+      },
+      "hint": {
+        "en": "Say this when you meet someone for the first time.",
+        "am": "አንድን ሰው ለመጀመሪያ ጊዜ ሲያገኙ ይህንን ይበሉ።",
+        "om": "Yeroo nama tokko yeroo jalqabaatiif wal argitan kana jedhaa."
+      }
+    },
+    {
+      "id": "new-here",
+      "english": {
+        "text": "I'm new here.",
+        "alternatives": [
+          "I am new here."
+        ]
+      },
+      "meaning": {
+        "en": {
+          "text": "I just joined this place."
+        },
+        "am": {
+          "text": "እዚህ አዲስ ነኝ።"
+        },
+        "om": {
+          "text": "Ani asitti haaraadha."
+        }
+      },
+      "hint": {
+        "en": "Use this to tell a coworker you have just joined.",
+        "am": "አሁን እንደተቀላቀሉ ለስራ ባልደረባዎ ለመንገር ይህንን ይጠቀሙ።",
+        "om": "Hojjetaa waliin hojjettu tokkotti akka dhiheenya kana itti makamte itti himuuf kanatti fayyadami."
+      }
+    },
+    {
+      "id": "ask-about-work",
+      "english": {
+        "text": "What do you do?"
+      },
+      "meaning": {
+        "en": {
+          "text": "What is your job?"
+        },
+        "am": {
+          "text": "ምን ሥራ ይሠራሉ?"
+        },
+        "om": {
+          "text": "Maal hojjetta?"
+        }
+      },
+      "hint": {
+        "en": "Ask this when you want to know someone's job.",
+        "am": "የአንድን ሰው ስራ ማወቅ ሲፈልጉ ይህንን ይጠይቁ።",
+        "om": "Yeroo hojii nama tokkoo beekuu barbaaddu kana gaafadhu."
+      }
+    },
+    {
+      "id": "work-in-sales",
+      "english": {
+        "text": "I work in sales."
+      },
+      "meaning": {
+        "en": {
+          "text": "My work is selling things."
+        },
+        "am": {
+          "text": "በሽያጭ ዘርፍ እሠራለሁ።"
+        },
+        "om": {
+          "text": "Ani gurgurtaa irratti nan hojjadha."
+        }
+      },
+      "hint": {
+        "en": "Use this pattern to name the kind of work you do.",
+        "am": "የሚያከናውኑትን የሥራ ዓይነት ለመሰየም ይህንን ዘይቤ ይጠቀሙ።",
+        "om": "Akaakuu hojii ati hojjettu maqaa itti kennuuf fakkeenya kana fayyadami."
+      }
+    },
+    {
+      "id": "say-your-job",
+      "english": {
+        "text": "I'm a nurse.",
+        "alternatives": [
+          "I am a nurse."
+        ]
+      },
+      "meaning": {
+        "en": {
+          "text": "My job is nursing."
+        },
+        "am": {
+          "text": "እኔ ነርስ ነኝ።"
+        },
+        "om": {
+          "text": "Ani narsiidha."
+        }
+      },
+      "hint": {
+        "en": "Use this pattern before a job title.",
+        "am": "ከሥራ መጠሪያ በፊት ይህንን ዘይቤ ይጠቀሙ።",
+        "om": "Maqaa hojii dura bifa kanaan fayyadami."
+      }
+    },
+    {
+      "id": "work-at-a-clinic",
+      "english": {
+        "text": "I work at a clinic."
+      },
+      "meaning": {
+        "en": {
+          "text": "A clinic is my workplace."
+        },
+        "am": {
+          "text": "ክሊኒክ ውስጥ እሠራለሁ።"
+        },
+        "om": {
+          "text": "Ani kilinika tokko keessatti hojjedha."
+        }
+      },
+      "hint": {
+        "en": "Use this pattern to name your workplace.",
+        "am": "የሥራ ቦታዎን ለመሰየም ይህንን ዘይቤ ይጠቀሙ።",
+        "om": "Bakka hojii kee moggaasuuf fakkeenya kana fayyadami."
+      }
+    },
+    {
+      "id": "work-in-customer-service",
+      "english": {
+        "text": "I work in customer service."
+      },
+      "meaning": {
+        "en": {
+          "text": "My job is to help customers."
+        },
+        "am": {
+          "text": "የደንበኞች አገልግሎት እሰራለሁ።"
+        },
+        "om": {
+          "text": "Ani tajaajila maamiltootaa irratti hojjedha."
+        }
+      },
+      "hint": {
+        "en": "Use this to say that you help customers at work.",
+        "am": "ይህንን በስራ ቦታ ደንበኞችን እንደሚረዱ ለመግለጽ ይጠቀሙበት።",
+        "om": "Bakka hojiitti maamiltoota akka gargaartu himuuf kanaan fayyadami."
+      }
+    }
+  ],
+  "levels": [
+    {
+      "kind": "lesson",
+      "id": "meet-a-coworker",
+      "lessons": [
+        {
+          "id": "understand-introductions",
+          "exercises": [
+            {"id":"understand-introductions-01","kind":"select-meaning","phraseId":"say-your-name","distractorPhraseIds":["meeting-greeting","new-here"]},
+            {"id":"understand-introductions-02","kind":"select-meaning","phraseId":"ask-their-name","distractorPhraseIds":["say-your-name","ask-about-work"]},
+            {"id":"understand-introductions-03","kind":"select-meaning","phraseId":"meeting-greeting","distractorPhraseIds":["say-your-name","ask-their-name"]},
+            {"id":"understand-introductions-04","kind":"match-pairs","phraseIds":["say-your-name","ask-their-name","meeting-greeting","new-here"]},
+            {"id":"understand-introductions-05","kind":"listen-and-pick","phraseId":"new-here","distractorPhraseIds":["say-your-name","meeting-greeting"]},
+            {"id":"understand-introductions-06","kind":"select-meaning","phraseId":"work-in-sales","distractorPhraseIds":["say-your-job","work-at-a-clinic"]},
+            {"id":"understand-introductions-07","kind":"select-meaning","phraseId":"ask-about-work","distractorPhraseIds":["ask-their-name","meeting-greeting"]},
+            {"id":"understand-introductions-08","kind":"listen-and-pick","phraseId":"ask-their-name","distractorPhraseIds":["ask-about-work","new-here"]},
+            {"id":"understand-introductions-09","kind":"match-pairs","phraseIds":["work-in-sales","say-your-job","ask-about-work"]},
+            {"id":"understand-introductions-10","kind":"listen-and-pick","phraseId":"say-your-name","distractorPhraseIds":["meeting-greeting","new-here"]}
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "lesson",
+      "id": "build-an-introduction",
+      "lessons": [
+        {
+          "id": "build-your-sentences",
+          "exercises": [
+            {"id":"build-your-sentences-01","kind":"word-bank-translate","phraseId":"say-your-name","direction":"support-to-english"},
+            {"id":"build-your-sentences-02","kind":"fill-blank","phraseId":"meeting-greeting","before":"Nice to ","after":" you.","answer":"meet","distractors":["meeting","met"]},
+            {"id":"build-your-sentences-03","kind":"word-bank-translate","phraseId":"ask-their-name","direction":"english-to-support"},
+            {"id":"build-your-sentences-04","kind":"word-bank-translate","phraseId":"new-here","direction":"support-to-english"},
+            {"id":"build-your-sentences-05","kind":"select-meaning","phraseId":"work-at-a-clinic","distractorPhraseIds":["work-in-sales","say-your-job"]},
+            {"id":"build-your-sentences-06","kind":"fill-blank","phraseId":"say-your-job","before":"I'm ","after":" nurse.","answer":"a","distractors":["in","at"]},
+            {"id":"build-your-sentences-07","kind":"word-bank-translate","phraseId":"work-in-sales","direction":"support-to-english"},
+            {"id":"build-your-sentences-08","kind":"fill-blank","phraseId":"work-at-a-clinic","before":"I work ","after":" a clinic.","answer":"at","distractors":["on","am"]},
+            {"id":"build-your-sentences-09","kind":"select-meaning","phraseId":"work-in-customer-service","distractorPhraseIds":["say-your-job","work-at-a-clinic"]},
+            {"id":"build-your-sentences-10","kind":"word-bank-translate","phraseId":"ask-about-work","direction":"english-to-support"}
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "lesson",
+      "id": "answer-out-loud",
+      "lessons": [
+        {
+          "id": "say-it-with-confidence",
+          "exercises": [
+            {"id":"say-it-with-confidence-01","kind":"listen-and-pick","phraseId":"say-your-name","distractorPhraseIds":["ask-their-name","meeting-greeting"]},
+            {"id":"say-it-with-confidence-02","kind":"speak-sentence","phraseId":"say-your-name"},
+            {"id":"say-it-with-confidence-03","kind":"type-what-you-hear","phraseId":"ask-their-name"},
+            {"id":"say-it-with-confidence-04","kind":"speak-sentence","phraseId":"meeting-greeting"},
+            {"id":"say-it-with-confidence-05","kind":"fill-blank","phraseId":"work-in-customer-service","before":"I work ","after":" customer service.","answer":"in","distractors":["am","do"]},
+            {"id":"say-it-with-confidence-06","kind":"speak-sentence","phraseId":"ask-about-work"},
+            {"id":"say-it-with-confidence-07","kind":"speak-sentence","phraseId":"say-your-job"},
+            {"id":"say-it-with-confidence-08","kind":"type-what-you-hear","phraseId":"work-at-a-clinic"},
+            {"id":"say-it-with-confidence-09","kind":"speak-sentence","phraseId":"work-in-sales"},
+            {"id":"say-it-with-confidence-10","kind":"speak-sentence","phraseId":"new-here"}
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "personal-practice",
+      "id": "revisit-your-phrases"
+    },
+    {
+      "kind": "speaking-roleplay",
+      "id": "introduce-yourself-to-a-coworker",
+      "setup": "Meet the learner as a friendly coworker on their first day. Ask their name and about their work one question at a time. Let them use their real details and end warmly.",
+      "learnerTask": {
+        "en": "You meet a new coworker. Say hello, tell them your name, and describe your job or workplace. Finish politely.",
+        "am": "ከአዲስ የሥራ ባልደረባ ጋር ተገናኝተዋል። ሰላም ይበሉ፣ ስምዎን ይናገሩ፣ ሥራዎን ወይም የሥራ ቦታዎን ይግለጹ። ውይይቱን በትሕትና ያጠናቅቁ።",
+        "om": "Hojjetaa haaraa tokko wajjin wal bari. Nagaa gaafadhu, maqaa kee itti himi, akkasumas hojii kee ykn bakka hojii kee ibsi. Haala gaariin xumuri."
+      },
+      "phraseIds": [
+        "say-your-name",
+        "ask-their-name",
+        "ask-about-work",
+        "work-in-sales",
+        "say-your-job",
+        "work-at-a-clinic",
+        "work-in-customer-service",
+        "meeting-greeting"
+      ]
+    },
+    {
+      "kind": "unit-review",
+      "id": "review-your-introduction",
+      "lessons": [
+        {
+          "id": "review-the-unit",
+          "exercises": [
+            {"id":"review-the-unit-01","kind":"select-meaning","phraseId":"new-here","distractorPhraseIds":["say-your-name","meeting-greeting"]},
+            {"id":"review-the-unit-02","kind":"match-pairs","phraseIds":["ask-about-work","work-in-sales","say-your-job","work-at-a-clinic"]},
+            {"id":"review-the-unit-03","kind":"listen-and-pick","phraseId":"work-in-customer-service","distractorPhraseIds":["work-at-a-clinic","say-your-job"]},
+            {"id":"review-the-unit-04","kind":"word-bank-translate","phraseId":"meeting-greeting","direction":"support-to-english"},
+            {"id":"review-the-unit-05","kind":"fill-blank","phraseId":"work-in-sales","before":"I ","after":" in sales.","answer":"work","distractors":["works","working"]},
+            {"id":"review-the-unit-06","kind":"word-bank-translate","phraseId":"say-your-job","direction":"english-to-support"},
+            {"id":"review-the-unit-07","kind":"type-what-you-hear","phraseId":"ask-about-work"},
+            {"id":"review-the-unit-08","kind":"speak-sentence","phraseId":"work-at-a-clinic"},
+            {"id":"review-the-unit-09","kind":"speak-sentence","phraseId":"work-in-customer-service"},
+            {"id":"review-the-unit-10","kind":"speak-sentence","phraseId":"ask-their-name"}
+          ]
+        }
+      ]
+    }
+  ]
+}

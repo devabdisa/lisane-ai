@@ -11,7 +11,9 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "prisma generate && next typegen && tsc --noEmit",
-    "messages:draft": "node --env-file-if-exists=.env.local scripts/draft-messages.mts"
+    "messages:draft": "node --env-file-if-exists=.env.local scripts/draft-messages.mts",
+    "curriculum:validate": "node scripts/validate-curriculum.mts",
+    "curriculum:sync": "node --env-file-if-exists=.env.local scripts/sync-curriculum.mts"
   },
   "dependencies": {
     "@google/genai": "3.6.1",

@@ -16,7 +16,22 @@
   },
   "Learn": {
     "title": "ደረጃ በደረጃ ይማሩ",
-    "description": "የእርስዎ የመማሪያ መንገድ እዚህ ይሆናል፡ እንግሊዝኛዎን አንድ በአንድ የሚያዳብሩ አጫጭር ትምህርቶች።"
+    "description": "የእርስዎ የመማሪያ መንገድ እዚህ ይሆናል፡ እንግሊዝኛዎን አንድ በአንድ የሚያዳብሩ አጫጭር ትምህርቶች።",
+    "empty": "የመማሪያ መንገድዎ ገና ዝግጁ አይደለም።",
+    "sectionIntro": "እዚህ ይጀምሩ",
+    "sectionA1": "ሀ1",
+    "sectionA2": "ሀ2",
+    "sectionB1": "B1",
+    "levelLesson": "ትምህርት",
+    "levelReview": "የክፍል ግምገማ",
+    "levelPractice": "የግል ልምምድ",
+    "levelRoleplay": "የንግግር ሚና መጫወት",
+    "levelLocked": "ተቆልፏል",
+    "levelCurrent": "የአሁን",
+    "levelDone": "ተከናውኗል",
+    "guidebook": "መመሪያ መጽሐፍ",
+    "closeGuidebook": "የጉዞ መመሪያውን ዝጋ",
+    "guidebookDraft": "ይህ ትርጉም አሁንም የአፍ መፍቻ ቋንቋ ተናጋሪ ግምገማ እየጠበቀ ነው።"
   },
   "Speak": {
     "helpStart": "በእንግሊዝኛ ለመናገር እርዳታ",

@@ -16,7 +16,22 @@
   },
   "Learn": {
     "title": "Learn step by step",
-    "description": "Your learning path will be here: short lessons that build your English one step at a time."
+    "description": "Short lessons that build your English one step at a time.",
+    "empty": "Your learning path is not ready yet.",
+    "sectionIntro": "Start here",
+    "sectionA1": "A1",
+    "sectionA2": "A2",
+    "sectionB1": "B1",
+    "levelLesson": "Lesson",
+    "levelReview": "Unit review",
+    "levelPractice": "Personal practice",
+    "levelRoleplay": "Speaking roleplay",
+    "levelLocked": "Locked",
+    "levelCurrent": "Current",
+    "levelDone": "Done",
+    "guidebook": "Guidebook",
+    "closeGuidebook": "Close guidebook",
+    "guidebookDraft": "This translation is still waiting for a native-speaker review."
   },
   "Speak": {
     "helpStart": "Help me say it",

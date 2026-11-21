@@ -22,6 +22,7 @@ model User {
   accounts      Account[]
   profile       UserProfile?
   speakSessions SpeakSession[]
+  levelProgress LevelProgress[]
 
   @@map("user")
 }
@@ -98,4 +99,46 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model CurriculumUnit {
+  id        String            @id
+  section   String
+  position  Int
+  review    Json
+  guidebook Json
+  phrases   Json
+  active    Boolean           @default(true)
+  levels    CurriculumLevel[]
+
+  @@index([active, section, position])
+  @@map("curriculum_unit")
+}
+
+model CurriculumLevel {
+  unitId   String
+  id       String
+  position Int
+  kind     String
+  content  Json
+  active   Boolean        @default(true)
+  unit     CurriculumUnit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  progress LevelProgress[]
+
+  @@id([unitId, id])
+  @@index([unitId, active, position])
+  @@map("curriculum_level")
+}
+
+model LevelProgress {
+  userId      String
+  unitId      String
+  levelId     String
+  completedAt DateTime        @default(now())
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  level       CurriculumLevel @relation(fields: [unitId, levelId], references: [unitId, id], onDelete: Restrict)
+
+  @@id([userId, unitId, levelId])
+  @@index([unitId, levelId])
+  @@map("level_progress")
 }

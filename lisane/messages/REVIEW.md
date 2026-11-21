@@ -30,7 +30,7 @@ still listed here, so reviewed text is never overwritten.
 | `Navigation.profile` | Profile | መገለጫ | quality: high |
 | `Placeholder.status` | Coming soon | በቅርቡ ይመጣል | quality: high |
 | `Learn.title` | Learn step by step | ደረጃ በደረጃ ይማሩ | quality: high |
-| `Learn.description` | Your learning path will be here: short lessons that build your English one step at a time. | የእርስዎ የመማሪያ መንገድ እዚህ ይሆናል፡ እንግሊዝኛዎን አንድ በአንድ የሚያዳብሩ አጫጭር ትምህርቶች። | quality: high |
+| `Learn.description` | Short lessons that build your English one step at a time. | የእርስዎ የመማሪያ መንገድ እዚህ ይሆናል፡ እንግሊዝኛዎን አንድ በአንድ የሚያዳብሩ አጫጭር ትምህርቶች። | quality: high |
 | `Speak.title` | Speak anytime | በማንኛውም ጊዜ ይናገሩ | quality: high |
 | `Speak.description` | Talk with your English coach by voice. | በጽሑፍ ወይም በድምጽ ከእንግሊዝኛ አሰልጣኝዎ ጋር ይነጋገሩ እና በእያንዳንዱ ተራ አንድ አይነት እርማት ያግኙ። | quality: high |
 | `Practice.title` | Practice | ልምምድ | quality: high |
@@ -155,6 +155,21 @@ still listed here, so reviewed text is never overwritten.
 | `Speak.reviewSession` | Review session | የግምገማ ክፍለ ጊዜ | quality: high |
 | `Speak.practiseAgain` | Practise again | እንደገና ይለማመዱ | quality: high |
 | `Speak.dismissNote` | Hide this note | ይህን ማስታወሻ ደብቅ | quality: high |
+| `Learn.empty` | Your learning path is not ready yet. | የመማሪያ መንገድዎ ገና ዝግጁ አይደለም። | quality: high |
+| `Learn.sectionIntro` | Start here | እዚህ ይጀምሩ | quality: high |
+| `Learn.sectionA1` | A1 | ሀ1 | quality: high |
+| `Learn.sectionA2` | A2 | ሀ2 | quality: high |
+| `Learn.sectionB1` | B1 | B1 | quality: high |
+| `Learn.levelLesson` | Lesson | ትምህርት | quality: high |
+| `Learn.levelReview` | Unit review | የክፍል ግምገማ | quality: high |
+| `Learn.levelPractice` | Personal practice | የግል ልምምድ | quality: high |
+| `Learn.levelRoleplay` | Speaking roleplay | የንግግር ሚና መጫወት | quality: high |
+| `Learn.levelLocked` | Locked | ተቆልፏል | quality: high |
+| `Learn.levelCurrent` | Current | የአሁን | quality: high |
+| `Learn.levelDone` | Done | ተከናውኗል | quality: high |
+| `Learn.guidebook` | Guidebook | መመሪያ መጽሐፍ | quality: high |
+| `Learn.closeGuidebook` | Close guidebook | የጉዞ መመሪያውን ዝጋ | quality: high |
+| `Learn.guidebookDraft` | This translation is still waiting for a native-speaker review. | ይህ ትርጉም አሁንም የአፍ መፍቻ ቋንቋ ተናጋሪ ግምገማ እየጠበቀ ነው። | quality: high |
 
 ## Afaan Oromo (om)
 
@@ -179,7 +194,7 @@ still listed here, so reviewed text is never overwritten.
 | `Navigation.profile` | Profile | Piroofayilii | quality: high |
 | `Placeholder.status` | Coming soon | Dhiyootti ni dhufa | quality: high |
 | `Learn.title` | Learn step by step | Tarkaanfii tarkaanfiidhaan baradhu | quality: high |
-| `Learn.description` | Your learning path will be here: short lessons that build your English one step at a time. | Daandiin barumsa keetii as jiraata: barumsa gaggabaaboo dandeettii Afaan Ingiliffaa kee tarkaanfii tokkoon tokkoon ijaaran. | quality: high |
+| `Learn.description` | Short lessons that build your English one step at a time. | Daandiin barumsa keetii as jiraata: barumsa gaggabaaboo dandeettii Afaan Ingiliffaa kee tarkaanfii tokkoon tokkoon ijaaran. | quality: high |
 | `Speak.title` | Speak anytime | Yeroo barbaaddetti dubbadhu | quality: high |
 | `Speak.description` | Talk with your English coach by voice. | Leenjisaa Afaan Ingiliffaa kee waliin barreeffamaan ykn sagaleen dubbadhu, akkasumas dabaree tokkoon sirreeffama gaarii tokko argadhu. | quality: high |
 | `Practice.title` | Practice | Shaakala | quality: high |
@@ -300,3 +315,18 @@ still listed here, so reviewed text is never overwritten.
 | `Speak.reviewSession` | Review session | Sagantaa irra deebii | quality: high |
 | `Speak.practiseAgain` | Practise again | Ammas shaakali | quality: high |
 | `Speak.dismissNote` | Hide this note | Yaadannoo kana dhoksi | quality: high |
+| `Learn.empty` | Your learning path is not ready yet. | Daandiin barumsa keetii ammatti hin qophoofne. | quality: high |
+| `Learn.sectionIntro` | Start here | Asirraa jalqabi | quality: high |
+| `Learn.sectionA1` | A1 | A1 | quality: high |
+| `Learn.sectionA2` | A2 | A2 | quality: high |
+| `Learn.sectionB1` | B1 | B1 | quality: high |
+| `Learn.levelLesson` | Lesson | Barumsa | quality: high |
+| `Learn.levelReview` | Unit review | Irra-deebii Boqonnaa | quality: high |
+| `Learn.levelPractice` | Personal practice | Shaakala dhuunfaa | quality: high |
+| `Learn.levelRoleplay` | Speaking roleplay | Tapha gahee dubbachuu | quality: high |
+| `Learn.levelLocked` | Locked | Cufameera | quality: high |
+| `Learn.levelCurrent` | Current | Ammee | quality: high |
+| `Learn.levelDone` | Done | Xumurameera | quality: high |
+| `Learn.guidebook` | Guidebook | Kitaaba Qajeelfamaa | quality: high |
+| `Learn.closeGuidebook` | Close guidebook | Kitaaba qajeelfamaa cufi | quality: high |
+| `Learn.guidebookDraft` | This translation is still waiting for a native-speaker review. | Hiikkaan kun ammas gamaaggama nama afaanicha dhalootaan dubbatuu eegaa jira. | quality: high |

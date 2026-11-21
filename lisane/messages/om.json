@@ -16,7 +16,22 @@
   },
   "Learn": {
     "title": "Tarkaanfii tarkaanfiidhaan baradhu",
-    "description": "Daandiin barumsa keetii as jiraata: barumsa gaggabaaboo dandeettii Afaan Ingiliffaa kee tarkaanfii tokkoon tokkoon ijaaran."
+    "description": "Daandiin barumsa keetii as jiraata: barumsa gaggabaaboo dandeettii Afaan Ingiliffaa kee tarkaanfii tokkoon tokkoon ijaaran.",
+    "empty": "Daandiin barumsa keetii ammatti hin qophoofne.",
+    "sectionIntro": "Asirraa jalqabi",
+    "sectionA1": "A1",
+    "sectionA2": "A2",
+    "sectionB1": "B1",
+    "levelLesson": "Barumsa",
+    "levelReview": "Irra-deebii Boqonnaa",
+    "levelPractice": "Shaakala dhuunfaa",
+    "levelRoleplay": "Tapha gahee dubbachuu",
+    "levelLocked": "Cufameera",
+    "levelCurrent": "Ammee",
+    "levelDone": "Xumurameera",
+    "guidebook": "Kitaaba Qajeelfamaa",
+    "closeGuidebook": "Kitaaba qajeelfamaa cufi",
+    "guidebookDraft": "Hiikkaan kun ammas gamaaggama nama afaanicha dhalootaan dubbatuu eegaa jira."
   },
   "Speak": {
     "helpStart": "Akkan Ingiliffaan jedhu na gargaari",
