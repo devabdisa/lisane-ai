@@ -300,7 +300,7 @@ Build from Duolingo's published design, not Voxa's learning module.
 - [x] 03. next-intl: `[locale]` routing, `proxy.ts`, `messages/en.json`, locale cookie, language switcher
 - [x] 04. Language registry (`src/config/languages.ts`), Addis-drafted `am`/`om` messages, `messages/REVIEW.md`
 - [x] 05. App shell: mobile layout, bottom navigation (Learn, Speak, Practice, Progress, Profile), placeholder `Mascot`, empty pages, and the theme switch (System, Light, Dark) saved in a cookie so the page never flashes the wrong theme
-- [ ] 06. Env validation (`src/lib/env.ts`) and the `server-only` setup
+- [x] 06. Env validation (`src/lib/env.ts`) and the `server-only` setup
 
 ### Data and auth
 - [ ] 07. Prisma (latest stable) with a hosted Postgres connection and base auth models

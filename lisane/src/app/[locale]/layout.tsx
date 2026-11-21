@@ -7,6 +7,7 @@ import { ThemeScript } from "@/components/theme-script";
 import { ThemeSync } from "@/components/theme-sync";
 import { fontClassNames, getLanguage } from "@/config/languages";
 import { routing } from "@/i18n/routing";
+import { env } from "@/lib/env";
 import "../globals.css";
 
 const inter = Inter({
@@ -31,6 +32,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
   const t = await getTranslations({ locale, namespace: "Metadata" });
 
   return {
+    metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
     title: t("title"),
     description: t("description"),
   };
