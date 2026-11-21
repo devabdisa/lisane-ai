@@ -86,11 +86,12 @@ function UnitPath({ unit }: { unit: Unit }) {
         {unit.levels.map((level, index) => {
           const label = level.kind === "lesson" ? t("lessonNumber", { number: lessonNumbers.get(level.id) ?? index + 1 }) : t(levelKey[level.kind]);
           return (
-            <li key={level.id} className="flex w-full justify-center" style={{ transform: `translateX(${shift[index % shift.length]}px)` }}>
+            <li key={level.id} className="flex w-full justify-center">
               <LevelNode
                 unitId={unit.id}
                 level={level}
                 label={label}
+                offset={shift[index % shift.length]}
                 hinted={hintId === level.id}
                 onLocked={() => setHintId((current) => (current === level.id ? null : level.id))}
               />
@@ -101,7 +102,7 @@ function UnitPath({ unit }: { unit: Unit }) {
       <dialog
         ref={dialogRef}
         aria-labelledby={titleId}
-        className="m-auto w-[min(100%-2rem,32rem)] rounded-16 border border-line bg-canvas p-0 text-fg backdrop:bg-midnight/70"
+        className="m-auto w-[calc(100%-2rem)] max-w-lg rounded-16 border border-line bg-canvas p-0 text-fg backdrop:bg-midnight/70"
       >
         <Guidebook unit={unit} titleId={titleId} onClose={() => dialogRef.current?.close()} />
       </dialog>
@@ -113,12 +114,14 @@ function LevelNode({
   unitId,
   level,
   label,
+  offset,
   hinted,
   onLocked,
 }: {
   unitId: string;
   level: Level;
   label: string;
+  offset: number;
   hinted: boolean;
   onLocked: () => void;
 }) {
@@ -133,27 +136,29 @@ function LevelNode({
 
   return (
     <div className="flex flex-col items-center">
-      {level.state === "current" ? (
-        <div className="relative mb-3 w-40 rounded-16 border border-line bg-card px-3 py-3 text-center shadow-raised">
-          <p className="text-caption font-semibold">{label}</p>
-          <Link
-            href={href}
-            className="mt-2 flex min-h-12 items-center justify-center rounded-full bg-action px-4 text-label font-semibold text-on-action focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg"
-          >
-            {t("start")}
+      <div className="flex flex-col items-center" style={{ transform: `translateX(clamp(-20vw, ${offset}px, 20vw))` }}>
+        {level.state === "current" ? (
+          <div className="relative mb-3 w-40 rounded-16 border border-line bg-card px-3 py-3 text-center shadow-raised">
+            <p className="text-caption font-semibold">{label}</p>
+            <Link
+              href={href}
+              className="mt-2 flex min-h-12 items-center justify-center rounded-full bg-action px-4 text-label font-semibold text-on-action focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg"
+            >
+              {t("start")}
+            </Link>
+            <span className="absolute -bottom-1.5 left-1/2 size-3 -translate-x-1/2 rotate-45 border-r border-b border-line bg-card" />
+          </div>
+        ) : null}
+        {level.state === "locked" ? (
+          <button type="button" className={circle} aria-label={`${label}. ${t(stateKey.locked)}`} aria-expanded={hinted} onClick={onLocked}>
+            <LockIcon />
+          </button>
+        ) : (
+          <Link href={href} className={circle} aria-label={`${label}. ${t(stateKey[level.state])}`} aria-current={level.state === "current" ? "step" : undefined}>
+            <LevelIcon kind={level.kind} done={level.state === "done"} />
           </Link>
-          <span className="absolute -bottom-1.5 left-1/2 size-3 -translate-x-1/2 rotate-45 border-r border-b border-line bg-card" />
-        </div>
-      ) : null}
-      {level.state === "locked" ? (
-        <button type="button" className={circle} aria-label={`${label}. ${t(stateKey.locked)}`} onClick={onLocked}>
-          <LockIcon />
-        </button>
-      ) : (
-        <Link href={href} className={circle} aria-label={`${label}. ${t(stateKey[level.state])}`}>
-          <LevelIcon kind={level.kind} done={level.state === "done"} />
-        </Link>
-      )}
+        )}
+      </div>
       {level.state === "locked" && hinted ? (
         <p className="mt-2 w-52 text-center text-caption text-fg-muted" role="status">
           {t("lockedHint")}
@@ -168,9 +173,9 @@ function Guidebook({ unit, titleId, onClose }: { unit: Unit; titleId: string; on
   const language = isLanguageCode(unit.guidebook.language) ? getLanguage(unit.guidebook.language) : null;
 
   return (
-    <div className={cn("flex max-h-[80dvh] flex-col gap-4 overflow-y-auto p-5", language && fontClassNames[language.font])} lang={language?.code}>
+    <div className="flex max-h-[80dvh] flex-col gap-4 overflow-y-auto p-5">
       <div className="flex items-start justify-between gap-3">
-        <h2 id={titleId} className="text-heading font-semibold">
+        <h2 id={titleId} lang={language?.code} dir={language?.dir} className={cn("text-heading font-semibold", language && fontClassNames[language.font])}>
           {unit.title}
         </h2>
         <button
@@ -182,22 +187,27 @@ function Guidebook({ unit, titleId, onClose }: { unit: Unit; titleId: string; on
           <CloseIcon />
         </button>
       </div>
-      <p className="text-body">{unit.guidebook.introduction}</p>
-      {unit.guidebook.notes.map((note) => (
-        <div key={note.explanation} className="flex flex-col gap-2 border-t border-line pt-3">
-          <p className="text-body">{note.explanation}</p>
-          <ul className="flex flex-col gap-2">
-            {note.examples.map((example) => (
-              <li key={example.id} className="rounded-12 border border-line bg-card px-3 py-2">
-                <p className="font-sans text-label font-semibold" lang="en">
-                  {example.english}
-                </p>
-                <p className="text-label text-fg-muted">{example.meaning}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      {unit.guidebook.reviewStatus === "draft" ? (
+        <p className="rounded-8 bg-field px-3 py-2 text-label text-fg-muted">{t("guidebookDraft")}</p>
+      ) : null}
+      <div className={cn("flex flex-col gap-4", language && fontClassNames[language.font])} lang={language?.code} dir={language?.dir}>
+        <p className="text-body">{unit.guidebook.introduction}</p>
+        {unit.guidebook.notes.map((note, index) => (
+          <div key={index} className="flex flex-col gap-2 border-t border-line pt-3">
+            <p className="text-body">{note.explanation}</p>
+            <ul className="flex flex-col gap-2">
+              {note.examples.map((example) => (
+                <li key={example.id} className="rounded-12 border border-line bg-card px-3 py-2">
+                  <p className="font-sans text-label font-semibold" lang="en" dir="ltr">
+                    {example.english}
+                  </p>
+                  <p className="text-label text-fg-muted">{example.meaning}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

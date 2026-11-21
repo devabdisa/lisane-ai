@@ -54,6 +54,8 @@ cd lisane
 pnpm install
 cp .env.example .env.local   # fill in DATABASE_URL, BETTER_AUTH_SECRET, GEMINI_API_KEY, ADDIS_API_KEY
 pnpm exec prisma migrate deploy
+pnpm db:generate
+pnpm curriculum:sync
 pnpm dev
 ```
 
@@ -61,7 +63,7 @@ Open http://localhost:3000. Checks: `pnpm typecheck`, `pnpm lint`, and `node --t
 
 ## Deploy
 
-Live conversations are held in the server's memory, so run one long-lived server instance. On Render, create a web service with root directory `lisane`, build command `npm install -g pnpm@12.21.0 && pnpm install --frozen-lockfile && pnpm exec prisma migrate deploy && pnpm build`, start command `pnpm start`, and the environment variables from [`lisane/.env.example`](lisane/.env.example), with `BETTER_AUTH_URL` and `NEXT_PUBLIC_APP_URL` set to the service address.
+Live conversations are held in the server's memory, so run one long-lived server instance. On Render, create a web service with root directory `lisane`, build command `npm install -g pnpm@12.21.0 && pnpm install --frozen-lockfile && pnpm exec prisma migrate deploy && pnpm build && pnpm curriculum:sync`, start command `pnpm start`, and the environment variables from [`lisane/.env.example`](lisane/.env.example), with `BETTER_AUTH_URL` and `NEXT_PUBLIC_APP_URL` set to the service address.
 
 ## Roadmap
 

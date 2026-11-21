@@ -11,6 +11,8 @@ still listed here, so reviewed text is never overwritten.
 
 | Key | English | Draft | Note |
 |---|---|---|---|
+| `Learn.couldNotSave` | The lesson couldn't be saved. Try again. | ትምህርቱን ማስቀመጥ አልተቻለም። እንደገና ይሞክሩ። | machine draft |
+| `Learn.listenUnavailable` | Audio is unavailable. Read the sentence to continue. | ድምፁ አልተገኘም። ለመቀጠል ዓረፍተ ነገሩን ያንብቡ። | machine draft |
 | `Speak.helpStart` | Help me say it | በእንግሊዝኛ ለመናገር እርዳታ | machine draft |
 | `Speak.helpRecording` | Say one sentence in your support language. | በቋንቋዎ አንድ ዓረፍተ ነገር ይናገሩ። | machine draft |
 | `Speak.helpTranslate` | Translate | ተርጉም | machine draft |
@@ -209,6 +211,8 @@ still listed here, so reviewed text is never overwritten.
 
 | Key | English | Draft | Note |
 |---|---|---|---|
+| `Learn.couldNotSave` | The lesson couldn't be saved. Try again. | Barumsa kana olkaa'uun hin danda'amne. Irra deebi'ii yaali. | machine draft |
+| `Learn.listenUnavailable` | Audio is unavailable. Read the sentence to continue. | Sagaleen hin jiru. Itti fufuuf himicha dubbisi. | machine draft |
 | `Speak.helpStart` | Help me say it | Akkan Ingiliffaan jedhu na gargaari | machine draft |
 | `Speak.helpRecording` | Say one sentence in your support language. | Afaan keetiin hima tokko dubbadhu. | machine draft |
 | `Speak.helpTranslate` | Translate | Hiiki | machine draft |

@@ -1,4 +1,5 @@
 import { getAppUser } from "@/lib/require-app-user";
+import { lessonCompletionSchema } from "@/schemas/lesson-attempt";
 import { enforceRouteRateLimit } from "@/server/rate-limit/route-rate-limit";
 import { completeLessonLevel } from "@/server/services/learn/lesson";
 
@@ -21,10 +22,15 @@ export async function POST(request: Request, context: { params: Promise<{ unitId
     return errorResponse(400, "invalid_input", "That lesson could not be found.");
   }
 
+  const body: unknown = await request.json().catch(() => null);
+  const completion = lessonCompletionSchema.safeParse(body);
+  if (!completion.success) return errorResponse(400, "invalid_input", "Answer each question before saving this lesson.");
+
   try {
-    const result = await completeLessonLevel(user.id, unitId, levelId);
+    const result = await completeLessonLevel(user.id, unitId, levelId, completion.data.attempts);
     if (result.status === "missing") return errorResponse(404, "not_found", "That step is not on your path.");
     if (result.status === "locked") return errorResponse(403, "locked", "Finish the step above before this one.");
+    if (result.status === "incomplete") return errorResponse(422, "incomplete", "Answer each question before saving this lesson.");
     return Response.json({ completed: true }, { headers: privateResponse });
   } catch (error) {
     console.error("Lesson could not be saved", { error: error instanceof Error ? error.name : "unknown" });

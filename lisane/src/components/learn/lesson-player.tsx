@@ -1,11 +1,11 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useId, useRef, useState } from "react";
 import { LessonExercise } from "@/components/learn/lesson-exercise";
 import { Mascot } from "@/components/mascot";
 import { Button } from "@/components/ui/button";
-import { Link, useRouter } from "@/i18n/navigation";
+import { getPathname, Link, useRouter } from "@/i18n/navigation";
 import { fontClassNames, getLanguage, isLanguageCode } from "@/config/languages";
 import type { LessonAttempt, LessonDTO, PublicExercise } from "@/lib/lesson";
 import { cn } from "@/lib/cn";
@@ -33,10 +33,10 @@ function LessonPlayer({ lesson }: { lesson: LessonDTO }) {
 }
 
 function LessonRun({ lesson }: { lesson: LessonDTO }) {
-  const [index, setIndex] = useState(0);
-  const [finished, setFinished] = useState(false);
+  const [attempts, setAttempts] = useState<LessonAttempt[]>([]);
+  const index = attempts.length;
   const exercise = lesson.exercises[index];
-  if (finished || !exercise) return <LessonComplete />;
+  if (!exercise) return <LessonComplete />;
   return (
     <Question
       key={exercise.id}
@@ -44,10 +44,8 @@ function LessonRun({ lesson }: { lesson: LessonDTO }) {
       exercise={exercise}
       index={index}
       total={lesson.exercises.length}
-      onAdvance={() => {
-        if (index + 1 >= lesson.exercises.length) setFinished(true);
-        else setIndex(index + 1);
-      }}
+      onSave={(attempt) => saveLesson(lesson.unitId, lesson.levelId, [...attempts, attempt])}
+      onAdvance={(attempt) => setAttempts((current) => current.length === index ? [...current, attempt] : current)}
     />
   );
 }
@@ -57,13 +55,15 @@ function Question({
   exercise,
   index,
   total,
+  onSave,
   onAdvance,
 }: {
   lesson: LessonDTO;
   exercise: PublicExercise;
   index: number;
   total: number;
-  onAdvance: () => void;
+  onSave: (attempt: LessonAttempt) => Promise<boolean>;
+  onAdvance: (attempt: LessonAttempt) => void;
 }) {
   const t = useTranslations("Learn");
   const router = useRouter();
@@ -80,15 +80,15 @@ function Question({
     router.refresh();
   }
 
-  async function check() {
-    if (!attempt || checking || feedback) return;
+  async function check(submitted: LessonAttempt | null = attempt) {
+    if (!submitted || checking || feedback) return;
     setChecking(true);
     setProblem(false);
     try {
       const response = await fetch(`/api/learn/levels/${lesson.unitId}/${lesson.levelId}/check`, {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify(attempt),
+        body: JSON.stringify(submitted),
       });
       const grade = readGrade(await response.json().catch(() => null));
       if (!response.ok || !grade) {
@@ -104,14 +104,16 @@ function Question({
   }
 
   async function continueForward() {
+    if (!attempt || !feedback || checking) return;
     if (index + 1 < total) {
-      onAdvance();
+      onAdvance(attempt);
       return;
     }
     setChecking(true);
-    const saved = await saveLesson(lesson.unitId, lesson.levelId);
+    setProblem(false);
+    const saved = await onSave(attempt);
     setChecking(false);
-    if (saved) onAdvance();
+    if (saved) onAdvance(attempt);
     else setProblem(true);
   }
 
@@ -137,15 +139,16 @@ function Question({
           <div className="h-full rounded-full bg-action transition-[width] duration-300" style={{ width: `${(answered / total) * 100}%` }} />
         </div>
       </header>
-      <div className="mx-auto flex w-full max-w-lg flex-1 flex-col px-4 pt-6">
+      <div className="mx-auto flex min-h-0 w-full max-w-lg flex-1 flex-col px-4 pt-6">
         <h1 className="sr-only">{lesson.kind === "lesson" ? t("lessonNumber", { number: lesson.lessonNumber }) : t(levelKey[lesson.kind])}</h1>
-        <div className="flex-1">
+        <div className="-mx-1 min-h-0 flex-1 overflow-y-auto px-1 pb-3">
           <LessonExercise
             exercise={exercise}
             supportLanguage={lesson.supportLanguage}
             disabled={feedback !== null || checking}
             prompt={t(promptKey[exercise.kind])}
             playLabel={t("listenPlay")}
+            listenUnavailable={t("listenUnavailable")}
             matchHint={t("matchPrompt")}
             matchMiss={t("matchMiss")}
             typePlaceholder={t("typePlaceholder")}
@@ -153,11 +156,14 @@ function Question({
             speakListening={t("speakListening")}
             speakUnavailable={t("speakUnavailable")}
             onAttempt={setAttempt}
-            onSolved={() => setFeedback({ correct: true, answer: "", answerLanguage: lesson.supportLanguage })}
+            onSolved={(matched) => {
+              setAttempt(matched);
+              void check(matched);
+            }}
           />
         </div>
-        <footer className="pb-[max(1rem,env(safe-area-inset-bottom))]">
-          {problem ? <p className="mb-3 text-label text-fg-muted">{t("couldNotCheck")}</p> : null}
+        <footer className="shrink-0 pb-[max(1rem,env(safe-area-inset-bottom))]">
+          {problem ? <p className="mb-3 text-label text-fg-muted" role="status">{t(feedback ? "couldNotSave" : "couldNotCheck")}</p> : null}
           {feedback ? (
             <div className={cn("flex flex-col gap-3 rounded-16 p-4", feedback.correct ? "bg-accent-host text-white" : "bg-card text-fg")}>
               <p className={cn("text-heading font-semibold", feedback.correct && "text-accent")}>{feedback.correct ? t("correct") : t("incorrect")}</p>
@@ -170,7 +176,7 @@ function Question({
                 {t("continue")}
               </Button>
             </div>
-          ) : exercise.kind === "match-pairs" ? (
+          ) : exercise.kind === "match-pairs" && !attempt ? (
             <div className="h-12" />
           ) : (
             <Button onClick={() => void check()} disabled={!attempt || checking} width="full">
@@ -182,7 +188,7 @@ function Question({
       <dialog
         ref={dialogRef}
         aria-labelledby={titleId}
-        className="m-auto w-[min(100%-2rem,24rem)] rounded-16 border border-line bg-canvas p-5 text-fg backdrop:bg-midnight/70"
+        className="m-auto w-[calc(100%-2rem)] max-w-sm rounded-16 border border-line bg-canvas p-5 text-fg backdrop:bg-midnight/70"
       >
         <h2 id={titleId} className="text-heading font-semibold">
           {t("quitTitle")}
@@ -203,7 +209,7 @@ function Question({
 
 function LessonComplete() {
   const t = useTranslations("Learn");
-  const router = useRouter();
+  const pathHref = getPathname({ href: "/learn", locale: useLocale() });
   return (
     <div className="fixed inset-0 z-30 flex flex-col items-center justify-center gap-4 bg-canvas px-6 text-center">
       <Mascot />
@@ -212,10 +218,7 @@ function LessonComplete() {
       <Button
         width="full"
         className="max-w-sm"
-        onClick={() => {
-          router.push("/learn");
-          router.refresh();
-        }}
+        onClick={() => window.location.assign(pathHref)}
       >
         {t("backToPath")}
       </Button>
@@ -226,19 +229,19 @@ function LessonComplete() {
 function LessonGate({ lesson }: { lesson: LessonDTO }) {
   const t = useTranslations("Learn");
   const router = useRouter();
+  const pathHref = getPathname({ href: "/learn", locale: useLocale() });
   const [saving, setSaving] = useState(false);
   const [problem, setProblem] = useState(false);
 
   async function moveOn() {
     setSaving(true);
-    const saved = await saveLesson(lesson.unitId, lesson.levelId);
+    const saved = await saveLesson(lesson.unitId, lesson.levelId, []);
     setSaving(false);
     if (!saved) {
       setProblem(true);
       return;
     }
-    router.push("/learn");
-    router.refresh();
+    window.location.assign(pathHref);
   }
 
   return (
@@ -251,7 +254,7 @@ function LessonGate({ lesson }: { lesson: LessonDTO }) {
         <Mascot />
         <h1 className="text-title font-semibold">{t(levelKey[lesson.kind])}</h1>
         <p className="text-body text-fg-muted">{t("gateBody")}</p>
-        {problem ? <p className="text-label text-fg-muted">{t("couldNotCheck")}</p> : null}
+        {problem ? <p className="text-label text-fg-muted" role="status">{t("couldNotSave")}</p> : null}
         {lesson.kind === "speaking-roleplay" ? (
           <Button asChild hierarchy="secondary" width="full">
             <Link href="/speak">{t("openSpeak")}</Link>
@@ -265,9 +268,13 @@ function LessonGate({ lesson }: { lesson: LessonDTO }) {
   );
 }
 
-async function saveLesson(unitId: string, levelId: string) {
+async function saveLesson(unitId: string, levelId: string, attempts: LessonAttempt[]) {
   try {
-    const response = await fetch(`/api/learn/levels/${unitId}/${levelId}/complete`, { method: "POST" });
+    const response = await fetch(`/api/learn/levels/${unitId}/${levelId}/complete`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ attempts }),
+    });
     return response.ok;
   } catch {
     return false;

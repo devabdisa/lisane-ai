@@ -4,6 +4,7 @@ import {
   buildPersonalPractice,
   buildPublicExercises,
   gradeLessonAttempt,
+  hasCompletedLesson,
   type LessonAttempt,
   type LessonDTO,
 } from "@/lib/lesson";
@@ -149,9 +150,12 @@ export async function checkLessonAnswer(
   return grade;
 }
 
-export async function completeLessonLevel(userId: string, unitId: string, levelId: string) {
+export async function completeLessonLevel(userId: string, unitId: string, levelId: string, attempts: LessonAttempt[]) {
   const opened = await openLevel(userId, unitId, levelId);
   if (opened.status !== "open") return opened;
+  if (!hasCompletedLesson(opened.unit, opened.level, opened.path.supportLanguage, attempts)) {
+    return { status: "incomplete" as const };
+  }
   await getPrisma().levelProgress.upsert({
     where: { userId_unitId_levelId: { userId, unitId, levelId } },
     create: { userId, unitId, levelId },

@@ -37,6 +37,7 @@ export type LessonAttempt = {
   choiceId?: string;
   tiles?: string[];
   text?: string;
+  pairs?: { englishId: string; meaningId: string }[];
 };
 
 export type LessonGrade =
@@ -50,6 +51,11 @@ function phrasesOf(unit: CurriculumUnit) {
 
 function meaning(phrase: Phrase, language: string) {
   return phrase.meaning[language]?.text ?? phrase.meaning[defaultLocale].text;
+}
+
+function supportAnswers(phrase: Phrase, language: string) {
+  const translated = phrase.meaning[language] ?? phrase.meaning[defaultLocale];
+  return [translated.text, ...(translated.alternatives ?? [])];
 }
 
 function englishAnswers(phrase: Phrase) {
@@ -195,22 +201,37 @@ export function gradeLessonAttempt(
 ): LessonGrade {
   if (level.kind === "personal-practice") {
     const practised = phrasesOf(unit).get(attempt.exerciseId);
-    if (!practised || !attempt.choiceId) return { status: "invalid" };
+    if (!practised || !attempt.choiceId || !phrasesOf(unit).has(attempt.choiceId)) return { status: "invalid" };
     return graded(attempt.choiceId === practised.id, meaning(practised, language), language);
   }
   if (level.kind === "speaking-roleplay") return { status: "unknown" };
   const exercise = level.lessons.flatMap((lesson) => lesson.exercises).find((item) => item.id === attempt.exerciseId);
   if (!exercise) return { status: "unknown" };
-  const phrase = phrasesOf(unit).get("phraseId" in exercise ? exercise.phraseId : "");
+  if (exercise.kind === "match-pairs") {
+    const pairs = attempt.pairs;
+    if (!pairs || pairs.length !== exercise.phraseIds.length) return { status: "invalid" };
+
+    const englishIds = new Set(exercise.phraseIds);
+    const meaningIds = new Set(exercise.phraseIds);
+    for (const { englishId, meaningId } of pairs) {
+      if (!englishIds.delete(englishId) || !meaningIds.delete(meaningId)) return { status: "invalid" };
+    }
+    return graded(pairs.every(({ englishId, meaningId }) => englishId === meaningId), "", language);
+  }
+
+  const phrase = phrasesOf(unit).get(exercise.phraseId);
 
   if (exercise.kind === "select-meaning" || exercise.kind === "listen-and-pick") {
-    const correctPhrase = phrasesOf(unit).get(exercise.phraseId);
-    if (!correctPhrase || !attempt.choiceId) return { status: "invalid" };
-    return graded(attempt.choiceId === exercise.phraseId, meaning(correctPhrase, language), language);
+    if (!phrase || !attempt.choiceId || ![exercise.phraseId, ...exercise.distractorPhraseIds].includes(attempt.choiceId)) {
+      return { status: "invalid" };
+    }
+    return graded(attempt.choiceId === exercise.phraseId, meaning(phrase, language), language);
   }
 
   if (exercise.kind === "fill-blank") {
-    if (!phrase || !attempt.text) return { status: "invalid" };
+    if (!phrase || !attempt.text || !matchesAnswer(attempt.text, [exercise.answer, ...exercise.distractors])) {
+      return { status: "invalid" };
+    }
     const sentence = `${exercise.before}${exercise.answer}${exercise.after}`.trim();
     return graded(matchesAnswer(attempt.text, [exercise.answer]), sentence, defaultLocale);
   }
@@ -218,8 +239,15 @@ export function gradeLessonAttempt(
   if (exercise.kind === "word-bank-translate") {
     if (!phrase || !attempt.tiles?.length) return { status: "invalid" };
     const support = meaning(phrase, language);
-    const accepted = exercise.direction === "support-to-english" ? englishAnswers(phrase) : [support];
-    const shown = exercise.direction === "support-to-english" ? phrase.english.text : support;
+    const toEnglish = exercise.direction === "support-to-english";
+    const accepted = toEnglish ? englishAnswers(phrase) : supportAnswers(phrase, language);
+    const shown = toEnglish ? phrase.english.text : support;
+    const available = shown.trim().split(/\s+/);
+    for (const tile of attempt.tiles) {
+      const index = available.indexOf(tile);
+      if (index === -1) return { status: "invalid" };
+      available.splice(index, 1);
+    }
     return graded(matchesAnswer(attempt.tiles.join(" "), accepted), shown, exercise.direction === "support-to-english" ? defaultLocale : language);
   }
 
@@ -229,4 +257,33 @@ export function gradeLessonAttempt(
   }
 
   return { status: "invalid" };
+}
+
+export function hasCompletedLesson(
+  unit: CurriculumUnit,
+  level: Level,
+  language: string,
+  attempts: LessonAttempt[],
+): boolean {
+  // The roleplay stays a preview until it is connected to the Speak engine.
+  if (level.kind === "speaking-roleplay") return attempts.length === 0;
+
+  let exerciseIds: string[];
+  let matchingIds: string[] = [];
+  if (level.kind === "personal-practice") {
+    exerciseIds = unit.phrases.length >= 3 ? unit.phrases.map((phrase) => phrase.id) : [];
+  } else {
+    const exercises = level.lessons.flatMap((lesson) => lesson.exercises);
+    exerciseIds = exercises.map((exercise) => exercise.id);
+    matchingIds = exercises.filter((exercise) => exercise.kind === "match-pairs").map((exercise) => exercise.id);
+  }
+  const remaining = new Set(exerciseIds);
+  const matching = new Set(matchingIds);
+  if (!remaining.size || attempts.length !== remaining.size) return false;
+
+  return attempts.every((attempt) => {
+    if (!remaining.delete(attempt.exerciseId)) return false;
+    const grade = gradeLessonAttempt(unit, level, language, attempt);
+    return grade.status === "graded" && (grade.correct || !matching.has(attempt.exerciseId));
+  });
 }

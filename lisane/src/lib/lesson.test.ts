@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { curriculumUnitSchema } from "../schemas/curriculum.ts";
-import { buildPersonalPractice, buildPublicExercises, gradeLessonAttempt, normalizeLessonAnswer } from "./lesson.ts";
+import { buildPersonalPractice, buildPublicExercises, gradeLessonAttempt, hasCompletedLesson, normalizeLessonAnswer, type LessonAttempt } from "./lesson.ts";
 
 const source = new URL("../../content/curriculum/english/intro/introduce-yourself-at-work.json", import.meta.url);
 const unit = curriculumUnitSchema.parse(JSON.parse(readFileSync(source, "utf8")));
@@ -91,4 +91,41 @@ test("personal practice asks the meaning of this unit's phrases", () => {
 
 test("answers ignore case and punctuation", () => {
   assert.equal(normalizeLessonAnswer("  What's   YOUR name? "), "what's your name");
+});
+
+function introductionAttempts(): LessonAttempt[] {
+  if (lesson.kind !== "lesson") throw new Error("missing intro lesson");
+  return lesson.lessons.flatMap((part) => part.exercises.map((exercise) => {
+    if (exercise.kind === "match-pairs") {
+      return {
+        exerciseId: exercise.id,
+        pairs: exercise.phraseIds.map((id) => ({ englishId: id, meaningId: id })),
+      };
+    }
+    if (exercise.kind === "select-meaning" || exercise.kind === "listen-and-pick") {
+      return { exerciseId: exercise.id, choiceId: exercise.distractorPhraseIds[0] };
+    }
+    throw new Error("unexpected exercise in intro lesson");
+  }));
+}
+
+test("finishing requires a valid attempt per question but accepts ordinary mistakes", () => {
+  const attempts = introductionAttempts();
+  assert.equal(hasCompletedLesson(unit, lesson, "en", attempts), true);
+  assert.equal(hasCompletedLesson(unit, lesson, "en", attempts.slice(1)), false);
+  assert.equal(hasCompletedLesson(unit, lesson, "en", [attempts[1], ...attempts.slice(1)]), false);
+});
+
+test("matched pairs must be complete and correct before the lesson can be saved", () => {
+  const attempts = introductionAttempts();
+  const match = attempts.find((attempt) => attempt.pairs);
+  assert.ok(match?.pairs);
+  const first = match.pairs[0];
+  const second = match.pairs[1];
+  first.meaningId = second.meaningId;
+  second.meaningId = first.englishId;
+  assert.deepEqual(gradeLessonAttempt(unit, lesson, "en", match), {
+    status: "graded", correct: false, answer: "", answerLanguage: "en",
+  });
+  assert.equal(hasCompletedLesson(unit, lesson, "en", attempts), false);
 });

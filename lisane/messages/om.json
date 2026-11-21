@@ -15,6 +15,8 @@
     "status": "Dhiyootti ni dhufa"
   },
   "Learn": {
+    "couldNotSave": "Barumsa kana olkaa'uun hin danda'amne. Irra deebi'ii yaali.",
+    "listenUnavailable": "Sagaleen hin jiru. Itti fufuuf himicha dubbisi.",
     "title": "Tarkaanfii tarkaanfiidhaan baradhu",
     "description": "Daandiin barumsa keetii as jiraata: barumsa gaggabaaboo dandeettii Afaan Ingiliffaa kee tarkaanfii tokkoon tokkoon ijaaran.",
     "empty": "Daandiin barumsa keetii ammatti hin qophoofne.",

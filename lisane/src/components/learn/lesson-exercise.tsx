@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fontClassNames, getLanguage, isLanguageCode } from "@/config/languages";
 import type { LessonAttempt, PublicExercise } from "@/lib/lesson";
 import { cn } from "@/lib/cn";
@@ -13,7 +13,9 @@ type BrowserRecognition = {
   maxAlternatives: number;
   onresult: ((event: RecognitionEvent) => void) | null;
   onerror: (() => void) | null;
+  onend: (() => void) | null;
   start: () => void;
+  abort: () => void;
 };
 
 function recognitionCtor() {
@@ -24,13 +26,24 @@ function recognitionCtor() {
   return host.SpeechRecognition ?? host.webkitSpeechRecognition ?? null;
 }
 
-function speakEnglish(text: string) {
-  if (!window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "en-US";
-  utterance.rate = 0.92;
-  window.speechSynthesis.speak(utterance);
+function speakEnglish(text: string, onUnavailable?: () => void) {
+  if (!window.speechSynthesis || typeof SpeechSynthesisUtterance !== "function") {
+    onUnavailable?.();
+    return;
+  }
+
+  try {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "en-US";
+    utterance.rate = 0.92;
+    utterance.onerror = ({ error }) => {
+      if (error !== "canceled" && error !== "interrupted") onUnavailable?.();
+    };
+    window.speechSynthesis.speak(utterance);
+  } catch {
+    onUnavailable?.();
+  }
 }
 
 function supportFont(language: string) {
@@ -44,6 +57,7 @@ function LessonExercise({
   disabled,
   prompt,
   playLabel,
+  listenUnavailable,
   matchHint,
   matchMiss,
   typePlaceholder,
@@ -58,6 +72,7 @@ function LessonExercise({
   disabled: boolean;
   prompt: string;
   playLabel: string;
+  listenUnavailable: string;
   matchHint: string;
   matchMiss: string;
   typePlaceholder: string;
@@ -65,7 +80,7 @@ function LessonExercise({
   speakListening: string;
   speakUnavailable: string;
   onAttempt: (attempt: LessonAttempt | null) => void;
-  onSolved: () => void;
+  onSolved: (attempt: LessonAttempt) => void;
 }) {
   const spoken = exercise.kind === "listen-and-pick" || exercise.kind === "type-what-you-hear" ? exercise.spoken : null;
 
@@ -94,7 +109,7 @@ function LessonExercise({
       ) : null}
       {exercise.kind === "listen-and-pick" ? (
         <>
-          <PlayButton label={playLabel} fallback={exercise.spoken} onPlay={() => speakEnglish(exercise.spoken)} />
+          <PlayButton label={playLabel} text={exercise.spoken} unavailable={listenUnavailable} />
           <Choices
             label={prompt}
             choices={exercise.choices}
@@ -132,7 +147,7 @@ function LessonExercise({
       ) : null}
       {exercise.kind === "type-what-you-hear" ? (
         <>
-          <PlayButton label={playLabel} onPlay={() => speakEnglish(exercise.spoken)} />
+          <PlayButton label={playLabel} text={exercise.spoken} unavailable={listenUnavailable} />
           <AnswerField
             placeholder={typePlaceholder}
             disabled={disabled}
@@ -199,28 +214,25 @@ function Choices({
   );
 }
 
-function PlayButton({ label, onPlay, fallback }: { label: string; onPlay: () => void; fallback?: string }) {
-  const [shown, setShown] = useState<string | null>(null);
+function PlayButton({ label, text, unavailable }: { label: string; text: string; unavailable: string }) {
+  const [shown, setShown] = useState(false);
   return (
     <div className="flex flex-col gap-3">
       <button
         type="button"
-        onClick={() => {
-          if (!window.speechSynthesis && fallback) {
-            setShown(fallback);
-            return;
-          }
-          onPlay();
-        }}
+        onClick={() => speakEnglish(text, () => setShown(true))}
         className="flex size-20 items-center justify-center self-start rounded-full bg-action text-on-action shadow-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg"
       >
         <span className="sr-only">{label}</span>
         <SpeakerIcon />
       </button>
       {shown ? (
-        <p className="font-sans text-title font-semibold" lang="en">
-          {shown}
-        </p>
+        <div role="status">
+          <p className="text-label text-fg-muted">{unavailable}</p>
+          <p className="font-sans text-title font-semibold" lang="en">
+            {text}
+          </p>
+        </div>
       ) : null}
     </div>
   );
@@ -239,7 +251,7 @@ function MatchPairs({
   disabled: boolean;
   hint: string;
   miss: string;
-  onSolved: () => void;
+  onSolved: (attempt: LessonAttempt) => void;
 }) {
   const [leftId, setLeftId] = useState<string | null>(null);
   const [matched, setMatched] = useState<string[]>([]);
@@ -256,7 +268,9 @@ function MatchPairs({
     setMatched(next);
     setLeftId(null);
     setMissed(false);
-    if (next.length === exercise.english.length) onSolved();
+    if (next.length === exercise.english.length) {
+      onSolved({ exerciseId: exercise.id, pairs: next.map((id) => ({ englishId: id, meaningId: id })) });
+    }
   }
 
   return (
@@ -508,26 +522,56 @@ function SpeakSentence({
   const [listening, setListening] = useState(false);
   const [fallback, setFallback] = useState(false);
   const [heard, setHeard] = useState("");
+  const activeRecognition = useRef<BrowserRecognition | null>(null);
+
+  useEffect(() => () => {
+    const recognition = activeRecognition.current;
+    activeRecognition.current = null;
+    recognition?.abort();
+  }, []);
 
   function listen() {
+    if (disabled || activeRecognition.current) return;
     const Ctor = recognitionCtor();
     if (!Ctor) {
       setFallback(true);
       return;
     }
+
+    setHeard("");
+    setFallback(false);
+    onAttempt(null);
     const recognition = new Ctor();
+    let heardSentence = false;
+    activeRecognition.current = recognition;
+
+    function finish(showFallback: boolean) {
+      if (activeRecognition.current !== recognition) return;
+      activeRecognition.current = null;
+      setListening(false);
+      if (showFallback) setFallback(true);
+    }
+
     recognition.lang = "en-US";
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
     recognition.onresult = (event) => {
-      const transcript = event.results[0]?.[0]?.transcript ?? "";
+      if (activeRecognition.current !== recognition) return;
+      const transcript = event.results[0]?.[0]?.transcript.trim() ?? "";
+      if (!transcript) return;
+      heardSentence = true;
       setHeard(transcript);
-      setListening(false);
-      onAttempt(transcript.trim() ? { exerciseId: exercise.id, text: transcript } : null);
+      onAttempt({ exerciseId: exercise.id, text: transcript });
     };
-    recognition.onerror = () => setListening(false);
+    recognition.onerror = () => finish(!heardSentence);
+    recognition.onend = () => finish(!heardSentence);
+
     setListening(true);
-    recognition.start();
+    try {
+      recognition.start();
+    } catch {
+      finish(true);
+    }
   }
 
   return (
