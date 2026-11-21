@@ -58,6 +58,28 @@ still listed here, so reviewed text is never overwritten.
 | `Auth.passwordTooShort` | Use at least 8 characters. | ቢያንስ 8 ቁምፊዎችን ይጠቀሙ። | quality: high |
 | `Auth.failed` | That did not work. Please try again. | ያ አልሰራም። እባክዎ እንደገና ይሞክሩ። | quality: high |
 | `Auth.signOut` | Sign out | ውጣ | quality: high |
+| `Profile.setup` | Your setup | የእርስዎ ዝግጅት | quality: high |
+| `Profile.goal` | Goal | ግብ | quality: high |
+| `Profile.level` | English level | የእንግሊዝኛ ደረጃ | quality: high |
+| `Profile.supportLanguage` | Support language | ቋንቋን ይደግፉ | quality: high |
+| `Profile.dailyGoal` | Daily goal | የዕለት ግብ | quality: high |
+| `Profile.editSetup` | Change answers | መልሶችን ይቀይሩ | quality: high |
+| `Onboarding.languageTitle` | Which language should we use to help you? | እርስዎን ለመርዳት የትኛውን ቋንቋ መጠቀም አለብን? | quality: high |
+| `Onboarding.goalTitle` | What do you want English for? | እንግሊዝኛ ለምን ትፈልጋለህ? | quality: high |
+| `Onboarding.levelTitle` | How much English do you know? | ምን ያህል እንግሊዝኛ ያውቃሉ? | quality: high |
+| `Onboarding.dailyTitle` | How long do you want to practise each day? | በየቀኑ ለምን ያህል ጊዜ ልምምድ ማድረግ ይፈልጋሉ? | quality: high |
+| `Onboarding.continue` | Continue | ይቀጥሉ | quality: high |
+| `Onboarding.back` | Back | ወደኋላ | quality: high |
+| `Onboarding.failed` | That did not save. Please try again. | ያ አልተቀመጠም። እባክዎ እንደገና ይሞክሩ። | quality: high |
+| `Onboarding.englishOnly` | English only | እንግሊዝኛ ብቻ | quality: high |
+| `Onboarding.minutes` | {count} minutes | {count} ደቂቃዎች | quality: high |
+| `Onboarding.goals.job_interview` | Job interview | የሥራ ቃለ መጠይቅ | quality: high |
+| `Onboarding.goals.workplace` | Workplace | የሥራ ቦታ | quality: high |
+| `Onboarding.goals.university` | University | ዩኒቨርሲቲ | quality: high |
+| `Onboarding.goals.daily_conversation` | Daily conversation | የዕለት ተዕለት ውይይት | quality: high |
+| `Onboarding.levels.beginner` | Beginner | ጀማሪ | quality: high |
+| `Onboarding.levels.a2` | A2 | ሀ2 | quality: high |
+| `Onboarding.levels.b1` | B1 | B1 | quality: high |
 
 ## Afaan Oromo (om)
 
@@ -110,3 +132,25 @@ still listed here, so reviewed text is never overwritten.
 | `Auth.passwordTooShort` | Use at least 8 characters. | Yoo xiqqaate mallattoo 8 fayyadami. | quality: high |
 | `Auth.failed` | That did not work. Please try again. | Inni hin hojjenne. Maaloo irra deebi'ii yaali. | quality: high |
 | `Auth.signOut` | Sign out | Keessaa ba'i | quality: high |
+| `Profile.setup` | Your setup | Qindaa'ina kee | quality: high |
+| `Profile.goal` | Goal | Galma | quality: high |
+| `Profile.level` | English level | Sadarkaa Ingiliffaa | quality: high |
+| `Profile.supportLanguage` | Support language | Afaan deeggarsaa | quality: high |
+| `Profile.dailyGoal` | Daily goal | Galma guyyaa | quality: high |
+| `Profile.editSetup` | Change answers | Deebiiwwan jijjiiri | quality: high |
+| `Onboarding.languageTitle` | Which language should we use to help you? | Si gargaaruuf afaan kam fayyadamuu qabna? | quality: high |
+| `Onboarding.goalTitle` | What do you want English for? | Afaan Ingiliffaa maaliif barbaadda? | quality: high |
+| `Onboarding.levelTitle` | How much English do you know? | Afaan Ingiliffaa hammam beekta? | quality: high |
+| `Onboarding.dailyTitle` | How long do you want to practise each day? | Guyyaa guyyaatti yeroo hammamiif shaakaluu barbaadda? | quality: high |
+| `Onboarding.continue` | Continue | Itti fufi | quality: high |
+| `Onboarding.back` | Back | Dugda | quality: high |
+| `Onboarding.failed` | That did not save. Please try again. | Kun hin olfanne. Maaloo irra deebi'ii yaali. | quality: high |
+| `Onboarding.englishOnly` | English only | Afaan Ingiliffaa qofa | quality: high |
+| `Onboarding.minutes` | {count} minutes | {count} daqiiqaa | quality: high |
+| `Onboarding.goals.job_interview` | Job interview | Gaaffii fi deebii hojii | quality: high |
+| `Onboarding.goals.workplace` | Workplace | Bakka hojii | quality: high |
+| `Onboarding.goals.university` | University | Yuunivarsiitii | quality: high |
+| `Onboarding.goals.daily_conversation` | Daily conversation | Haasawa guyyaa guyyaa | quality: high |
+| `Onboarding.levels.beginner` | Beginner | Jalqabaa | quality: high |
+| `Onboarding.levels.a2` | A2 | A2 | quality: high |
+| `Onboarding.levels.b1` | B1 | B1 | quality: high |

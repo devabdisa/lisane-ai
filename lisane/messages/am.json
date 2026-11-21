@@ -34,7 +34,13 @@
     "title": "መገለጫ",
     "description": "ግብዎችዎ እና ቅንብሮችዎ እዚህ ይሆናሉ።",
     "appearance": "መልክ",
-    "appLanguage": "የመተግበሪያ ቋንቋ"
+    "appLanguage": "የመተግበሪያ ቋንቋ",
+    "setup": "የእርስዎ ዝግጅት",
+    "goal": "ግብ",
+    "level": "የእንግሊዝኛ ደረጃ",
+    "supportLanguage": "ቋንቋን ይደግፉ",
+    "dailyGoal": "የዕለት ግብ",
+    "editSetup": "መልሶችን ይቀይሩ"
   },
   "LanguageSwitcher": {
     "label": "ቋንቋ"
@@ -67,5 +73,27 @@
     "passwordTooShort": "ቢያንስ 8 ቁምፊዎችን ይጠቀሙ።",
     "failed": "ያ አልሰራም። እባክዎ እንደገና ይሞክሩ።",
     "signOut": "ውጣ"
+  },
+  "Onboarding": {
+    "languageTitle": "እርስዎን ለመርዳት የትኛውን ቋንቋ መጠቀም አለብን?",
+    "goalTitle": "እንግሊዝኛ ለምን ትፈልጋለህ?",
+    "levelTitle": "ምን ያህል እንግሊዝኛ ያውቃሉ?",
+    "dailyTitle": "በየቀኑ ለምን ያህል ጊዜ ልምምድ ማድረግ ይፈልጋሉ?",
+    "continue": "ይቀጥሉ",
+    "back": "ወደኋላ",
+    "failed": "ያ አልተቀመጠም። እባክዎ እንደገና ይሞክሩ።",
+    "englishOnly": "እንግሊዝኛ ብቻ",
+    "minutes": "{count} ደቂቃዎች",
+    "goals": {
+      "job_interview": "የሥራ ቃለ መጠይቅ",
+      "workplace": "የሥራ ቦታ",
+      "university": "ዩኒቨርሲቲ",
+      "daily_conversation": "የዕለት ተዕለት ውይይት"
+    },
+    "levels": {
+      "beginner": "ጀማሪ",
+      "a2": "ሀ2",
+      "b1": "B1"
+    }
   }
 }

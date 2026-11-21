@@ -1,9 +1,16 @@
 import { Suspense, type ReactNode } from "react";
+import { getLocale } from "next-intl/server";
 import { AppNav } from "@/components/shell/app-nav";
+import { redirect } from "@/i18n/navigation";
 import { requireAppUser } from "@/lib/require-app-user";
+import { getProfile } from "@/server/services/profile/profile";
 
 async function SignedInShell({ children }: { children: ReactNode }) {
-  await requireAppUser();
+  const user = await requireAppUser();
+  const profile = await getProfile(user.id);
+  if (!profile?.onboardingCompleted) {
+    redirect({ href: "/onboarding", locale: await getLocale() });
+  }
 
   return (
     <div className="flex min-h-dvh flex-col md:flex-row">

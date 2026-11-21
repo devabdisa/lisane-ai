@@ -10,12 +10,9 @@ export type AppUser = {
   avatarUrl: string | null;
 };
 
-export async function requireAppUser(): Promise<AppUser> {
+export async function getAppUser(): Promise<AppUser | null> {
   const user = (await getServerSession())?.user;
-  if (!user?.id || !user.email) {
-    redirect({ href: "/login", locale: await getLocale() });
-    return null as never;
-  }
+  if (!user?.id || !user.email) return null;
 
   return {
     id: user.id,
@@ -23,4 +20,13 @@ export async function requireAppUser(): Promise<AppUser> {
     email: user.email,
     avatarUrl: user.image ?? null,
   };
+}
+
+export async function requireAppUser(): Promise<AppUser> {
+  const user = await getAppUser();
+  if (!user) {
+    redirect({ href: "/login", locale: await getLocale() });
+    return null as never;
+  }
+  return user;
 }

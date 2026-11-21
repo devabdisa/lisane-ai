@@ -34,7 +34,13 @@
     "title": "Piroofayilii",
     "description": "Galmoonnii fi qindaa'inoonni kee asitti argamu.",
     "appearance": "Bifaa",
-    "appLanguage": "Afaan appii"
+    "appLanguage": "Afaan appii",
+    "setup": "Qindaa'ina kee",
+    "goal": "Galma",
+    "level": "Sadarkaa Ingiliffaa",
+    "supportLanguage": "Afaan deeggarsaa",
+    "dailyGoal": "Galma guyyaa",
+    "editSetup": "Deebiiwwan jijjiiri"
   },
   "LanguageSwitcher": {
     "label": "Afaan"
@@ -67,5 +73,27 @@
     "passwordTooShort": "Yoo xiqqaate mallattoo 8 fayyadami.",
     "failed": "Inni hin hojjenne. Maaloo irra deebi'ii yaali.",
     "signOut": "Keessaa ba'i"
+  },
+  "Onboarding": {
+    "languageTitle": "Si gargaaruuf afaan kam fayyadamuu qabna?",
+    "goalTitle": "Afaan Ingiliffaa maaliif barbaadda?",
+    "levelTitle": "Afaan Ingiliffaa hammam beekta?",
+    "dailyTitle": "Guyyaa guyyaatti yeroo hammamiif shaakaluu barbaadda?",
+    "continue": "Itti fufi",
+    "back": "Dugda",
+    "failed": "Kun hin olfanne. Maaloo irra deebi'ii yaali.",
+    "englishOnly": "Afaan Ingiliffaa qofa",
+    "minutes": "{count} daqiiqaa",
+    "goals": {
+      "job_interview": "Gaaffii fi deebii hojii",
+      "workplace": "Bakka hojii",
+      "university": "Yuunivarsiitii",
+      "daily_conversation": "Haasawa guyyaa guyyaa"
+    },
+    "levels": {
+      "beginner": "Jalqabaa",
+      "a2": "A2",
+      "b1": "B1"
+    }
   }
 }
