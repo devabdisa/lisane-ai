@@ -26,6 +26,7 @@ test("a lesson becomes one question per authored exercise, in that order", () =>
   const heard = questions.find((question) => question.kind === "listen-and-pick");
   assert.ok(heard && heard.kind === "listen-and-pick");
   assert.equal("prompt" in heard, false);
+  assert.match(heard.audioSrc, /^\/lesson-audio\/[a-f0-9]{20}\.mp3$/);
 });
 
 test("selecting a meaning is graded against the phrase, not the label text", () => {
@@ -76,6 +77,19 @@ test("word order, blanks, and spoken answers accept the authored sentence", () =
     assert.equal(blank.answer, "Nice to meet you.");
   }
   if (spoken.status === "graded") assert.equal(spoken.correct, true);
+  assert.deepEqual(gradeLessonAttempt(unit, speak, "en", {
+    exerciseId: "say-it-with-confidence-02", text: "Hi, I’m Hannah.",
+  }), { status: "graded", correct: true, answer: "Hi, I'm Hana.", answerLanguage: "en" });
+});
+
+test("dictation checks the recorded wording while ignoring case and punctuation", () => {
+  const exerciseId = "say-it-with-confidence-03";
+  assert.deepEqual(gradeLessonAttempt(unit, speak, "am", { exerciseId, text: "WHAt’s your NAME" }), {
+    status: "graded", correct: true, answer: "What's your name?", answerLanguage: "en",
+  });
+  assert.deepEqual(gradeLessonAttempt(unit, speak, "am", { exerciseId, text: "What is your name?" }), {
+    status: "graded", correct: false, answer: "What's your name?", answerLanguage: "en",
+  });
 });
 
 test("personal practice asks the meaning of this unit's phrases", () => {

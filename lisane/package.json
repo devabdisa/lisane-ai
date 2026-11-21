@@ -13,6 +13,8 @@
     "typecheck": "prisma generate && next typegen && tsc --noEmit",
     "messages:draft": "node --env-file-if-exists=.env.local scripts/draft-messages.mts",
     "curriculum:validate": "node scripts/validate-curriculum.mts",
+    "curriculum:audio": "node --env-file-if-exists=.env.local scripts/generate-lesson-audio.mts",
+    "curriculum:audio:check": "node scripts/generate-lesson-audio.mts --check",
     "curriculum:sync": "node --env-file-if-exists=.env.local scripts/sync-curriculum.mts"
   },
   "dependencies": {

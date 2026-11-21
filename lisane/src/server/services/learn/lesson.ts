@@ -136,6 +136,17 @@ export async function getLessonPage(userId: string, unitId: string, levelId: str
   };
 }
 
+export async function checkLessonSpeechAccess(params: { userId: string; unitId: string; levelId: string; exerciseId: string }) {
+  const opened = await openLevel(params.userId, params.unitId, params.levelId);
+  if (opened.status !== "open") return opened.status;
+
+  if (!("lessons" in opened.level)) return "missing";
+  const hasExercise = opened.level.lessons.some(({ exercises }) =>
+    exercises.some((exercise) => exercise.id === params.exerciseId && exercise.kind === "speak-sentence"),
+  );
+  return hasExercise ? "ready" : "missing";
+}
+
 export async function checkLessonAnswer(
   userId: string,
   unitId: string,

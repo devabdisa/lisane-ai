@@ -1,3 +1,4 @@
+import { lessonAudioPath } from "./lesson-audio.ts";
 import { defaultLocale } from "../config/languages.ts";
 import type { CurriculumUnit } from "../schemas/curriculum.ts";
 
@@ -10,7 +11,7 @@ export type LessonChoice = { id: string; label: string };
 
 export type PublicExercise =
   | { id: string; kind: "select-meaning"; prompt: string; choices: LessonChoice[] }
-  | { id: string; kind: "listen-and-pick"; spoken: string; choices: LessonChoice[] }
+  | { id: string; kind: "listen-and-pick"; spoken: string; audioSrc: string; choices: LessonChoice[] }
   | { id: string; kind: "match-pairs"; english: LessonChoice[]; meanings: LessonChoice[] }
   | {
       id: string;
@@ -20,7 +21,7 @@ export type PublicExercise =
       direction: "support-to-english" | "english-to-support";
     }
   | { id: string; kind: "fill-blank"; hint: string; before: string; after: string; choices: string[] }
-  | { id: string; kind: "type-what-you-hear"; spoken: string }
+  | { id: string; kind: "type-what-you-hear"; spoken: string; audioSrc: string }
   | { id: string; kind: "speak-sentence"; prompt: string };
 
 export type LessonDTO = {
@@ -124,7 +125,7 @@ function presentExercise(
       }),
       random,
     );
-    if (exercise.kind === "listen-and-pick") return { id: exercise.id, kind: exercise.kind, spoken: phrase.english.text, choices };
+    if (exercise.kind === "listen-and-pick") return { id: exercise.id, kind: exercise.kind, spoken: phrase.english.text, audioSrc: lessonAudioPath(phrase.english.text), choices };
     return { id: exercise.id, kind: exercise.kind, prompt: phrase.english.text, choices };
   }
 
@@ -152,7 +153,7 @@ function presentExercise(
     };
   }
 
-  if (exercise.kind === "type-what-you-hear") return { id: exercise.id, kind: exercise.kind, spoken: phrase.english.text };
+  if (exercise.kind === "type-what-you-hear") return { id: exercise.id, kind: exercise.kind, spoken: phrase.english.text, audioSrc: lessonAudioPath(phrase.english.text) };
   return { id: exercise.id, kind: exercise.kind, prompt: phrase.english.text };
 }
 
@@ -253,7 +254,8 @@ export function gradeLessonAttempt(
 
   if (exercise.kind === "type-what-you-hear" || exercise.kind === "speak-sentence") {
     if (!phrase || !attempt.text) return { status: "invalid" };
-    return graded(matchesAnswer(attempt.text, englishAnswers(phrase)), phrase.english.text, defaultLocale);
+    const accepted = exercise.kind === "type-what-you-hear" ? [phrase.english.text] : englishAnswers(phrase);
+    return graded(matchesAnswer(attempt.text, accepted), phrase.english.text, defaultLocale);
   }
 
   return { status: "invalid" };

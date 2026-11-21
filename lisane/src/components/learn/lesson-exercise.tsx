@@ -1,50 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
+import { useRef, useState } from "react";
+import { useLessonRecording } from "./use-lesson-recording";
 import { fontClassNames, getLanguage, isLanguageCode } from "@/config/languages";
 import type { LessonAttempt, PublicExercise } from "@/lib/lesson";
 import { cn } from "@/lib/cn";
-
-type RecognitionEvent = { results: ArrayLike<ArrayLike<{ transcript: string }>> };
-
-type BrowserRecognition = {
-  lang: string;
-  interimResults: boolean;
-  maxAlternatives: number;
-  onresult: ((event: RecognitionEvent) => void) | null;
-  onerror: (() => void) | null;
-  onend: (() => void) | null;
-  start: () => void;
-  abort: () => void;
-};
-
-function recognitionCtor() {
-  const host = window as Window & {
-    SpeechRecognition?: new () => BrowserRecognition;
-    webkitSpeechRecognition?: new () => BrowserRecognition;
-  };
-  return host.SpeechRecognition ?? host.webkitSpeechRecognition ?? null;
-}
-
-function speakEnglish(text: string, onUnavailable?: () => void) {
-  if (!window.speechSynthesis || typeof SpeechSynthesisUtterance !== "function") {
-    onUnavailable?.();
-    return;
-  }
-
-  try {
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "en-US";
-    utterance.rate = 0.92;
-    utterance.onerror = ({ error }) => {
-      if (error !== "canceled" && error !== "interrupted") onUnavailable?.();
-    };
-    window.speechSynthesis.speak(utterance);
-  } catch {
-    onUnavailable?.();
-  }
-}
 
 function supportFont(language: string) {
   if (!isLanguageCode(language)) return "font-sans";
@@ -61,9 +22,7 @@ function LessonExercise({
   matchHint,
   matchMiss,
   typePlaceholder,
-  speakStart,
-  speakListening,
-  speakUnavailable,
+  transcribeUrl,
   onAttempt,
   onSolved,
 }: {
@@ -76,20 +35,10 @@ function LessonExercise({
   matchHint: string;
   matchMiss: string;
   typePlaceholder: string;
-  speakStart: string;
-  speakListening: string;
-  speakUnavailable: string;
+  transcribeUrl: string;
   onAttempt: (attempt: LessonAttempt | null) => void;
   onSolved: (attempt: LessonAttempt) => void;
 }) {
-  const spoken = exercise.kind === "listen-and-pick" || exercise.kind === "type-what-you-hear" ? exercise.spoken : null;
-
-  useEffect(() => {
-    if (!spoken) return;
-    speakEnglish(spoken);
-    return () => window.speechSynthesis?.cancel();
-  }, [exercise.id, spoken]);
-
   return (
     <div className="flex flex-col gap-5">
       <p className="text-label font-semibold text-fg-muted">{prompt}</p>
@@ -109,7 +58,7 @@ function LessonExercise({
       ) : null}
       {exercise.kind === "listen-and-pick" ? (
         <>
-          <PlayButton label={playLabel} text={exercise.spoken} unavailable={listenUnavailable} />
+          <PlayButton label={playLabel} text={exercise.spoken} audioSrc={exercise.audioSrc} unavailable={listenUnavailable} />
           <Choices
             label={prompt}
             choices={exercise.choices}
@@ -147,7 +96,7 @@ function LessonExercise({
       ) : null}
       {exercise.kind === "type-what-you-hear" ? (
         <>
-          <PlayButton label={playLabel} text={exercise.spoken} unavailable={listenUnavailable} />
+          <PlayButton label={playLabel} text={exercise.spoken} audioSrc={exercise.audioSrc} unavailable={listenUnavailable} />
           <AnswerField
             placeholder={typePlaceholder}
             disabled={disabled}
@@ -159,9 +108,7 @@ function LessonExercise({
         <SpeakSentence
           exercise={exercise}
           disabled={disabled}
-          startLabel={speakStart}
-          listeningLabel={speakListening}
-          unavailable={speakUnavailable}
+          transcribeUrl={transcribeUrl}
           placeholder={typePlaceholder}
           onAttempt={onAttempt}
         />
@@ -214,13 +161,29 @@ function Choices({
   );
 }
 
-function PlayButton({ label, text, unavailable }: { label: string; text: string; unavailable: string }) {
+function PlayButton({ label, text, audioSrc, unavailable }: { label: string; text: string; audioSrc: string; unavailable: string }) {
+  const audio = useRef<HTMLAudioElement>(null);
   const [shown, setShown] = useState(false);
+
+  async function play() {
+    const player = audio.current;
+    if (!player) return;
+    if (player.error) player.load();
+    try {
+      player.currentTime = 0;
+      await player.play();
+      setShown(false);
+    } catch {
+      setShown(true);
+    }
+  }
+
   return (
     <div className="flex flex-col gap-3">
+      <audio ref={audio} src={audioSrc} preload="none" onError={() => setShown(true)} />
       <button
         type="button"
-        onClick={() => speakEnglish(text, () => setShown(true))}
+        onClick={() => void play()}
         className="flex size-20 items-center justify-center self-start rounded-full bg-action text-on-action shadow-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg"
       >
         <span className="sr-only">{label}</span>
@@ -492,7 +455,11 @@ function AnswerField({
       value={value}
       lang="en"
       disabled={disabled}
+      aria-label={placeholder}
       placeholder={placeholder}
+      autoComplete="off"
+      autoCapitalize="none"
+      spellCheck={false}
       onChange={(event) => {
         setValue(event.target.value);
         onChange(event.target.value.trim());
@@ -505,73 +472,25 @@ function AnswerField({
 function SpeakSentence({
   exercise,
   disabled,
-  startLabel,
-  listeningLabel,
-  unavailable,
+  transcribeUrl,
   placeholder,
   onAttempt,
 }: {
   exercise: Extract<PublicExercise, { kind: "speak-sentence" }>;
   disabled: boolean;
-  startLabel: string;
-  listeningLabel: string;
-  unavailable: string;
+  transcribeUrl: string;
   placeholder: string;
   onAttempt: (attempt: LessonAttempt | null) => void;
 }) {
-  const [listening, setListening] = useState(false);
-  const [fallback, setFallback] = useState(false);
-  const [heard, setHeard] = useState("");
-  const activeRecognition = useRef<BrowserRecognition | null>(null);
+  const t = useTranslations("Learn");
+  const [typing, setTyping] = useState(false);
+  const { state, start, stop, retry } = useLessonRecording(transcribeUrl, exercise.id, publish);
+  const { status } = state;
+  const problem = status === "network" || status === "unclear" || status === "unavailable";
+  const busy = status === "preparing" || status === "sending";
 
-  useEffect(() => () => {
-    const recognition = activeRecognition.current;
-    activeRecognition.current = null;
-    recognition?.abort();
-  }, []);
-
-  function listen() {
-    if (disabled || activeRecognition.current) return;
-    const Ctor = recognitionCtor();
-    if (!Ctor) {
-      setFallback(true);
-      return;
-    }
-
-    setHeard("");
-    setFallback(false);
-    onAttempt(null);
-    const recognition = new Ctor();
-    let heardSentence = false;
-    activeRecognition.current = recognition;
-
-    function finish(showFallback: boolean) {
-      if (activeRecognition.current !== recognition) return;
-      activeRecognition.current = null;
-      setListening(false);
-      if (showFallback) setFallback(true);
-    }
-
-    recognition.lang = "en-US";
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-    recognition.onresult = (event) => {
-      if (activeRecognition.current !== recognition) return;
-      const transcript = event.results[0]?.[0]?.transcript.trim() ?? "";
-      if (!transcript) return;
-      heardSentence = true;
-      setHeard(transcript);
-      onAttempt({ exerciseId: exercise.id, text: transcript });
-    };
-    recognition.onerror = () => finish(!heardSentence);
-    recognition.onend = () => finish(!heardSentence);
-
-    setListening(true);
-    try {
-      recognition.start();
-    } catch {
-      finish(true);
-    }
+  function publish(text: string) {
+    onAttempt(text ? { exerciseId: exercise.id, text } : null);
   }
 
   return (
@@ -579,29 +498,39 @@ function SpeakSentence({
       <p className="font-sans text-title font-semibold" lang="en">
         {exercise.prompt}
       </p>
-      <button
-        type="button"
-        disabled={disabled || listening}
-        onClick={listen}
-        className="min-h-14 rounded-full bg-action px-6 font-semibold text-on-action focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg disabled:opacity-60"
-      >
-        {listening ? listeningLabel : startLabel}
-      </button>
-      {heard ? (
-        <p className="font-sans text-body text-fg-muted" lang="en">
-          {heard}
-        </p>
-      ) : null}
-      {fallback ? (
+      {typing ? (
+        <AnswerField placeholder={placeholder} disabled={disabled} onChange={publish} />
+      ) : (
         <>
-          <p className="text-label text-fg-muted">{unavailable}</p>
-          <AnswerField
-            placeholder={placeholder}
-            disabled={disabled}
-            onChange={(text) => onAttempt(text ? { exerciseId: exercise.id, text } : null)}
-          />
+          <button
+            type="button"
+            disabled={disabled || busy}
+            onClick={() => status === "recording" ? stop() : void start()}
+            className="min-h-14 rounded-full bg-action px-6 font-semibold text-on-action focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg disabled:opacity-60"
+          >
+            {status === "recording" ? t("speakStop") : t("speakStart")}
+          </button>
+          <div role="status" className="text-label text-fg-muted empty:hidden">
+            {status === "preparing" ? t("speakPreparing") : null}
+            {status === "recording" ? t("speakListening") : null}
+            {status === "sending" ? t("speakChecking") : null}
+            {status === "network" ? t("speakCouldNotCheck") : null}
+            {status === "unclear" ? t("speakUnclear") : null}
+            {status === "unavailable" ? t("speakUnavailable") : null}
+            {status === "heard" ? <p lang="en" className="font-sans text-body">{state.transcript}</p> : null}
+          </div>
+          {status === "network" ? (
+            <button type="button" onClick={retry} className="min-h-11 self-start font-semibold underline">
+              {t("speakRetry")}
+            </button>
+          ) : null}
+          {problem ? (
+            <button type="button" onClick={() => setTyping(true)} className="min-h-11 self-start font-semibold underline">
+              {t("speakTypeInstead")}
+            </button>
+          ) : null}
         </>
-      ) : null}
+      )}
     </div>
   );
 }

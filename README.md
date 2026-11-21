@@ -59,6 +59,8 @@ pnpm curriculum:sync
 pnpm dev
 ```
 
+English lesson audio is shipped as short MP3 files. When authoring new listening or dictation prompts, run `pnpm curriculum:audio` with the local Gemini key, then `pnpm curriculum:audio:check`. Keep the generated clips with the curriculum changes. Builds serve the clips directly.
+
 Open http://localhost:3000. Checks: `pnpm typecheck`, `pnpm lint`, and `node --test "src/**/*.test.ts"` for the unit tests.
 
 ## Deploy

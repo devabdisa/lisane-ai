@@ -13,6 +13,13 @@ still listed here, so reviewed text is never overwritten.
 |---|---|---|---|
 | `Learn.couldNotSave` | The lesson couldn't be saved. Try again. | ትምህርቱን ማስቀመጥ አልተቻለም። እንደገና ይሞክሩ። | machine draft |
 | `Learn.listenUnavailable` | Audio is unavailable. Read the sentence to continue. | ድምፁ አልተገኘም። ለመቀጠል ዓረፍተ ነገሩን ያንብቡ። | machine draft |
+| `Learn.speakStop` | Done speaking | ተናግሬ ጨርሻለሁ | machine draft |
+| `Learn.speakPreparing` | Opening the microphone… | ማይክሮፎኑን በማስነሳት ላይ… | machine draft |
+| `Learn.speakChecking` | Checking your recording… | የተቀዳውን ድምፅ በማረጋገጥ ላይ… | machine draft |
+| `Learn.speakCouldNotCheck` | Couldn’t check that recording. Try sending it again. | የተቀዳውን ድምፅ ማረጋገጥ አልተቻለም። በድጋሚ ይላኩ። | machine draft |
+| `Learn.speakUnclear` | We couldn’t hear clear words. Try saying the sentence again. | ቃላትዎን በግልጽ መስማት አልቻልንም። ዓረፍተ ነገሩን ደግመው ይናገሩ። | machine draft |
+| `Learn.speakRetry` | Send recording again | የተቀዳውን ድምፅ ደግመው ይላኩ | machine draft |
+| `Learn.speakTypeInstead` | Type the sentence instead | በምትኩ ዓረፍተ ነገሩን ይተይቡ | machine draft |
 | `Speak.helpStart` | Help me say it | በእንግሊዝኛ ለመናገር እርዳታ | machine draft |
 | `Speak.helpRecording` | Say one sentence in your support language. | በቋንቋዎ አንድ ዓረፍተ ነገር ይናገሩ። | machine draft |
 | `Speak.helpTranslate` | Translate | ተርጉም | machine draft |
@@ -184,7 +191,7 @@ still listed here, so reviewed text is never overwritten.
 | `Learn.couldNotCheck` | That answer couldn't be checked. Try again. | ያ መልስ ሊረጋገጥ አልቻለም። እንደገና ይሞክሩ። | quality: high |
 | `Learn.selectPrompt` | What does this mean? | ይህ ምን ማለት ነው? | quality: high |
 | `Learn.listenPrompt` | Listen, then pick the meaning. | አድምጡ፣ ከዚያም ትርጉሙን ምረጡ። | quality: high |
-| `Learn.listenPlay` | Play again | እንደገና ይጫወቱ | quality: high |
+| `Learn.listenPlay` | Play audio | ድምፁን ያጫውቱ | machine draft |
 | `Learn.matchPrompt` | Tap the matching pairs. | ተመሳሳይ የሆኑ ጥንዶችን ይንኩ። | quality: high |
 | `Learn.matchMiss` | Those two don't match. Try another pair. | እነዚያ ሁለቱ አይዛመዱም። ሌላ ጥንድ ይሞክሩ። | quality: high |
 | `Learn.wordBankPrompt` | Put the words in order. | ቃላቶቹን በቅደም ተከተል አስቀምጥ። | quality: high |
@@ -194,7 +201,7 @@ still listed here, so reviewed text is never overwritten.
 | `Learn.speakPrompt` | Say this out loud. | ይህን ጮክ ብለህ ተናገር። | quality: high |
 | `Learn.speakStart` | Tap and say it | ይጫኑና ይናገሩት | quality: high |
 | `Learn.speakListening` | Listening… | እየሰማሁ ነው… | quality: high |
-| `Learn.speakUnavailable` | This browser can't hear the lesson. Type the sentence this once. | ይህ ማሰሻ ትምህርቱን መስማት አይችልም። ይህንን ዓረፍተ ነገር አንድ ጊዜ ይተይቡ። | quality: high |
+| `Learn.speakUnavailable` | Microphone unavailable. Check your permissions or type the sentence. | ማይክሮፎኑ አልተገኘም። የመዳረሻ ፈቃዱን ያረጋግጡ ወይም ዓረፍተ ነገሩን ይተይቡ። | machine draft |
 | `Learn.quit` | Leave lesson | ትምህርቱን ይልቀቁ | quality: high |
 | `Learn.quitTitle` | Leave this lesson? | ይህን ትምህርት ይተው? | quality: high |
 | `Learn.quitBody` | This step starts again from the first question. | ይህ እርምጃ ከመጀመሪያው ጥያቄ እንደገና ይጀምራል። | quality: high |
@@ -213,6 +220,13 @@ still listed here, so reviewed text is never overwritten.
 |---|---|---|---|
 | `Learn.couldNotSave` | The lesson couldn't be saved. Try again. | Barumsa kana olkaa'uun hin danda'amne. Irra deebi'ii yaali. | machine draft |
 | `Learn.listenUnavailable` | Audio is unavailable. Read the sentence to continue. | Sagaleen hin jiru. Itti fufuuf himicha dubbisi. | machine draft |
+| `Learn.speakStop` | Done speaking | Dubbachuu xumureera | machine draft |
+| `Learn.speakPreparing` | Opening the microphone… | Maayikiroofonii banuun irra jira… | machine draft |
+| `Learn.speakChecking` | Checking your recording… | Sagalee waraabame qorachaa jirra… | machine draft |
+| `Learn.speakCouldNotCheck` | Couldn’t check that recording. Try sending it again. | Sagalee waraabame qorachuu hin dandeenye. Irra deebi’ii ergi. | machine draft |
+| `Learn.speakUnclear` | We couldn’t hear clear words. Try saying the sentence again. | Jechoota ifatti dhaga’uu hin dandeenye. Himicha irra deebi’ii dubbadhu. | machine draft |
+| `Learn.speakRetry` | Send recording again | Sagalee waraabame irra deebi’ii ergi | machine draft |
+| `Learn.speakTypeInstead` | Type the sentence instead | Bakka isaa himicha barreessi | machine draft |
 | `Speak.helpStart` | Help me say it | Akkan Ingiliffaan jedhu na gargaari | machine draft |
 | `Speak.helpRecording` | Say one sentence in your support language. | Afaan keetiin hima tokko dubbadhu. | machine draft |
 | `Speak.helpTranslate` | Translate | Hiiki | machine draft |
@@ -380,7 +394,7 @@ still listed here, so reviewed text is never overwritten.
 | `Learn.couldNotCheck` | That answer couldn't be checked. Try again. | Deebiin sun mirkaneeffamuu hin dandeenye. Irra deebi'ii yaali. | quality: high |
 | `Learn.selectPrompt` | What does this mean? | Kun maal jechuudha? | quality: high |
 | `Learn.listenPrompt` | Listen, then pick the meaning. | Dhaggeeffadhu, achiis hiika isaa filadhu. | quality: high |
-| `Learn.listenPlay` | Play again | Ammas taphadhu | quality: high |
+| `Learn.listenPlay` | Play audio | Sagalee taphachiisi | machine draft |
 | `Learn.matchPrompt` | Tap the matching pairs. | Cimdiiwwan wal fakkatan tuqi. | quality: high |
 | `Learn.matchMiss` | Those two don't match. Try another pair. | Lamaan sun wal hin simatan. Cimdii biraa yaali. | quality: high |
 | `Learn.wordBankPrompt` | Put the words in order. | Jechoota tartiibaan kaa'i. | quality: high |
@@ -390,7 +404,7 @@ still listed here, so reviewed text is never overwritten.
 | `Learn.speakPrompt` | Say this out loud. | Kana sagalee ol kaaftee jedhi. | quality: high |
 | `Learn.speakStart` | Tap and say it | Tuqiitii dubbadhu | quality: high |
 | `Learn.speakListening` | Listening… | Dhaggeeffachaa jira... | quality: high |
-| `Learn.speakUnavailable` | This browser can't hear the lesson. Type the sentence this once. | Biraawuzariin kun barumsa kana dhageeffachuu hin danda'u. Hima kana yeroo tokkoof barreessi. | quality: high |
+| `Learn.speakUnavailable` | Microphone unavailable. Check your permissions or type the sentence. | Maayikiroofoniin hin argamne. Hayyama isaa ilaali yookaan himicha barreessi. | machine draft |
 | `Learn.quit` | Leave lesson | Barnoota gadi lakkisi | quality: high |
 | `Learn.quitTitle` | Leave this lesson? | Barumsa kana dhiisuu? | quality: high |
 | `Learn.quitBody` | This step starts again from the first question. | Tarkaanfiin kun gaaffii jalqabaa irraa deebi'ee jalqaba. | quality: high |

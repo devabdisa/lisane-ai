@@ -152,9 +152,7 @@ function Question({
             matchHint={t("matchPrompt")}
             matchMiss={t("matchMiss")}
             typePlaceholder={t("typePlaceholder")}
-            speakStart={t("speakStart")}
-            speakListening={t("speakListening")}
-            speakUnavailable={t("speakUnavailable")}
+            transcribeUrl={`/api/learn/levels/${lesson.unitId}/${lesson.levelId}/transcribe`}
             onAttempt={setAttempt}
             onSolved={(matched) => {
               setAttempt(matched);
