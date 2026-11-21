@@ -134,30 +134,74 @@ function VoiceSession() {
           <MicIcon />
           <span className="sr-only">{listening ? t("stop") : t("start")}</span>
         </button>
+        </div>
       </div>
     </div>
   );
 }
 
+const scenarioLabel = {
+  self_introduction: "selfIntroduction",
+  job_interview: "jobInterview",
+  workplace: "workplace",
+  university: "university",
+} as const;
+
 type Capture = { stop: () => void };
 
-async function startCapture(onPcm: (pcm: Int16Array) => void): Promise<Capture> {
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+async function startCapture(onPcm: (pcm: Int16Array) => void, isCoachSpeaking: () => boolean): Promise<Capture> {
+  const stream = await navigator.mediaDevices.getUserMedia({
+    audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true },
+  });
   const context = new AudioContext();
   const source = context.createMediaStreamSource(stream);
-  const processor = context.createScriptProcessor(4096, 1, 1);
   let pending: number[] = [];
+  let lastSpeechAt = 0;
   let timer = 0;
-
-  processor.onaudioprocess = (event) => {
-    const channel = event.inputBuffer.getChannelData(0);
-    const pcm = downsampleToPcm16(channel, context.sampleRate);
-    pending.push(...pcm);
-  };
   const silent = context.createGain();
   silent.gain.value = 0;
-  source.connect(processor);
-  processor.connect(silent);
+  let processor: ScriptProcessorNode | null = null;
+  let worklet: AudioWorkletNode | null = null;
+  const acceptFrame = (pcm: Int16Array, rms: number) => {
+    if (isCoachSpeaking()) {
+      pending = [];
+      return;
+    }
+    const now = Date.now();
+    if (rms >= SPEECH_RMS) lastSpeechAt = now;
+    if (rms < SPEECH_RMS && (lastSpeechAt === 0 || now - lastSpeechAt > SILENCE_TAIL_MS)) return;
+    for (let index = 0; index < pcm.length; index += 1) pending.push(pcm[index] ?? 0);
+  };
+
+  if (context.audioWorklet) {
+    try {
+      await context.audioWorklet.addModule("/worklets/lisane-mic-processor.js");
+      worklet = new AudioWorkletNode(context, "lisane-mic-processor", {
+        numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [1],
+      });
+      worklet.port.onmessage = (event: MessageEvent<{ type?: string; pcmBuffer?: ArrayBuffer; rms?: number }>) => {
+        if (event.data?.type !== "audio" || !event.data.pcmBuffer) return;
+        acceptFrame(new Int16Array(event.data.pcmBuffer), event.data.rms ?? 0);
+      };
+      source.connect(worklet);
+      worklet.connect(silent);
+    } catch {
+      worklet?.disconnect();
+      worklet = null;
+    }
+  }
+
+  if (!worklet) {
+    processor = context.createScriptProcessor(2048, 1, 1);
+    processor.onaudioprocess = (event) => {
+      const channel = event.inputBuffer.getChannelData(0);
+      let sum = 0;
+      for (const sample of channel) sum += sample * sample;
+      acceptFrame(downsampleToPcm16(channel, context.sampleRate), Math.sqrt(sum / Math.max(1, channel.length)));
+    };
+    source.connect(processor);
+    processor.connect(silent);
+  }
   silent.connect(context.destination);
   timer = window.setInterval(() => {
     if (pending.length === 0) return;
@@ -169,7 +213,9 @@ async function startCapture(onPcm: (pcm: Int16Array) => void): Promise<Capture> 
   return {
     stop: () => {
       window.clearInterval(timer);
-      processor.disconnect();
+      processor?.disconnect();
+      worklet?.port.close();
+      worklet?.disconnect();
       source.disconnect();
       void context.close();
       for (const track of stream.getAudioTracks()) track.stop();
