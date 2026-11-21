@@ -106,6 +106,8 @@ Around them: a fully localized UI, low-network resilience, and a free daily limi
 - **No hearts or energy that punish mistakes.** Our promise is "no judgment". Free-tier limits apply to AI usage, not to making mistakes.
 - **Target skill is English speaking.** Gemini judges and speaks English (conversation, correction, STT, TTS). Addis AI owns everything in the learner's own language.
 - **Tone:** kind, encouraging, no judgment. Corrections are short and practical, one per turn.
+- **Design source:** the Figma file "Lisane AI · Midnight lime" is the visual source of truth. Build screens from its frames and tokens; only the responsive layout for wider screens is our own, inspired by the design.
+- **Light and dark mode:** both themes are first-class. Dark (Midnight) is the default, Light / Contrast-safe is the alternative, and the learner can choose System, Light or Dark. Use only theme tokens (`bg-canvas`, `text-fg`, and so on), never raw colors, and keep lime on Midnight surfaces only.
 - **Mascot:** a new Lisane mascot (not Voxa's Lumi or Saba). Until art exists, use a single placeholder `Mascot` component.
 
 ---
@@ -284,7 +286,7 @@ Build from Duolingo's published design, not Voxa's learning module.
 - `pnpm build` passes for steps that touch routing, config, the service worker or the server.
 - Unit tests pass for pure logic (memory math, lesson adaptivity, quota math, payment verification, idempotency, content validation).
 - Prisma migration is created and applied locally when the schema changes.
-- The feature is checked in the browser at mobile width, in `en` plus at least one support language.
+- The feature is checked in the browser at mobile width, in `en` plus at least one support language, and in both light and dark mode.
 - Offline-related steps are also tested with DevTools throttling ("Slow 3G" and "Offline").
 - The step report says honestly what was **not** verified.
 
@@ -293,17 +295,18 @@ Build from Duolingo's published design, not Voxa's learning module.
 ## 12. Roadmap (tick only after owner approval)
 
 ### Foundation
-- [ ] 01. Scaffold `lisane/` with `create-next-app@latest` (TypeScript, App Router, `src/`, Tailwind 4, ESLint, pnpm), plus `.env.example` and a README stub
-- [ ] 02. Design tokens and fonts: Tailwind 4 `@theme`, Noto Sans Ethiopic plus a Latin font, port UI primitives and `cn`
+- [x] 01. Scaffold `lisane/` with `create-next-app@latest` (TypeScript, App Router, `src/`, Tailwind 4, ESLint, pnpm), plus `.env.example` and a README stub
+- [x] 02. Design tokens and fonts: Tailwind 4 `@theme`, Noto Sans Ethiopic plus a Latin font, port UI primitives and `cn`
 - [ ] 03. next-intl: `[locale]` routing, `proxy.ts`, `messages/en.json`, locale cookie, language switcher
 - [ ] 04. Language registry (`src/config/languages.ts`), Addis-drafted `am`/`om` messages, `messages/REVIEW.md`
-- [ ] 05. App shell: mobile layout, bottom navigation (Learn, Speak, Practice, Progress, Profile), placeholder `Mascot`, empty pages
+- [ ] 05. App shell: mobile layout, bottom navigation (Learn, Speak, Practice, Progress, Profile), placeholder `Mascot`, empty pages, and the theme switch (System, Light, Dark) saved in a cookie so the page never flashes the wrong theme
 - [ ] 06. Env validation (`src/lib/env.ts`) and the `server-only` setup
 
 ### Data and auth
 - [ ] 07. Prisma (latest stable) with a hosted Postgres connection and base auth models
 - [ ] 08. Better Auth port: email plus Google, login and signup pages, `requireAppUser`
 - [ ] 09. `UserProfile` and onboarding: goal, English level, support language, daily goal
+- [ ] 09b. Deploy a staging environment (host and hosted Postgres chosen with the owner), so every later step is tested on real phones and networks
 
 ### AI and language core
 - [ ] 10. Gemini client on the latest `@google/genai`, rate limiter, usage guardrails

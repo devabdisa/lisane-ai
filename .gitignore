@@ -1,6 +1,9 @@
 # Voxa reference repo (read-only, kept locally, never committed here)
 /talkbuddy/
 
+# Local editor and MCP config
+/.cursor/
+
 node_modules/
 .next/
 .env*

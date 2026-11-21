@@ -1,26 +1,95 @@
 @import "tailwindcss";
 
+/* Values mirror the Figma "Lisane AI · Midnight lime · Foundations" variables. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --palette-midnight: #0b0f14;
+  --palette-white: #ffffff;
+  --palette-lime: #b6f23a;
+
+  --background-base: var(--palette-midnight);
+  --surface-card: #15191d;
+  --surface-input: #1c2024;
+  --surface-raised: #23272c;
+  --surface-accent-host: var(--palette-midnight);
+  --text-primary: var(--palette-white);
+  --text-secondary: #ffffff99;
+  --border-subtle: #ffffff1a;
+  --action-primary: var(--palette-lime);
+  --action-on-primary: var(--palette-midnight);
+  --accent-lime: var(--palette-lime);
+
+  color-scheme: dark;
+}
+
+/* Lime is held on Midnight surfaces only, so the light theme switches the primary action to Midnight. */
+[data-theme="light"] {
+  --background-base: var(--palette-white);
+  --surface-card: #f8f8f8;
+  --surface-input: #f0f1f1;
+  --surface-raised: #f0f1f1;
+  --text-primary: var(--palette-midnight);
+  --text-secondary: #0b0f1499;
+  --border-subtle: #0b0f141f;
+  --action-primary: var(--palette-midnight);
+  --action-on-primary: var(--palette-white);
+
+  color-scheme: light;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-midnight: var(--palette-midnight);
+  --color-white: var(--palette-white);
+  --color-lime: var(--palette-lime);
+
+  --color-canvas: var(--background-base);
+  --color-card: var(--surface-card);
+  --color-field: var(--surface-input);
+  --color-raised: var(--surface-raised);
+  --color-accent-host: var(--surface-accent-host);
+  --color-fg: var(--text-primary);
+  --color-fg-muted: var(--text-secondary);
+  --color-line: var(--border-subtle);
+  --color-action: var(--action-primary);
+  --color-on-action: var(--action-on-primary);
+  --color-accent: var(--accent-lime);
+
+  --font-sans: var(--font-inter), var(--font-ethiopic), ui-sans-serif, system-ui, sans-serif;
+  --font-ethiopic: var(--font-noto-ethiopic), var(--font-inter), sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.25rem;
+  --text-label: 0.875rem;
+  --text-label--line-height: 1.5rem;
+  --text-body: 1rem;
+  --text-body--line-height: 1.75rem;
+  --text-heading: 1.25rem;
+  --text-heading--line-height: 2rem;
+  --text-title: 1.75rem;
+  --text-title--line-height: 2.5rem;
+  --text-display: 2.5rem;
+  --text-display--line-height: 3.25rem;
+
+  --radius-*: initial;
+  --radius-4: 4px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+
+  --shadow-raised: 0 2px 8px 0 #0b0f1452;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-canvas);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  :lang(am),
+  :lang(ti) {
+    font-family: var(--font-ethiopic);
+  }
 }
