@@ -297,7 +297,7 @@ Build from Duolingo's published design, not Voxa's learning module.
 ### Foundation
 - [x] 01. Scaffold `lisane/` with `create-next-app@latest` (TypeScript, App Router, `src/`, Tailwind 4, ESLint, pnpm), plus `.env.example` and a README stub
 - [x] 02. Design tokens and fonts: Tailwind 4 `@theme`, Noto Sans Ethiopic plus a Latin font, port UI primitives and `cn`
-- [ ] 03. next-intl: `[locale]` routing, `proxy.ts`, `messages/en.json`, locale cookie, language switcher
+- [x] 03. next-intl: `[locale]` routing, `proxy.ts`, `messages/en.json`, locale cookie, language switcher
 - [ ] 04. Language registry (`src/config/languages.ts`), Addis-drafted `am`/`om` messages, `messages/REVIEW.md`
 - [ ] 05. App shell: mobile layout, bottom navigation (Learn, Speak, Practice, Progress, Profile), placeholder `Mascot`, empty pages, and the theme switch (System, Light, Dark) saved in a cookie so the page never flashes the wrong theme
 - [ ] 06. Env validation (`src/lib/env.ts`) and the `server-only` setup
