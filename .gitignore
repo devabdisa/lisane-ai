@@ -1,0 +1,8 @@
+# Voxa reference repo (read-only, kept locally, never committed here)
+/talkbuddy/
+
+node_modules/
+.next/
+.env*
+!.env.example
+.DS_Store
