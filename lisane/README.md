@@ -15,7 +15,8 @@ See [`../AGENTS.md`](../AGENTS.md) for the product scope, architecture rules and
 
 ```bash
 pnpm install
-cp .env.example .env.local
+cp .env.example .env.local   # fill in DATABASE_URL, BETTER_AUTH_SECRET, GEMINI_API_KEY, ADDIS_API_KEY
+pnpm exec prisma migrate deploy
 pnpm dev
 ```
 
@@ -30,3 +31,5 @@ Open http://localhost:3000.
 | `pnpm start` | Run the production build |
 | `pnpm lint` | ESLint |
 | `pnpm typecheck` | Generate route types and run TypeScript |
+| `node --test "src/**/*.test.ts"` | Unit tests |
+| `pnpm messages:draft` | Draft missing Amharic and Afaan Oromo strings with Addis AI |
