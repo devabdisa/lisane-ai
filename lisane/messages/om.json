@@ -44,5 +44,28 @@
     "system": "Sirna",
     "light": "Ifa",
     "dark": "Dukkana"
+  },
+  "Auth": {
+    "loginTitle": "Baga nagaan deebite",
+    "loginSubtitle": "Shaakala Afaan Ingiliffaa kee itti fufuuf seeni.",
+    "signupTitle": "Akkaawuntii keessan uumaa",
+    "signupSubtitle": "Iddoo dhuunfaa afaan keetiin Ingiliffa itti shaakaltu.",
+    "name": "Maqaa",
+    "email": "Iimeelii",
+    "password": "Jecha iccitii",
+    "showPassword": "Jecha iccitii agarsiisi",
+    "hidePassword": "Jecha iccitii dhoksi",
+    "submitLogin": "Seeni",
+    "submitSignup": "Akkaawuntii uumi",
+    "google": "Google'n itti fufi",
+    "noAccount": "Asitti haaraadha?",
+    "signupLink": "Akkaawuntii uumi",
+    "hasAccount": "Duraan akaawuntii qabdaa?",
+    "loginLink": "Seeni",
+    "nameRequired": "Maaloo maqaa keessan galchaa.",
+    "emailRequired": "Maaloo teessoo imeelii sirrii galchaa.",
+    "passwordTooShort": "Yoo xiqqaate mallattoo 8 fayyadami.",
+    "failed": "Inni hin hojjenne. Maaloo irra deebi'ii yaali.",
+    "signOut": "Keessaa ba'i"
   }
 }

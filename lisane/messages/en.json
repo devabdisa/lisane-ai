@@ -44,5 +44,28 @@
     "system": "System",
     "light": "Light",
     "dark": "Dark"
+  },
+  "Auth": {
+    "loginTitle": "Welcome back",
+    "loginSubtitle": "Sign in to continue your English practice.",
+    "signupTitle": "Create your account",
+    "signupSubtitle": "A private place to practise English, in your own language.",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "submitLogin": "Sign in",
+    "submitSignup": "Create account",
+    "google": "Continue with Google",
+    "noAccount": "New here?",
+    "signupLink": "Create an account",
+    "hasAccount": "Already have an account?",
+    "loginLink": "Sign in",
+    "nameRequired": "Please enter your name.",
+    "emailRequired": "Please enter a valid email address.",
+    "passwordTooShort": "Use at least 8 characters.",
+    "failed": "That did not work. Please try again.",
+    "signOut": "Sign out"
   }
 }

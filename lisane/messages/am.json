@@ -44,5 +44,28 @@
     "system": "ሲስተም",
     "light": "ብርሃን",
     "dark": "ጨለማ"
+  },
+  "Auth": {
+    "loginTitle": "እንኳን ደህና መጡ",
+    "loginSubtitle": "የእንግሊዝኛ ልምምድዎን ለመቀጠል ይግቡ።",
+    "signupTitle": "መለያዎን ይፍጠሩ",
+    "signupSubtitle": "እንግሊዝኛን በራስዎ ቋንቋ ለመለማመድ የግል ቦታ።",
+    "name": "ስም",
+    "email": "ኢሜይል",
+    "password": "የይለፍ ቃል",
+    "showPassword": "የይለፍ ቃል አሳይ",
+    "hidePassword": "የይለፍ ቃል ደብቅ",
+    "submitLogin": "ይግቡ",
+    "submitSignup": "አካውንት ፍጠር",
+    "google": "በGoogle ይቀጥሉ",
+    "noAccount": "አዲስ ነዎት?",
+    "signupLink": "አካውንት ይፍጠሩ",
+    "hasAccount": "አካውንት አለዎት?",
+    "loginLink": "ይግቡ",
+    "nameRequired": "እባክዎ ስምዎን ያስገቡ።",
+    "emailRequired": "እባክዎ ትክክለኛ የኢሜይል አድራሻ ያስገቡ።",
+    "passwordTooShort": "ቢያንስ 8 ቁምፊዎችን ይጠቀሙ።",
+    "failed": "ያ አልሰራም። እባክዎ እንደገና ይሞክሩ።",
+    "signOut": "ውጣ"
   }
 }

@@ -37,6 +37,27 @@ still listed here, so reviewed text is never overwritten.
 | `ThemeSwitcher.system` | System | ሲስተም | quality: high |
 | `ThemeSwitcher.light` | Light | ብርሃን | quality: high |
 | `ThemeSwitcher.dark` | Dark | ጨለማ | quality: high |
+| `Auth.loginTitle` | Welcome back | እንኳን ደህና መጡ | quality: high |
+| `Auth.loginSubtitle` | Sign in to continue your English practice. | የእንግሊዝኛ ልምምድዎን ለመቀጠል ይግቡ። | quality: high |
+| `Auth.signupTitle` | Create your account | መለያዎን ይፍጠሩ | quality: high |
+| `Auth.signupSubtitle` | A private place to practise English, in your own language. | እንግሊዝኛን በራስዎ ቋንቋ ለመለማመድ የግል ቦታ። | quality: high |
+| `Auth.name` | Name | ስም | quality: high |
+| `Auth.email` | Email | ኢሜይል | quality: high |
+| `Auth.password` | Password | የይለፍ ቃል | quality: high |
+| `Auth.showPassword` | Show password | የይለፍ ቃል አሳይ | quality: high |
+| `Auth.hidePassword` | Hide password | የይለፍ ቃል ደብቅ | quality: high |
+| `Auth.submitLogin` | Sign in | ይግቡ | quality: high |
+| `Auth.submitSignup` | Create account | አካውንት ፍጠር | quality: high |
+| `Auth.google` | Continue with Google | በGoogle ይቀጥሉ | quality: high |
+| `Auth.noAccount` | New here? | አዲስ ነዎት? | quality: high |
+| `Auth.signupLink` | Create an account | አካውንት ይፍጠሩ | quality: high |
+| `Auth.hasAccount` | Already have an account? | አካውንት አለዎት? | quality: high |
+| `Auth.loginLink` | Sign in | ይግቡ | quality: high |
+| `Auth.nameRequired` | Please enter your name. | እባክዎ ስምዎን ያስገቡ። | quality: high |
+| `Auth.emailRequired` | Please enter a valid email address. | እባክዎ ትክክለኛ የኢሜይል አድራሻ ያስገቡ። | quality: high |
+| `Auth.passwordTooShort` | Use at least 8 characters. | ቢያንስ 8 ቁምፊዎችን ይጠቀሙ። | quality: high |
+| `Auth.failed` | That did not work. Please try again. | ያ አልሰራም። እባክዎ እንደገና ይሞክሩ። | quality: high |
+| `Auth.signOut` | Sign out | ውጣ | quality: high |
 
 ## Afaan Oromo (om)
 
@@ -68,3 +89,24 @@ still listed here, so reviewed text is never overwritten.
 | `ThemeSwitcher.system` | System | Sirna | quality: high |
 | `ThemeSwitcher.light` | Light | Ifa | quality: high |
 | `ThemeSwitcher.dark` | Dark | Dukkana | quality: high |
+| `Auth.loginTitle` | Welcome back | Baga nagaan deebite | quality: high |
+| `Auth.loginSubtitle` | Sign in to continue your English practice. | Shaakala Afaan Ingiliffaa kee itti fufuuf seeni. | quality: high |
+| `Auth.signupTitle` | Create your account | Akkaawuntii keessan uumaa | quality: high |
+| `Auth.signupSubtitle` | A private place to practise English, in your own language. | Iddoo dhuunfaa afaan keetiin Ingiliffa itti shaakaltu. | quality: high |
+| `Auth.name` | Name | Maqaa | quality: high |
+| `Auth.email` | Email | Iimeelii | quality: high |
+| `Auth.password` | Password | Jecha iccitii | quality: high |
+| `Auth.showPassword` | Show password | Jecha iccitii agarsiisi | quality: high |
+| `Auth.hidePassword` | Hide password | Jecha iccitii dhoksi | quality: high |
+| `Auth.submitLogin` | Sign in | Seeni | quality: high |
+| `Auth.submitSignup` | Create account | Akkaawuntii uumi | quality: high |
+| `Auth.google` | Continue with Google | Google'n itti fufi | quality: high |
+| `Auth.noAccount` | New here? | Asitti haaraadha? | quality: high |
+| `Auth.signupLink` | Create an account | Akkaawuntii uumi | quality: high |
+| `Auth.hasAccount` | Already have an account? | Duraan akaawuntii qabdaa? | quality: high |
+| `Auth.loginLink` | Sign in | Seeni | quality: high |
+| `Auth.nameRequired` | Please enter your name. | Maaloo maqaa keessan galchaa. | quality: high |
+| `Auth.emailRequired` | Please enter a valid email address. | Maaloo teessoo imeelii sirrii galchaa. | quality: high |
+| `Auth.passwordTooShort` | Use at least 8 characters. | Yoo xiqqaate mallattoo 8 fayyadami. | quality: high |
+| `Auth.failed` | That did not work. Please try again. | Inni hin hojjenne. Maaloo irra deebi'ii yaali. | quality: high |
+| `Auth.signOut` | Sign out | Keessaa ba'i | quality: high |

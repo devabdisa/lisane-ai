@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
+import { SignOutButton } from "@/components/auth/sign-out-button";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { PlaceholderScreen } from "@/components/shell/placeholder-screen";
@@ -40,6 +41,7 @@ export default async function ProfilePage() {
         <CardTitle>{t("appLanguage")}</CardTitle>
         <LanguageSwitcher />
       </Card>
+      <SignOutButton />
     </PlaceholderScreen>
   );
 }
