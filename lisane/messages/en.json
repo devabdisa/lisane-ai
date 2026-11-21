@@ -20,7 +20,19 @@
   },
   "Speak": {
     "title": "Speak anytime",
-    "description": "Talk with your English coach by text or voice, and get one kind correction each turn."
+    "description": "Talk with your English coach by voice.",
+    "empty": "Tap the microphone and start speaking. Your coach will answer out loud.",
+    "you": "You",
+    "coach": "Coach",
+    "idle": "Ready when you are",
+    "connecting": "Connecting",
+    "listening": "Listening",
+    "ended": "Session ended",
+    "error": "The coach could not stay connected",
+    "start": "Start speaking",
+    "stop": "Stop speaking",
+    "unavailable": "The coach could not be reached. Try again in a moment.",
+    "microphone": "Lisane needs the microphone to practise speaking."
   },
   "Practice": {
     "title": "Practice",

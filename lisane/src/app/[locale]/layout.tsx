@@ -1,3 +1,4 @@
+import { SerwistProvider } from "@serwist/turbopack/react";
 import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Sans_Ethiopic } from "next/font/google";
 import { notFound } from "next/navigation";
@@ -33,8 +34,21 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
 
   return {
     metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
+    applicationName: "Lisane AI",
     title: t("title"),
     description: t("description"),
+    appleWebApp: {
+      capable: true,
+      title: "Lisane AI",
+      statusBarStyle: "black-translucent",
+    },
+    icons: {
+      icon: [
+        { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+        { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+      ],
+      apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    },
   };
 }
 
@@ -63,8 +77,10 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
         <ThemeScript />
       </head>
       <body className="flex min-h-full flex-col bg-canvas text-fg">
-        <ThemeSync />
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <SerwistProvider swUrl="/serwist/sw.js" disable={process.env.NODE_ENV === "development"}>
+          <ThemeSync />
+          <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        </SerwistProvider>
       </body>
     </html>
   );

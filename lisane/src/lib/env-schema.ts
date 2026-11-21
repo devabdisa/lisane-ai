@@ -17,7 +17,14 @@ export const envSchema = z
     GOOGLE_CLIENT_ID: optionalSecret,
     GOOGLE_CLIENT_SECRET: optionalSecret,
     GEMINI_API_KEY: optionalSecret,
-    GEMINI_TTS_MODEL: optionalSecret,
+    GEMINI_LIVE_MODEL: z.preprocess(
+      emptyToUndefined,
+      z.string().min(1).default("models/gemini-3.1-flash-live-preview"),
+    ),
+    GEMINI_TTS_MODEL: z.preprocess(
+      emptyToUndefined,
+      z.string().min(1).default("gemini-3.1-flash-tts-preview"),
+    ),
     STT_PROVIDER: z.preprocess(emptyToUndefined, z.enum(["gemini", "groq"]).default("gemini")),
     GROQ_API_KEY: optionalSecret,
     ADDIS_API_KEY: optionalSecret,

@@ -20,7 +20,19 @@
   },
   "Speak": {
     "title": "Yeroo barbaaddetti dubbadhu",
-    "description": "Leenjisaa Afaan Ingiliffaa kee waliin barreeffamaan ykn sagaleen dubbadhu, akkasumas dabaree tokkoon sirreeffama gaarii tokko argadhu."
+    "description": "Leenjisaa Afaan Ingiliffaa kee waliin barreeffamaan ykn sagaleen dubbadhu, akkasumas dabaree tokkoon sirreeffama gaarii tokko argadhu.",
+    "empty": "Maayikiroofoonii tuquun dubbachuu jalqabi. Leenjisaan kee sagaleen siif deebisa.",
+    "you": "Ati",
+    "coach": "Leenjisaa",
+    "idle": "Yommuu ati qophoofte qophiidha",
+    "connecting": "Wal-qunnamsiisuu",
+    "listening": "Dhaggeeffachuu",
+    "ended": "Yeroon xumurameera",
+    "error": "Leenjisaichi walitti dhufeenya qabaatee turuu hin dandeenye.",
+    "start": "Dubbachuu jalqabi",
+    "stop": "Dubbachuu dhaabi",
+    "unavailable": "Leenjisaa qunnamuun hin danda'amne. Yeroo muraasa booda irra deebi'ii yaali.",
+    "microphone": "Liseen dubbachuu shaakaluuf maayikiroofoonii ni barbaaddi."
   },
   "Practice": {
     "title": "Shaakala",

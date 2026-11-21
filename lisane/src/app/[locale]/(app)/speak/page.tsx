@@ -1,7 +1,13 @@
 import { getTranslations } from "next-intl/server";
-import { PlaceholderScreen } from "@/components/shell/placeholder-screen";
+import { VoiceSession } from "@/components/speak/voice-session";
+import { PageHeader } from "@/components/shell/page-header";
 
 export default async function SpeakPage() {
   const t = await getTranslations("Speak");
-  return <PlaceholderScreen title={t("title")} description={t("description")} />;
+  return (
+    <>
+      <PageHeader title={t("title")} />
+      <VoiceSession />
+    </>
+  );
 }

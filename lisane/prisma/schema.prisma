@@ -21,6 +21,7 @@ model User {
   sessions      Session[]
   accounts      Account[]
   profile       UserProfile?
+  speakSessions SpeakSession[]
 
   @@map("user")
 }
@@ -38,6 +39,18 @@ model UserProfile {
   user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("user_profile")
+}
+
+model SpeakSession {
+  id        String    @id @default(cuid())
+  userId    String
+  status    String    @default("ACTIVE")
+  createdAt DateTime  @default(now())
+  endedAt   DateTime?
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("speak_session")
 }
 
 model Session {

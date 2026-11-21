@@ -24,7 +24,7 @@ still listed here, so reviewed text is never overwritten.
 | `Learn.title` | Learn step by step | ደረጃ በደረጃ ይማሩ | quality: high |
 | `Learn.description` | Your learning path will be here: short lessons that build your English one step at a time. | የእርስዎ የመማሪያ መንገድ እዚህ ይሆናል፡ እንግሊዝኛዎን አንድ በአንድ የሚያዳብሩ አጫጭር ትምህርቶች። | quality: high |
 | `Speak.title` | Speak anytime | በማንኛውም ጊዜ ይናገሩ | quality: high |
-| `Speak.description` | Talk with your English coach by text or voice, and get one kind correction each turn. | በጽሑፍ ወይም በድምጽ ከእንግሊዝኛ አሰልጣኝዎ ጋር ይነጋገሩ እና በእያንዳንዱ ተራ አንድ አይነት እርማት ያግኙ። | quality: high |
+| `Speak.description` | Talk with your English coach by voice. | በጽሑፍ ወይም በድምጽ ከእንግሊዝኛ አሰልጣኝዎ ጋር ይነጋገሩ እና በእያንዳንዱ ተራ አንድ አይነት እርማት ያግኙ። | quality: high |
 | `Practice.title` | Practice | ልምምድ | quality: high |
 | `Practice.description` | Words and mistakes you are learning will come back here at the right time, so they stay with you. | እየተማሯቸው ያሉ ቃላት እና ስህተቶች በትክክለኛው ጊዜ እዚህ ይመለሳሉ፣ ስለዚህ ከእርስዎ ጋር ይቆያሉ። | quality: high |
 | `Progress.title` | Your progress | እድገትዎ | quality: high |
@@ -80,6 +80,18 @@ still listed here, so reviewed text is never overwritten.
 | `Onboarding.levels.beginner` | Beginner | ጀማሪ | quality: high |
 | `Onboarding.levels.a2` | A2 | ሀ2 | quality: high |
 | `Onboarding.levels.b1` | B1 | B1 | quality: high |
+| `Speak.empty` | Tap the microphone and start speaking. Your coach will answer out loud. | ማይክሮፎኑን መታ ያድርጉ እና መናገር ይጀምሩ። አሰልጣኝዎ ጮክ ብሎ ይመልስልዎታል። | quality: high |
+| `Speak.you` | You | እርስዎ | quality: high |
+| `Speak.coach` | Coach | አሰልጣኝ | quality: high |
+| `Speak.idle` | Ready when you are | እርስዎ ሲዘጋጁ እኔም ዝግጁ ነኝ | quality: high |
+| `Speak.connecting` | Connecting | ማገናኘት | quality: high |
+| `Speak.listening` | Listening | ማዳመጥ | quality: high |
+| `Speak.ended` | Session ended | ክፍለ ጊዜው አብቅቷል | quality: high |
+| `Speak.error` | The coach could not stay connected | አሰልጣኙ እንደተገናኙ መቆየት አልቻሉም | quality: high |
+| `Speak.start` | Start speaking | መናገር ጀምር | quality: high |
+| `Speak.stop` | Stop speaking | ማውራት አቁም | quality: high |
+| `Speak.unavailable` | The coach could not be reached. Try again in a moment. | አሰልጣኙን ማግኘት አልተቻለም። ከጥቂት ጊዜ በኋላ እንደገና ይሞክሩ። | quality: high |
+| `Speak.microphone` | Lisane needs the microphone to practise speaking. | ሊሳኔ ንግግር ለመለማመድ ማይክሮፎኑ ያስፈልጋታል። | quality: high |
 
 ## Afaan Oromo (om)
 
@@ -98,7 +110,7 @@ still listed here, so reviewed text is never overwritten.
 | `Learn.title` | Learn step by step | Tarkaanfii tarkaanfiidhaan baradhu | quality: high |
 | `Learn.description` | Your learning path will be here: short lessons that build your English one step at a time. | Daandiin barumsa keetii as jiraata: barumsa gaggabaaboo dandeettii Afaan Ingiliffaa kee tarkaanfii tokkoon tokkoon ijaaran. | quality: high |
 | `Speak.title` | Speak anytime | Yeroo barbaaddetti dubbadhu | quality: high |
-| `Speak.description` | Talk with your English coach by text or voice, and get one kind correction each turn. | Leenjisaa Afaan Ingiliffaa kee waliin barreeffamaan ykn sagaleen dubbadhu, akkasumas dabaree tokkoon sirreeffama gaarii tokko argadhu. | quality: high |
+| `Speak.description` | Talk with your English coach by voice. | Leenjisaa Afaan Ingiliffaa kee waliin barreeffamaan ykn sagaleen dubbadhu, akkasumas dabaree tokkoon sirreeffama gaarii tokko argadhu. | quality: high |
 | `Practice.title` | Practice | Shaakala | quality: high |
 | `Practice.description` | Words and mistakes you are learning will come back here at the right time, so they stay with you. | Jechoonniifi dogoggorri ati barachaa jirtu akka siif galaniif yeroo sirrii ta'etti asitti deebi'u. | quality: high |
 | `Progress.title` | Your progress | Adeemsa kee | quality: high |
@@ -154,3 +166,15 @@ still listed here, so reviewed text is never overwritten.
 | `Onboarding.levels.beginner` | Beginner | Jalqabaa | quality: high |
 | `Onboarding.levels.a2` | A2 | A2 | quality: high |
 | `Onboarding.levels.b1` | B1 | B1 | quality: high |
+| `Speak.empty` | Tap the microphone and start speaking. Your coach will answer out loud. | Maayikiroofoonii tuquun dubbachuu jalqabi. Leenjisaan kee sagaleen siif deebisa. | quality: high |
+| `Speak.you` | You | Ati | quality: high |
+| `Speak.coach` | Coach | Leenjisaa | quality: high |
+| `Speak.idle` | Ready when you are | Yommuu ati qophoofte qophiidha | quality: high |
+| `Speak.connecting` | Connecting | Wal-qunnamsiisuu | quality: high |
+| `Speak.listening` | Listening | Dhaggeeffachuu | quality: high |
+| `Speak.ended` | Session ended | Yeroon xumurameera | quality: high |
+| `Speak.error` | The coach could not stay connected | Leenjisaichi walitti dhufeenya qabaatee turuu hin dandeenye. | quality: high |
+| `Speak.start` | Start speaking | Dubbachuu jalqabi | quality: high |
+| `Speak.stop` | Stop speaking | Dubbachuu dhaabi | quality: high |
+| `Speak.unavailable` | The coach could not be reached. Try again in a moment. | Leenjisaa qunnamuun hin danda'amne. Yeroo muraasa booda irra deebi'ii yaali. | quality: high |
+| `Speak.microphone` | Lisane needs the microphone to practise speaking. | Liseen dubbachuu shaakaluuf maayikiroofoonii ni barbaaddi. | quality: high |
