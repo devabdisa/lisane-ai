@@ -10,7 +10,7 @@ This is the working agreement for the AI agent that builds Lisane AI. The agent 
 
 Lisane AI is a mobile-first PWA that turns Ethiopians who understand English into confident English **speakers**, with deep support in the learner's own language. It has two main features:
 
-1. **Speak anytime.** The learner opens a conversation with an AI English coach whenever they want, by text or recorded voice, freely or in a scenario like a job interview. Every turn gets one short, kind correction. The explanation is written in the learner's chosen support language by **Addis AI**, so it reads naturally instead of like a machine translation.
+1. **Speak anytime.** The learner talks with an AI English coach by voice, freely or in a scenario like a job interview. There is no typed chat. Every turn gets one short, kind correction. The explanation is written in the learner's chosen support language by **Addis AI**, so it reads naturally instead of like a machine translation. On a weak connection the voice conversation keeps going: audio is sent in small pieces, a failed piece is retried, and the coach's stream reconnects instead of ending the talk.
 2. **Learn step by step.** A Duolingo-style learning path for English: sections, units, levels and short lessons. It mixes new material with review and uses spaced repetition to bring weak items back. Guidebooks, hints and translation exercises use the learner's support language.
 
 Both features feed one shared **memory**: mistakes from speaking and from lessons become practice items that return at the right time.
@@ -86,7 +86,7 @@ Around them: a fully localized UI, low-network resilience, and a free daily limi
 ## 5. Product guardrails
 
 - **MVP scope:**
-  - Speak anytime (text plus recorded voice, free talk plus scenarios)
+  - Speak anytime (live voice conversation, free talk plus scenarios, no typed chat)
   - corrections with a support-language explanation
   - "help me say it", which turns the learner's own-language sentence into natural English
   - the Duolingo-style learning path with lessons and speaking roleplays
@@ -99,7 +99,7 @@ Around them: a fully localized UI, low-network resilience, and a free daily limi
 - **Not in the MVP:**
   - the separate interactive reader or passage library
   - PDF upload
-  - realtime Gemini Live voice
+  - a typed chat for speaking practice
   - peer matching and leaderboards
   - teacher or class plans
   - the mobile app
@@ -134,8 +134,8 @@ Around them: a fully localized UI, low-network resilience, and a free daily limi
   3. If that fails, fall back to `translate.create` of the English reason, then to Gemini, and log each fallback.
 - Gemini must **not** write the support-language explanation in the main path. That was Voxa's quality ceiling.
 - Keep Voxa's good behavior: a warm coach persona (renamed), one correction per turn, 1–3 sentence replies, session memory, reinforcement of recent weak patterns, and scenarios.
-- **Help me say it:** the learner types (or later speaks) a sentence in their support language. Addis translates it to English, and Gemini makes it natural for the conversation. The learner then says it themselves.
-- Voice: record locally, upload one short Opus clip (45-second cap), transcribe it with the English STT abstraction, reply text-first, and offer on-demand cached TTS. Never auto-play audio.
+- **Help me say it:** the learner gives one sentence in their support language. Addis translates it to English, and Gemini makes it natural. The learner then says it themselves. This is a single helper, not a chat.
+- **Voice conversation:** the learner speaks. The phone keeps the audio and sends it in small pieces, about every tenth of a second. One piece is in flight at a time. If a piece fails, it returns to the front of the queue and is retried up to three times, waiting longer each time, while the learner keeps talking. The coach's audio and transcript arrive on a stream. If that stream drops, the screen says it is reconnecting, then that the connection is slow, and it keeps trying for 45 seconds. A missed "I'm speaking" or "I'm done" signal is sent once more. The session stops immediately only when the server says that session is already gone. If the connection cannot recover, the transcript is saved on the phone so the conversation can be opened again.
 - Every correction creates a memory item (section 7.3).
 
 ### 7.2 Learn step by step (Duolingo approach)
@@ -195,7 +195,7 @@ Build from Duolingo's published design, not Voxa's learning module.
 - Lesson answers completed offline sync later.
 - Every AI or speech request carries a `clientRequestId`. The server dedupes it (`ProcessedRequest`), so retries are never processed or charged twice.
 - Failed sends go to an IndexedDB outbox and retry with backoff. The UI shows a queued or retrying state, never a silent failure.
-- On a weak network, voice practice switches to text automatically and says so in the UI.
+- On a weak network the voice conversation keeps going, as in section 7.1. Speaking practice does not turn into a typed chat.
 
 ### 7.7 Payments (Chapa)
 - Use a unique `tx_ref` for every attempt.
@@ -254,7 +254,7 @@ Build from Duolingo's published design, not Voxa's learning module.
   - remove anything outside the MVP
 - Port only what the current step needs.
 - **Port these** (paths under `talkbuddy/apps/platform/src/` unless noted):
-  - **Speaking:** `server/ai/generate-practice-reply.ts` and `server/services/practice/*` (sessions, messages, session memory, reply audio cache), `components/practice/*`, `use-recorded-voice-message.ts`, `use-practice-reply-audio-player.ts`
+  - **Speaking:** `components/practice/voice-practice-view.tsx`, `server/live/live-session-manager.ts`, and the practice session, memory, and correction pieces those call. Port the weak-connection behavior in section 7.1 with them.
   - **Prompts:** `packages/prompts/src/practice/*`. The correction prompt in `packages/prompts/src/corrections/analyze-user-message.ts` is a **reference only**; it gets redesigned per section 7.1
   - **Speech:** `server/services/speech/*` (STT provider abstraction)
   - **Guardrails:** `server/services/rate-limit/*`, `server/services/ai/usage-guardrails.ts`
@@ -264,7 +264,7 @@ Build from Duolingo's published design, not Voxa's learning module.
 - **Do not port:**
   - Voxa's learning module (`server/services/learning/*`, `components/learning/*`, the `Learning*` models)
   - reading or PDF
-  - live voice
+  - the typed practice chat (`practice-session-client.tsx` and the text composer)
   - gamification internals (XP and streak are rebuilt to fit the path)
 
 ---
@@ -309,16 +309,16 @@ Build from Duolingo's published design, not Voxa's learning module.
 - [x] 09b. Deploy a staging environment (host and hosted Postgres chosen with the owner), so every later step is tested on real phones and networks
 
 ### AI and language core
-- [ ] 10. Gemini client on the latest `@google/genai`, rate limiter, usage guardrails
-- [ ] 11. Addis AI client: `translate` and `chat` with registry-driven languages, caching and fallbacks
+- [x] 10. Gemini client on the latest `@google/genai`, rate limiter, usage guardrails
+- [x] 11. Addis AI client: `translate` and `chat` with registry-driven languages, caching and fallbacks
 
 ### Speak anytime
-- [ ] 12. Speaking sessions: text chat, messages, coach reply (Voxa prompt ported and renamed)
-- [ ] 13. Correction pipeline v2: Gemini English judgment, Addis support-language explanation, correction card
-- [ ] 14. Help me say it: support-language input to natural English
-- [ ] 15. STT abstraction plus recorded voice message (Opus recorder, 45-second cap)
-- [ ] 16. Reply TTS with cache, plus a "Play voice" button
-- [ ] 17. Scenarios (self-introduction, job interview, workplace, university) and the session review page
+- [ ] 12. Live voice session: microphone, small audio pieces, transcript on screen (Voxa voice practice ported)
+- [ ] 13. Weak connection: audio queue and retry, one send at a time, coach stream reconnects for 45 seconds, transcript saved on the phone
+- [ ] 14. Correction during the voice turn: Gemini English judgment, Addis support-language explanation, shown on that turn
+- [ ] 15. Help me say it: one support-language sentence becomes natural English, then the learner says it
+- [ ] 16. Scenarios (self-introduction, job interview, workplace, university) and the session review page
+- [ ] 17. Session memory inside the voice conversation: recent topic, weak pattern, and the next follow-up
 
 ### Learn step by step
 - [ ] 18. Curriculum content schema (zod), `content/curriculum/` layout, validator script, first unit authored
@@ -339,7 +339,7 @@ Build from Duolingo's published design, not Voxa's learning module.
 - [ ] 29. Serwist PWA: manifest, icons, app shell and message precache, install prompt
 - [ ] 30. Dexie: downloaded units (content plus audio), offline lesson completion with later sync, local speaking history
 - [ ] 31. Outbox plus `clientRequestId` idempotency (`ProcessedRequest`) with retry UI
-- [ ] 32. Network-quality hook: automatic text-first fallback, banner, streaming replies with resume
+- [ ] 32. Voice session on a throttled network: a failed audio piece retries, the coach stream reconnects, and the transcript is still there
 
 ### Monetization
 - [ ] 33. Usage, entitlement, credit and payment models, plus `assertQuota` on all AI and speech routes
