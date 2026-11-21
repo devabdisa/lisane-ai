@@ -17,6 +17,7 @@ import {
   mergeStreamingTranscript,
   normalizeTranscriptText,
 } from "@/lib/live-transcript";
+import { requestedSpokenSupport } from "@/lib/spoken-support";
 import { countAudiblePcm16Windows, MIN_AUDIBLE_WINDOWS } from "@/lib/voice-evidence";
 import { buildLiveSystemInstruction, type LiveProfileContext } from "@/prompts/speak-live";
 import {
@@ -29,6 +30,7 @@ import {
 import { GEMINI_LIVE_MODEL, getGeminiLive, toModelResource } from "@/server/ai/gemini";
 import { getPrisma } from "@/server/db";
 import { judgeSpeakTurn } from "@/server/services/speak/judge-turn";
+import { supportOpener } from "./support-opener";
 
 const LIVE_SESSION_MAX_AGE_MS = 1000 * 60 * 20;
 const LIVE_SESSION_IDLE_TIMEOUT_MS = 1000 * 60 * 5;
@@ -101,6 +103,8 @@ type LiveSessionState = {
   ended: boolean;
   stopRequested: boolean;
   pendingUserTranscript: string | null;
+  latestAudibleTranscript: string;
+  assistantSupportReplied: boolean;
   pendingAssistantTranscript: string | null;
   pendingUserFinalTimer: ReturnType<typeof setTimeout> | null;
   pendingAssistantFinalTimer: ReturnType<typeof setTimeout> | null;
@@ -291,6 +295,8 @@ export class LiveSessionManager {
       ended: false,
       stopRequested: false,
       pendingUserTranscript: null,
+      latestAudibleTranscript: "",
+      assistantSupportReplied: false,
       pendingAssistantTranscript: null,
       pendingUserFinalTimer: null,
       pendingAssistantFinalTimer: null,
@@ -609,6 +615,24 @@ export class LiveSessionManager {
     state.assistantTurnInProgress = true;
     state.turnCounter += 1;
     state.currentAssistantTurnId = `t-${state.id}-${state.turnCounter}`;
+    const language = !state.scenario && !state.customIdea ? requestedSpokenSupport(state.latestAudibleTranscript) : null;
+    const opening = language ? supportOpener(language) : null;
+    if (opening) {
+      state.assistantSupportReplied = true;
+      this.clearPendingAssistantFinalTimer(state);
+      state.pendingAssistantTranscript = null;
+      for (const audio of opening.audio) this.publish(state, { type: "assistant_audio", ...audio });
+      this.publish(state, {
+        type: "transcript",
+        speaker: "AI",
+        text: opening.text,
+        final: true,
+        turnId: state.currentAssistantTurnId,
+        source: "assistant_text",
+      });
+      this.finalizeAssistantTranscript(state.id, opening.text);
+      logInfo("voice.support_opening", { liveSessionId: state.id, language });
+    }
     return true;
   }
 
@@ -617,6 +641,8 @@ export class LiveSessionManager {
     state.assistantTurnInProgress = false;
     state.audibleInputWindows = 0;
     state.userTranscriptClosed = false;
+    state.latestAudibleTranscript = "";
+    state.assistantSupportReplied = false;
     state.currentUserTurnId = null;
   }
 
@@ -657,6 +683,7 @@ export class LiveSessionManager {
 
       state.pendingUserTranscript = mergeStreamingTranscript(state.pendingUserTranscript, rawUserChunk);
       const normalizedUserTranscript = normalizeTranscriptText(state.pendingUserTranscript);
+      state.latestAudibleTranscript = normalizedUserTranscript;
       const isExplicitFinal = Boolean(serverContent.inputTranscription?.finished);
       this.publish(state, {
         type: "transcript",
@@ -701,6 +728,12 @@ export class LiveSessionManager {
 
     if (hasAssistantPayload && !this.shouldAcceptAssistantOutput(state)) {
       if (serverContent.turnComplete) state.discardAssistantTurn = false;
+      return;
+    }
+
+    if (state.assistantSupportReplied) {
+      // Gemini still sees the whole turn. The learner hears the prepared answer once.
+      if (serverContent.turnComplete) this.completeAssistantOutput(state);
       return;
     }
 
@@ -754,13 +787,14 @@ export class LiveSessionManager {
       }
     }
 
-    if (serverContent.turnComplete) {
-      state.discardAssistantTurn = false;
-      if (state.assistantTurnInProgress) {
-        this.markAssistantTurnComplete(state);
-        this.publish(state, { type: "assistant_turn_complete" });
-      }
-    }
+    if (serverContent.turnComplete) this.completeAssistantOutput(state);
+  }
+
+  private completeAssistantOutput(state: LiveSessionState) {
+    state.discardAssistantTurn = false;
+    if (!state.assistantTurnInProgress) return;
+    this.markAssistantTurnComplete(state);
+    this.publish(state, { type: "assistant_turn_complete" });
   }
 
   private clearPendingUserFinalTimer(state: LiveSessionState) {
