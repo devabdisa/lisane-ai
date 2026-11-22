@@ -31,7 +31,7 @@ export async function POST(request: Request, context: { params: Promise<{ unitId
     if (result.status === "missing") return errorResponse(404, "not_found", "That step is not on your path.");
     if (result.status === "locked") return errorResponse(403, "locked", "Finish the step above before this one.");
     if (result.status === "incomplete") return errorResponse(422, "incomplete", "Answer each question before saving this lesson.");
-    return Response.json({ completed: true }, { headers: privateResponse });
+    return Response.json({ completed: true, reward: result.reward }, { headers: privateResponse });
   } catch (error) {
     console.error("Lesson could not be saved", { error: error instanceof Error ? error.name : "unknown" });
     return errorResponse(500, "lesson_unavailable", "Try saving this lesson again in a moment.");

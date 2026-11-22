@@ -71,6 +71,14 @@
     "leave": "ውጣ",
     "completeTitle": "እርምጃው ተጠናቋል",
     "completeBody": "በመንገድዎ ላይ ያለው ቀጣዩ እርምጃ ክፍት ነው።",
+    "inARow": "ተከታታይ {count}",
+    "xpGain": "+{xp} ኤክስፒ",
+    "streakCount": "{count} ቀን ተከታታይ",
+    "gemLabel": "የጌም ሂደት",
+    "gemAmount": "ወደሚቀጥለው ዕንቁ {goal} {into}",
+    "gemCount": "እንቁዎች: {count}",
+    "xpTotal": "{count, number} XP",
+    "gemFound": "እንቁ አግኝተዋል",
     "backToPath": "ወደ መንገዱ ተመለስ",
     "gateBody": "ይህ እርምጃ የጥያቄ ስብስብ አይደለም። መቀጠል እና ንግግሩን በ Speak ውስጥ መለማመድ ይችላሉ።",
     "moveOn": "እንቀጥል",
@@ -161,7 +169,12 @@
   },
   "Progress": {
     "title": "እድገትዎ",
-    "description": "የደቂቃዎች ንግግርዎ፣ የተጠናቀቁ ትምህርቶችዎ እና ዕለታዊ ተከታታይነትዎ እዚህ ይገኛሉ።"
+    "description": "የደቂቃዎች ንግግርዎ፣ የተጠናቀቁ ትምህርቶችዎ እና ዕለታዊ ተከታታይነትዎ እዚህ ይገኛሉ።",
+    "xpValue": "{xp} XP",
+    "streakLabel": "የቀን ተከታታይ",
+    "lessonsLabel": "ትምህርቶች ተጠናቀቁ",
+    "dailyGoalLabel": "የየቀኑ ግብ",
+    "dailyGoalMinutes": "{count} ደቂቃዎች"
   },
   "Profile": {
     "title": "መገለጫ",
@@ -221,12 +234,48 @@
       "job_interview": "የሥራ ቃለ መጠይቅ",
       "workplace": "የሥራ ቦታ",
       "university": "ዩኒቨርሲቲ",
-      "daily_conversation": "የዕለት ተዕለት ውይይት"
+      "daily_conversation": "የዕለት ተዕለት ውይይት",
+      "travel": "ጉዞ",
+      "career_growth": "የሙያ እድገት"
     },
     "levels": {
       "beginner": "ጀማሪ",
       "a2": "ሀ2",
-      "b1": "B1"
+      "b1": "B1",
+      "a1": "A1 · መሠረታዊ",
+      "b2": "B2 ወይም ከዚያ በላይ",
+      "unsure": "እርግጠኛ አይደለሁም"
+    },
+    "setupProgress": "የቅንብር ሂደት",
+    "languageHint": "ማብራሪያዎችንና ፍንጮችን በዚህ ቋንቋ ያገኛሉ።",
+    "goalHint": "የበለጠ በራስዎ ተማምነው መናገር የሚፈልጉበትን ሁኔታ ይምረጡ።",
+    "levelHint": "አሁን ያሉበትን ደረጃ የሚገልጸውን ይምረጡ።",
+    "dailyHint": "ከዕለታዊ ሥራዎ ጋር የሚስማማ የልምምድ ጊዜ ይምረጡ።",
+    "startTitle": "ከየት መጀመር ይፈልጋሉ?",
+    "startHint": "ቅንብሩን ሲጨርሱ የሚከፈተውን ይምረጡ።",
+    "englishOnlyHint": "ፍንጮችንና ማብራሪያዎችን በእንግሊዝኛ ያግኙ።",
+    "finish": "ልምምድ ይጀምሩ",
+    "saving": "በማስቀመጥ ላይ…",
+    "startLearn": "በደረጃ ይማሩ",
+    "startLearnHint": "በአጭር ትምህርቶች የሚጠቅም እንግሊዝኛ ይማሩ።",
+    "firstUnit": "የመጀመሪያ ክፍል",
+    "startSpeak": "ውይይት ይጀምሩ",
+    "startSpeakHint": "በሚመችዎት ፍጥነት ከአሰልጣኙ ጋር ይነጋገሩ።",
+    "goalDetails": {
+      "job_interview": "ስለ ልምድዎና ችሎታዎ ይናገሩ።",
+      "workplace": "በስብሰባና ከሥራ ባልደረቦች ጋር ይነጋገሩ።",
+      "university": "በክፍል ውይይት ይሳተፉ፣ ስለ ምድብ ሥራም ይነጋገሩ።",
+      "daily_conversation": "በዕለታዊ ውይይት ራስዎን ተማምነው ይናገሩ።",
+      "travel": "አቅጣጫ ይጠይቁ፣ በጉዞ ጊዜ የሚያስፈልጉ ንግግሮችን ይለማመዱ።",
+      "career_growth": "ሐሳብዎን ያቅርቡ፣ አዳዲስ ሰዎችንም ያግኙ።"
+    },
+    "levelDetails": {
+      "beginner": "ጥቂት ቃላትና ሐረጎች አውቃለሁ።",
+      "a1": "ራሴን ማስተዋወቅና ቀላል ጥያቄ መጠየቅ እችላለሁ።",
+      "a2": "ስለማውቃቸው ርዕሶች አጭር ውይይት ማድረግ እችላለሁ።",
+      "b1": "በሚያውቋቸው ሁኔታዎች ሐሳቤን መግለጽ እችላለሁ።",
+      "b2": "ስለ ውስብስብ ጉዳዮች መነጋገር እችላለሁ፣ ይበልጥ ተፈጥሯዊ መናገር እፈልጋለሁ።",
+      "unsure": "በቀላል ውይይት መጀመር እፈልጋለሁ።"
     }
   }
 }

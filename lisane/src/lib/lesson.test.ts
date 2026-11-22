@@ -130,6 +130,14 @@ test("finishing requires a valid attempt per question but accepts ordinary mista
   assert.equal(hasCompletedLesson(unit, lesson, "en", [attempts[1], ...attempts.slice(1)]), false);
 });
 
+test("a missed exercise can return once and a correct one cannot earn a retry", () => {
+  const attempts = introductionAttempts();
+  const retry = { exerciseId: attempts[0].exerciseId, choiceId: "say-your-name" };
+  assert.equal(hasCompletedLesson(unit, lesson, "en", [...attempts, retry]), true);
+  assert.equal(hasCompletedLesson(unit, lesson, "en", [...attempts, retry, retry]), false);
+  assert.equal(hasCompletedLesson(unit, lesson, "en", [retry, ...attempts]), false);
+});
+
 test("matched pairs must be complete and correct before the lesson can be saved", () => {
   const attempts = introductionAttempts();
   const match = attempts.find((attempt) => attempt.pairs);

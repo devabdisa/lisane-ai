@@ -14,4 +14,4 @@ export const lessonAttemptSchema = z
     message: "Choose one answer for this question.",
   });
 
-export const lessonCompletionSchema = z.strictObject({ attempts: z.array(lessonAttemptSchema) });
+export const lessonCompletionSchema = z.strictObject({ attempts: z.array(lessonAttemptSchema).max(45) });

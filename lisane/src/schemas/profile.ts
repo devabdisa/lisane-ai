@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { supportLanguages } from "@/config/languages";
 
-export const goals = ["job_interview", "workplace", "university", "daily_conversation"] as const;
-export const englishLevels = ["beginner", "a2", "b1"] as const;
-export const dailyGoalMinutes = [5, 10, 15] as const;
+export const goals = ["job_interview", "workplace", "university", "daily_conversation", "travel", "career_growth"] as const;
+export const englishLevels = ["beginner", "a1", "a2", "b1", "b2", "unsure"] as const;
+export const dailyGoalMinutes = [3, 5, 10, 15, 20] as const;
 
 export type Goal = (typeof goals)[number];
 export type EnglishLevel = (typeof englishLevels)[number];
@@ -15,7 +15,7 @@ export const onboardingSchema = z.object({
   supportLanguage: z.string().refine((code) => supportLanguages.some((language) => language.code === code), {
     message: "Choose a support language",
   }),
-  dailyGoalMinutes: z.union([z.literal(5), z.literal(10), z.literal(15)]),
+  dailyGoalMinutes: z.literal(dailyGoalMinutes),
 });
 
 export type OnboardingInput = z.infer<typeof onboardingSchema>;

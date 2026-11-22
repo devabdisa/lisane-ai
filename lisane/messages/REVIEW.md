@@ -45,7 +45,7 @@ still listed here, so reviewed text is never overwritten.
 | `Practice.title` | Practice | ልምምድ | quality: high |
 | `Practice.description` | Words and mistakes you are learning will come back here at the right time, so they stay with you. | እየተማሯቸው ያሉ ቃላት እና ስህተቶች በትክክለኛው ጊዜ እዚህ ይመለሳሉ፣ ስለዚህ ከእርስዎ ጋር ይቆያሉ። | quality: high |
 | `Progress.title` | Your progress | እድገትዎ | quality: high |
-| `Progress.description` | Your minutes spoken, finished lessons and daily streak will be here. | የደቂቃዎች ንግግርዎ፣ የተጠናቀቁ ትምህርቶችዎ እና ዕለታዊ ተከታታይነትዎ እዚህ ይገኛሉ። | quality: high |
+| `Progress.description` | Your streak, gems, and finished lessons. | የደቂቃዎች ንግግርዎ፣ የተጠናቀቁ ትምህርቶችዎ እና ዕለታዊ ተከታታይነትዎ እዚህ ይገኛሉ። | quality: high |
 | `Profile.title` | Profile | መገለጫ | quality: high |
 | `Profile.description` | Your goals and settings will be here. | ግብዎችዎ እና ቅንብሮችዎ እዚህ ይሆናሉ። | quality: high |
 | `Profile.appLanguage` | App language | የመተግበሪያ ቋንቋ | quality: high |
@@ -213,6 +213,18 @@ still listed here, so reviewed text is never overwritten.
 | `Learn.gateBody` | This step is not a question set. You can move on, and practise the conversation in Speak. | ይህ እርምጃ የጥያቄ ስብስብ አይደለም። መቀጠል እና ንግግሩን በ Speak ውስጥ መለማመድ ይችላሉ። | quality: high |
 | `Learn.moveOn` | Move on | እንቀጥል | quality: high |
 | `Learn.openSpeak` | Open Speak | ክፈት ስፒክ | quality: high |
+| `Learn.inARow` | {count} in a row | ተከታታይ {count} | quality: high |
+| `Learn.xpGain` | +{xp} XP | +{xp} ኤክስፒ | quality: high |
+| `Learn.streakCount` | {count}-day streak | {count} ቀን ተከታታይ | quality: high |
+| `Learn.gemLabel` | Gem progress | የጌም ሂደት | quality: high |
+| `Learn.gemAmount` | {into} of {goal} toward the next gem | ወደሚቀጥለው ዕንቁ {goal} {into} | quality: high |
+| `Learn.gemCount` | Gems: {count} | እንቁዎች: {count} | quality: high |
+| `Learn.gemFound` | You found a gem. | እንቁ አግኝተዋል | quality: high |
+| `Progress.xpValue` | {xp} XP | {xp} XP | placeholders lost, kept English (draft: {ኤክስፒ} ኤክስፒ) |
+| `Progress.streakLabel` | Day streak | የቀን ተከታታይ | quality: high |
+| `Progress.lessonsLabel` | Lessons finished | ትምህርቶች ተጠናቀቁ | quality: high |
+| `Progress.dailyGoalLabel` | Daily goal | የየቀኑ ግብ | quality: high |
+| `Progress.dailyGoalMinutes` | {count} minutes | {count} ደቂቃዎች | quality: high |
 
 ## Afaan Oromo (om)
 
@@ -252,7 +264,7 @@ still listed here, so reviewed text is never overwritten.
 | `Practice.title` | Practice | Shaakala | quality: high |
 | `Practice.description` | Words and mistakes you are learning will come back here at the right time, so they stay with you. | Jechoonniifi dogoggorri ati barachaa jirtu akka siif galaniif yeroo sirrii ta'etti asitti deebi'u. | quality: high |
 | `Progress.title` | Your progress | Adeemsa kee | quality: high |
-| `Progress.description` | Your minutes spoken, finished lessons and daily streak will be here. | Daqiiqawwan ati dubbatte, barumsa xumurtee fi itti fufiinsi guyyaa guyyaa keetii asitti argamu. | quality: high |
+| `Progress.description` | Your streak, gems, and finished lessons. | Daqiiqawwan ati dubbatte, barumsa xumurtee fi itti fufiinsi guyyaa guyyaa keetii asitti argamu. | quality: high |
 | `Profile.title` | Profile | Piroofayilii | quality: high |
 | `Profile.description` | Your goals and settings will be here. | Galmoonnii fi qindaa'inoonni kee asitti argamu. | quality: high |
 | `Profile.appLanguage` | App language | Afaan appii | quality: high |
@@ -416,3 +428,48 @@ still listed here, so reviewed text is never overwritten.
 | `Learn.gateBody` | This step is not a question set. You can move on, and practise the conversation in Speak. | Tarkaanfiin kun garee gaaffii miti. Itti fuftee Speak keessatti marii shaakaluu dandeessa. | quality: high |
 | `Learn.moveOn` | Move on | Itti fufi | quality: high |
 | `Learn.openSpeak` | Open Speak | Bana Dubbadhu | quality: high |
+| `Learn.inARow` | {count} in a row | {count} walitti aansuun | quality: high |
+| `Learn.xpGain` | +{xp} XP | +{xp} XP | quality: high |
+| `Learn.streakCount` | {count}-day streak | Walitti aansuun guyyaa {count} | quality: high |
+| `Learn.gemLabel` | Gem progress | Adeemsa Gem | quality: high |
+| `Learn.gemAmount` | {into} of {goal} toward the next gem | {into} {goal} keessaa gara faaya itti aanuutti | quality: high |
+| `Learn.gemCount` | Gems: {count} | Faaya: {count} | quality: high |
+| `Learn.gemFound` | You found a gem. | Waan gatii guddaa qabu argatte. | quality: high |
+| `Learn.xpTotal` | {count, number} XP | XP {count, number} | XP {count, number} |
+| `Onboarding.setupProgress` | Setup progress | Adeemsa qindaa’inaa | Adeemsa qindaa’inaa |
+| `Onboarding.languageHint` | Use this language for explanations and hints. | Ibsaafi akeeka afaan kanaan argatta. | Ibsaafi akeeka afaan kanaan argatta. |
+| `Onboarding.goalHint` | Choose the situation you want to feel more confident in. | Haala ofitti amanamummaan dubbachuu barbaaddu filadhu. | Haala ofitti amanamummaan dubbachuu barbaaddu filadhu. |
+| `Onboarding.levelHint` | Pick the description that sounds like you. | Ibsa sadarkaa kee wajjin wal simu filadhu. | Ibsa sadarkaa kee wajjin wal simu filadhu. |
+| `Onboarding.dailyHint` | Choose a daily practice goal that fits your routine. | Yeroo shaakalaa hojii guyyaa kee wajjin wal simu filadhu. | Yeroo shaakalaa hojii guyyaa kee wajjin wal simu filadhu. |
+| `Onboarding.startTitle` | Where do you want to start? | Eessaa jalqabuu barbaadda? | Eessaa jalqabuu barbaadda? |
+| `Onboarding.startHint` | Choose what to open when you finish setup. | Qindaa’ina erga xumurtee booda waan banuu barbaaddu filadhu. | Qindaa’ina erga xumurtee booda waan banuu barbaaddu filadhu. |
+| `Onboarding.englishOnlyHint` | Use English for hints and explanations. | Akeekaafi ibsa Afaan Ingiliziitiin argadhu. | Akeekaafi ibsa Afaan Ingiliziitiin argadhu. |
+| `Onboarding.finish` | Start practising | Shaakala jalqabi | Shaakala jalqabi |
+| `Onboarding.saving` | Saving… | Olkaa’aa jira… | Olkaa’aa jira… |
+| `Onboarding.startLearn` | Follow the learning path | Daandii barnootaa hordofi | Daandii barnootaa hordofi |
+| `Onboarding.startLearnHint` | Build useful English one short lesson at a time. | Barnoota gabaabaadhaan Afaan Ingilizii si fayyadu baradhu. | Barnoota gabaabaadhaan Afaan Ingilizii si fayyadu baradhu. |
+| `Onboarding.firstUnit` | First unit | Kutaa jalqabaa | Kutaa jalqabaa |
+| `Onboarding.startSpeak` | Have a conversation | Marii jalqabi | Marii jalqabi |
+| `Onboarding.startSpeakHint` | Talk out loud with the coach at your own pace. | Saffisa siif mijatuun leenjisaa wajjin haasa’i. | Saffisa siif mijatuun leenjisaa wajjin haasa’i. |
+| `Onboarding.goals.travel` | Travel | Imala | Imala |
+| `Onboarding.goals.career_growth` | Career growth | Guddina hojii | Guddina hojii |
+| `Onboarding.goalDetails.job_interview` | Talk about your experience and strengths. | Waa’ee muuxannoofi dandeettii keetii dubbadhu. | Waa’ee muuxannoofi dandeettii keetii dubbadhu. |
+| `Onboarding.goalDetails.workplace` | Speak up in meetings and with coworkers. | Walgahii irrattiifi hiriyoota hojii wajjin dubbadhu. | Walgahii irrattiifi hiriyoota hojii wajjin dubbadhu. |
+| `Onboarding.goalDetails.university` | Join class discussions and talk about assignments. | Marii daree irratti hirmaadhu, waa’ee hojii manaa haasa’i. | Marii daree irratti hirmaadhu, waa’ee hojii manaa haasa’i. |
+| `Onboarding.goalDetails.daily_conversation` | Handle everyday conversations with confidence. | Haasaa guyyaa guyyaa keessatti ofitti amanamummaan dubbadhu. | Haasaa guyyaa guyyaa keessatti ofitti amanamummaan dubbadhu. |
+| `Onboarding.goalDetails.travel` | Ask for directions and handle common travel situations. | Kallattii gaafadhu, haala yeroo imalaa shaakali. | Kallattii gaafadhu, haala yeroo imalaa shaakali. |
+| `Onboarding.goalDetails.career_growth` | Present ideas, meet people and grow your network. | Yaada kee dhiheessi, namoota haaraa wajjin wal bari. | Yaada kee dhiheessi, namoota haaraa wajjin wal bari. |
+| `Onboarding.levels.a1` | A1 · Elementary | A1 · Bu’uuraa | A1 · Bu’uuraa |
+| `Onboarding.levels.b2` | B2 or higher | B2 yookaan isaa ol | B2 yookaan isaa ol |
+| `Onboarding.levels.unsure` | I’m not sure | Sirriitti hin beeku | Sirriitti hin beeku |
+| `Onboarding.levelDetails.beginner` | I know a few words and phrases. | Jechootaafi gaaleewwan muraasa nan beeka. | Jechootaafi gaaleewwan muraasa nan beeka. |
+| `Onboarding.levelDetails.a1` | I can introduce myself and ask simple questions. | Of beeksisuufi gaaffii salphaa gaafachuu nan danda’a. | Of beeksisuufi gaaffii salphaa gaafachuu nan danda’a. |
+| `Onboarding.levelDetails.a2` | I can manage short conversations about familiar topics. | Mata duree ani beeku irratti gabaabinaan haasa’uu nan danda’a. | Mata duree ani beeku irratti gabaabinaan haasa’uu nan danda’a. |
+| `Onboarding.levelDetails.b1` | I can explain my ideas in familiar situations. | Haala ani beeku keessatti yaada koo ibsuu nan danda’a. | Haala ani beeku keessatti yaada koo ibsuu nan danda’a. |
+| `Onboarding.levelDetails.b2` | I can discuss more complex topics and want to sound more natural. | Mata dureewwan walxaxaa irratti mari’achuu nan danda’a, caalaatti akka uumamaatti dubbachuu barbaada. | Mata dureewwan walxaxaa irratti mari’achuu nan danda’a, caalaatti akka uumamaatti dubbachuu barbaada. |
+| `Onboarding.levelDetails.unsure` | I want to start with an easy conversation. | Haasaa salphaadhaan jalqabuu barbaada. | Haasaa salphaadhaan jalqabuu barbaada. |
+| `Progress.xpValue` | {xp} XP | {xp} XP | quality: high |
+| `Progress.streakLabel` | Day streak | Guyyoota walitti fufan | quality: high |
+| `Progress.lessonsLabel` | Lessons finished | Barnoonni dhumaniiru | quality: high |
+| `Progress.dailyGoalLabel` | Daily goal | Galma guyyaa | quality: high |
+| `Progress.dailyGoalMinutes` | {count} minutes | daqiiqaa {count} | quality: high |

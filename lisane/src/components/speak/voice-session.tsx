@@ -4,7 +4,8 @@ import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { Mascot } from "@/components/mascot";
 import { Button } from "@/components/ui/button";
-import { fontClassNames, getLanguage, isLanguageCode, usesAddisSpeech } from "@/config/languages";
+import { usesAddisSpeech } from "@/config/languages";
+import { TranscriptPanel } from "./transcript-panel";
 import type { SpeakScenarioId } from "@/config/scenarios";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
@@ -98,12 +99,6 @@ const statusLabelKey = {
   failed: "statusFailed",
 } as const;
 
-const correctionTypeKey = {
-  GRAMMAR: "typeGrammar",
-  VOCABULARY: "typeVocabulary",
-  PHRASING: "typePhrasing",
-} as const;
-
 function VoiceSession() {
   const t = useTranslations("Speak");
   const [scenario, setScenario] = useState<SpeakScenarioId | null>(null);
@@ -125,7 +120,6 @@ function VoiceSession() {
   const [advisoryHint, setAdvisoryHint] = useState<string | null>(null);
   const [liveSessionId, setLiveSessionId] = useState<string | null>(null);
   const [transcript, setTranscript] = useState<TranscriptItem[]>([]);
-  const [latestCorrection, setLatestCorrection] = useState<LiveCorrection | null>(null);
   const [supportLanguage, setSupportLanguage] = useState("en");
   const speakHelp = useSpeakHelp();
 
@@ -157,7 +151,6 @@ function VoiceSession() {
   const silentHintShownRef = useRef(false);
   const seenCorrectionIdsRef = useRef(new Set<string>());
   const transcriptRef = useRef<TranscriptItem[]>([]);
-  const transcriptScrollRef = useRef<HTMLDivElement | null>(null);
   const turnModeRef = useRef<LiveTurnMode>("auto");
   const manualActivityOpenRef = useRef(false);
   const hasSpokenThisManualTurnRef = useRef(false);
@@ -176,12 +169,6 @@ function VoiceSession() {
 
   useEffect(() => {
     transcriptRef.current = transcript;
-    const el = transcriptScrollRef.current;
-    if (el) {
-      requestAnimationFrame(() => {
-        el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
-      });
-    }
   }, [transcript]);
 
   function updateConnectionStatus(next: "IDLE" | LiveConnectionStatus) {
@@ -981,9 +968,6 @@ function VoiceSession() {
         }
 
         if (event.type === "transcript") {
-          if (event.speaker === "USER" && event.final) {
-            setLatestCorrection(null);
-          }
           if (event.final) {
             debugVoice("transcript.finalized", { sessionId, speaker: event.speaker, textLength: event.text.length });
           }
@@ -1032,7 +1016,6 @@ function VoiceSession() {
           seenCorrectionIdsRef.current.add(event.correction.id);
           debugVoice("correction.received", { sessionId, correctionId: event.correction.id });
           attachCorrection(event.correction, event.turnId);
-          setLatestCorrection(event.correction);
         }
       } catch {
         debugVoice("sse.message_parse_error", { sessionId });
@@ -1099,7 +1082,6 @@ function VoiceSession() {
       const saved = loadTranscriptForResume();
       setTranscript(saved ?? []);
       clearTranscriptForResume();
-      setLatestCorrection(null);
       seenCorrectionIdsRef.current.clear();
       setManualActivityOpen(false);
       setIsMicReady(false);
@@ -1222,7 +1204,6 @@ function VoiceSession() {
   function handlePractiseAgain() {
     setError(null);
     setAdvisoryHint(null);
-    setLatestCorrection(null);
     updateConnectionStatus("IDLE");
     updateVoiceStatus("idle");
   }
@@ -1283,7 +1264,6 @@ function VoiceSession() {
   }, []);
 
   const isActive = Boolean(liveSessionId);
-  const latestUserTurn = transcript.findLast((item) => item.speaker === "USER" && item.final);
   const statusLabel = t(statusLabelKey[voiceStatus]);
   const voiceModeTip =
     turnMode === "manual"
@@ -1371,7 +1351,7 @@ function VoiceSession() {
           </Button>
         </section>
       ) : (
-        <section className="flex flex-col items-center gap-5 rounded-16 border border-line bg-card p-4">
+        <section className="flex flex-col items-center gap-3 rounded-16 border border-line bg-card p-3 sm:gap-4 sm:p-4">
           <header className="flex w-full flex-wrap items-center justify-between gap-2 border-b border-line pb-3">
             <span className="flex items-center gap-2 text-caption text-fg-muted">
               <span
@@ -1386,50 +1366,30 @@ function VoiceSession() {
             <span className="rounded-8 border border-line px-2 py-1 text-caption text-fg-muted">{situation}</span>
           </header>
 
-          <div className="relative flex size-44 items-center justify-center">
-            {live ? <div aria-hidden className="absolute inset-0 rounded-full bg-field motion-safe:animate-pulse" /> : null}
-            <div
-              className={cn(
-                "relative flex size-32 items-center justify-center rounded-full border-2 bg-canvas",
-                live ? "border-action" : "border-line",
-              )}
-            >
-              <Mascot className="size-24" />
+          <div className="flex w-full items-center gap-3 rounded-12 border border-line bg-canvas p-3">
+            <div className={cn("flex size-12 shrink-0 items-center justify-center rounded-full border", live ? "border-action" : "border-line")}>
+              <Mascot className="size-9" />
+            </div>
+            <div className="min-w-0 flex-1" aria-live="polite">
+              <p className="text-label font-semibold">{statusLabel}</p>
+              <p className="text-caption text-fg-muted">{voiceModeTip}</p>
+            </div>
+            <div aria-hidden className="flex h-5 shrink-0 items-center gap-1">
+              {Array.from({ length: 4 }, (_, index) => (
+                <span
+                  key={index}
+                  className={cn(
+                    "h-4 w-1 origin-center rounded-full",
+                    live ? "bg-action motion-safe:animate-eq-wave" : "scale-y-[0.3] bg-line",
+                  )}
+                  style={live ? { animationDelay: `${index * 125}ms` } : undefined}
+                />
+              ))}
             </div>
           </div>
 
-          <div aria-hidden className="flex h-8 items-center justify-center gap-2">
-            {Array.from({ length: 6 }, (_, i) => (
-              <span
-                key={i}
-                className={cn(
-                  "h-7 w-1.5 origin-center rounded-full",
-                  live ? "bg-action motion-safe:animate-eq-wave" : "scale-y-[0.3] bg-line",
-                )}
-                style={live ? { animationDelay: `${i * 150}ms` } : undefined}
-              />
-            ))}
-          </div>
-
-          <div className="flex flex-col items-center gap-1 text-center" aria-live="polite">
-            <p className="text-heading font-semibold">{statusLabel}</p>
-            <p className="max-w-sm text-caption text-fg-muted">{voiceModeTip}</p>
-          </div>
-
-          {transcript.some((item) => item.final) ? (
-            <div className="flex w-full flex-col gap-2 rounded-12 border border-line bg-field p-3">
-              {transcript
-                .filter((item) => item.final)
-                .slice(-3)
-                .map((turn) => (
-                  <p key={turn.id} className="flex gap-2 text-label">
-                    <span className="w-12 shrink-0 text-caption text-fg-muted">
-                      {turn.speaker === "USER" ? t("you") : t("coach")}
-                    </span>
-                    <span>{turn.text}</span>
-                  </p>
-                ))}
-            </div>
+          {transcript.length > 0 || isTranscriptOpen ? (
+            <TranscriptPanel items={transcript} expanded={isTranscriptOpen} />
           ) : null}
 
           {usesAddisSpeech(supportLanguage) ? (
@@ -1474,7 +1434,7 @@ function VoiceSession() {
           <div className="flex w-full flex-wrap items-center justify-center gap-3 border-t border-line pt-4">
             <Button
               hierarchy="secondary"
-              aria-pressed={isTranscriptOpen}
+              aria-expanded={isTranscriptOpen}
               onClick={() => setIsTranscriptOpen((open) => !open)}
             >
               {isTranscriptOpen ? t("hideHistory") : t("showHistory")}
@@ -1499,30 +1459,12 @@ function VoiceSession() {
         </section>
       )}
 
-      {(isActive && isTranscriptOpen) || (!isActive && transcript.length > 0) ? (
-        <section className="flex flex-col gap-3 rounded-16 border border-line bg-card p-4">
-          <div>
-            <h2 className="text-label font-semibold">{t("transcriptTitle")}</h2>
-            <p className="text-caption text-fg-muted">{t("transcriptSubtitle")}</p>
-          </div>
-          <div ref={transcriptScrollRef} className="flex max-h-96 flex-col gap-3 overflow-y-auto">
-            {transcript.length === 0 ? (
-              <p className="py-6 text-center text-label text-fg-muted">{t("startSayingHello")}</p>
-            ) : (
-              transcript.map((item) => <TranscriptBubble key={item.id} item={item} />)
-            )}
-          </div>
-        </section>
-      ) : null}
+      {!isActive && transcript.length > 0 ? <TranscriptPanel items={transcript} expanded /> : null}
 
       {advisoryHint ? (
         <p role="status" className="rounded-12 border border-line bg-field p-3 text-label text-fg-muted">
           {advisoryHint}
         </p>
-      ) : null}
-
-      {latestCorrection && latestUserTurn?.correction?.id === latestCorrection.id ? (
-        <LatestCorrection correction={latestCorrection} onDismiss={() => setLatestCorrection(null)} />
       ) : null}
 
       {showPostSessionPanel ? (
@@ -1564,70 +1506,6 @@ function VoiceSession() {
   );
 }
 
-function TranscriptBubble({ item }: { item: TranscriptItem }) {
-  const t = useTranslations("Speak");
-  return (
-    <div className={cn("flex w-full", item.speaker === "USER" ? "justify-end" : "justify-start")}>
-      <div
-        className={cn(
-          "max-w-[85%] rounded-16 border border-line px-4 py-3 text-body",
-          item.speaker === "USER" ? "bg-field" : "bg-raised",
-          !item.final && "opacity-80",
-        )}
-      >
-        <span className="mb-1 block text-caption text-fg-muted">
-          {item.speaker === "USER" ? t("you") : t("coach")}
-        </span>
-        <p className="whitespace-pre-wrap">{item.text}</p>
-        {item.warning ? <p className="mt-1 text-caption text-fg-muted">{t("transcriptUncertain")}</p> : null}
-        {item.correction ? <CorrectionNote correction={item.correction} /> : null}
-      </div>
-    </div>
-  );
-}
-
-function CorrectionNote({ correction }: { correction: LiveCorrection }) {
-  const t = useTranslations("Speak");
-  const language = isLanguageCode(correction.supportLanguage) ? getLanguage(correction.supportLanguage) : null;
-  return (
-    <div className="mt-3 border-t border-line pt-3">
-      <p className="text-caption text-fg-muted">
-        {t("tryThis")} · {t(correctionTypeKey[correction.correctionType])}
-      </p>
-      <p className="mt-1">{correction.corrected}</p>
-      <p lang={language?.code} className={cn("mt-2 text-label text-fg-muted", language && fontClassNames[language.font])}>
-        {correction.explanation}
-      </p>
-    </div>
-  );
-}
-
-function LatestCorrection({ correction, onDismiss }: { correction: LiveCorrection; onDismiss: () => void }) {
-  const t = useTranslations("Speak");
-  const language = isLanguageCode(correction.supportLanguage) ? getLanguage(correction.supportLanguage) : null;
-  return (
-    <section className="flex flex-col gap-2 rounded-16 border border-line bg-card p-4">
-      <div className="flex items-start justify-between gap-3">
-        <p className="text-caption text-fg-muted">
-          {t("tryThis")} · {t(correctionTypeKey[correction.correctionType])}
-        </p>
-        <button
-          type="button"
-          onClick={onDismiss}
-          className="-m-2 flex size-10 items-center justify-center rounded-full text-fg-muted focus-visible:outline-2 focus-visible:outline-fg"
-        >
-          <CloseIcon />
-          <span className="sr-only">{t("dismissNote")}</span>
-        </button>
-      </div>
-      <p className="text-body">{correction.corrected}</p>
-      <p lang={language?.code} className={cn("text-label text-fg-muted", language && fontClassNames[language.font])}>
-        {correction.explanation}
-      </p>
-    </section>
-  );
-}
-
 function MicIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
@@ -1644,14 +1522,6 @@ function HangUpIcon() {
         d="M3 14.5c5-4.7 13-4.7 18 0l-2.4 2.4-3.4-1.6v-2.5a11 11 0 0 0-6.4 0v2.5l-3.4 1.6L3 14.5Z"
         strokeLinejoin="round"
       />
-    </svg>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
-      <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
     </svg>
   );
 }

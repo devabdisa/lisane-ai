@@ -23,6 +23,7 @@ model User {
   profile       UserProfile?
   speakSessions SpeakSession[]
   levelProgress LevelProgress[]
+  reward        LearnerReward?
 
   @@map("user")
 }
@@ -141,4 +142,14 @@ model LevelProgress {
   @@id([userId, unitId, levelId])
   @@index([unitId, levelId])
   @@map("level_progress")
+}
+
+model LearnerReward {
+  userId  String  @id
+  xp      Int     @default(0)
+  streak  Int     @default(0)
+  lastDay String?
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("learner_reward")
 }

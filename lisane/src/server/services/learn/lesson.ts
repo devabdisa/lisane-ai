@@ -9,6 +9,7 @@ import {
   type LessonDTO,
 } from "@/lib/lesson";
 import { buildLearningPath, type LearningPathDTO } from "@/lib/learning-path";
+import { activeStreak, describeReward, lessonXp, nextStreak, practiceDay, rewardSnapshot } from "@/lib/lesson-session";
 import { curriculumUnitSchema, type CurriculumUnit } from "@/schemas/curriculum";
 import { getPrisma } from "@/server/db";
 
@@ -30,8 +31,7 @@ function contentRecord(content: Prisma.JsonValue) {
 
 async function loadLearnerCurriculum(userId: string) {
   const db = getPrisma();
-  const [profile, rows] = await db.$transaction(
-    [
+  const [profile, rows] = await Promise.all([
       db.userProfile.findUnique({ where: { userId }, select: { supportLanguage: true } }),
       db.curriculumUnit.findMany({
         where: { active: true },
@@ -54,9 +54,7 @@ async function loadLearnerCurriculum(userId: string) {
           },
         },
       }),
-    ],
-    { isolationLevel: "RepeatableRead" },
-  );
+  ]);
 
   const parsed = new Map<string, CurriculumUnit>();
   const units = rows.flatMap((row) => {
@@ -167,10 +165,59 @@ export async function completeLessonLevel(userId: string, unitId: string, levelI
   if (!hasCompletedLesson(opened.unit, opened.level, opened.path.supportLanguage, attempts)) {
     return { status: "incomplete" as const };
   }
-  await getPrisma().levelProgress.upsert({
-    where: { userId_unitId_levelId: { userId, unitId, levelId } },
-    create: { userId, unitId, levelId },
-    update: {},
-  });
-  return { status: "completed" as const };
+
+  const reward = await getPrisma().$transaction(async (tx) => {
+    // Serialize a learner's completions so simultaneous requests cannot award XP twice or overwrite a streak.
+    await tx.$queryRaw`SELECT "id" FROM "user" WHERE "id" = ${userId} FOR NO KEY UPDATE`;
+    const where = { userId_unitId_levelId: { userId, unitId, levelId } };
+    const existing = await tx.levelProgress.findUnique({ where, select: { userId: true } });
+    await tx.levelProgress.upsert({ where, create: { userId, unitId, levelId }, update: {} });
+    const stored = await tx.learnerReward.findUnique({ where: { userId } });
+    const today = practiceDay(new Date());
+    const previous = { streak: stored?.streak ?? 0, lastDay: stored?.lastDay ?? null };
+    const before = { xp: stored?.xp ?? 0, streak: activeStreak(previous, today) };
+    if (!attempts.length) return describeReward(before, before, 0);
+
+    const xpGained = existing ? 0 : xpForAttempts(opened.unit, opened.level, opened.path.supportLanguage, attempts);
+    const after = { xp: before.xp + xpGained, streak: nextStreak(previous, today) };
+    await tx.learnerReward.upsert({
+      where: { userId },
+      create: { userId, ...after, lastDay: today },
+      update: { ...after, lastDay: today },
+    });
+    return describeReward(before, after, xpGained);
+  }, { isolationLevel: "ReadCommitted" });
+  return { status: "completed" as const, reward };
+}
+
+function xpForAttempts(unit: CurriculumUnit, level: CurriculumUnit["levels"][number], language: string, attempts: LessonAttempt[]) {
+  const first = new Map<string, boolean>();
+  const last = new Map<string, boolean>();
+  for (const attempt of attempts) {
+    const grade = gradeLessonAttempt(unit, level, language, attempt);
+    if (grade.status !== "graded") continue;
+    if (!first.has(attempt.exerciseId)) first.set(attempt.exerciseId, grade.correct);
+    last.set(attempt.exerciseId, grade.correct);
+  }
+  return lessonXp([...last.entries()].map(([id, correct]) => ({ correct, firstCorrect: first.get(id) === true })));
+}
+
+export async function getLearnerReward(userId: string) {
+  const stored = await getPrisma().learnerReward.findUnique({ where: { userId } });
+  return rewardSnapshot(stored?.xp ?? 0, stored ? activeStreak(stored, practiceDay(new Date())) : 0);
+}
+
+export async function getProgressSummary(userId: string) {
+  const db = getPrisma();
+  const today = practiceDay(new Date());
+  const [stored, lessonsDone, profile] = await Promise.all([
+    db.learnerReward.findUnique({ where: { userId } }),
+    db.levelProgress.count({ where: { userId } }),
+    db.userProfile.findUnique({ where: { userId }, select: { dailyGoalMinutes: true } }),
+  ]);
+  return {
+    ...rewardSnapshot(stored?.xp ?? 0, stored ? activeStreak(stored, today) : 0),
+    lessonsDone,
+    dailyGoalMinutes: profile?.dailyGoalMinutes ?? null,
+  };
 }

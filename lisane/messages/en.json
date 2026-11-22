@@ -71,6 +71,14 @@
     "leave": "Leave",
     "completeTitle": "Step complete",
     "completeBody": "The next step on your path is open.",
+    "inARow": "{count} in a row",
+    "xpGain": "+{xp} XP",
+    "streakCount": "{count}-day streak",
+    "gemLabel": "Gem progress",
+    "gemAmount": "{into} of {goal} toward the next gem",
+    "gemCount": "Gems: {count}",
+    "xpTotal": "{count, number} XP",
+    "gemFound": "You found a gem.",
     "backToPath": "Back to the path",
     "gateBody": "This step is not a question set. You can move on, and practise the conversation in Speak.",
     "moveOn": "Move on",
@@ -161,7 +169,12 @@
   },
   "Progress": {
     "title": "Your progress",
-    "description": "Your minutes spoken, finished lessons and daily streak will be here."
+    "description": "Your streak, gems, and finished lessons.",
+    "xpValue": "{xp} XP",
+    "streakLabel": "Day streak",
+    "lessonsLabel": "Lessons finished",
+    "dailyGoalLabel": "Daily goal",
+    "dailyGoalMinutes": "{count} minutes"
   },
   "Profile": {
     "title": "Profile",
@@ -221,12 +234,48 @@
       "job_interview": "Job interview",
       "workplace": "Workplace",
       "university": "University",
-      "daily_conversation": "Daily conversation"
+      "daily_conversation": "Daily conversation",
+      "travel": "Travel",
+      "career_growth": "Career growth"
     },
     "levels": {
       "beginner": "Beginner",
       "a2": "A2",
-      "b1": "B1"
+      "b1": "B1",
+      "a1": "A1 · Elementary",
+      "b2": "B2 or higher",
+      "unsure": "I’m not sure"
+    },
+    "setupProgress": "Setup progress",
+    "languageHint": "Use this language for explanations and hints.",
+    "goalHint": "Choose the situation you want to feel more confident in.",
+    "levelHint": "Pick the description that sounds like you.",
+    "dailyHint": "Choose a daily practice goal that fits your routine.",
+    "startTitle": "Where do you want to start?",
+    "startHint": "Choose what to open when you finish setup.",
+    "englishOnlyHint": "Use English for hints and explanations.",
+    "finish": "Start practising",
+    "saving": "Saving…",
+    "startLearn": "Follow the learning path",
+    "startLearnHint": "Build useful English one short lesson at a time.",
+    "firstUnit": "First unit",
+    "startSpeak": "Have a conversation",
+    "startSpeakHint": "Talk out loud with the coach at your own pace.",
+    "goalDetails": {
+      "job_interview": "Talk about your experience and strengths.",
+      "workplace": "Speak up in meetings and with coworkers.",
+      "university": "Join class discussions and talk about assignments.",
+      "daily_conversation": "Handle everyday conversations with confidence.",
+      "travel": "Ask for directions and handle common travel situations.",
+      "career_growth": "Present ideas, meet people and grow your network."
+    },
+    "levelDetails": {
+      "beginner": "I know a few words and phrases.",
+      "a1": "I can introduce myself and ask simple questions.",
+      "a2": "I can manage short conversations about familiar topics.",
+      "b1": "I can explain my ideas in familiar situations.",
+      "b2": "I can discuss more complex topics and want to sound more natural.",
+      "unsure": "I want to start with an easy conversation."
     }
   }
 }

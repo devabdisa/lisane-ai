@@ -5,6 +5,7 @@ import { useSyncExternalStore } from "react";
 import { Link } from "@/i18n/navigation";
 import { fontClassNames, getLanguage, isLanguageCode } from "@/config/languages";
 import { cn } from "@/lib/cn";
+import { TranscriptBubble } from "./transcript-panel";
 import { emptyReview, loadReview, subscribeReview } from "./transcript-store";
 
 function SessionReview() {
@@ -18,20 +19,7 @@ function SessionReview() {
         <>
           <p className="text-body text-fg-muted">{review.situation}</p>
           <div className="flex flex-col gap-3">
-            {review.items.map((item) => (
-              <div
-                key={item.id}
-                className={cn(
-                  "max-w-[85%] rounded-16 border border-line px-4 py-3 text-body",
-                  item.speaker === "USER" ? "self-end bg-field" : "self-start bg-card",
-                )}
-              >
-                <span className="mb-1 block text-caption text-fg-muted">
-                  {item.speaker === "USER" ? t("you") : t("coach")}
-                </span>
-                <p>{item.text}</p>
-              </div>
-            ))}
+            {review.items.map((item) => <TranscriptBubble key={item.id} item={item} showCorrection={false} />)}
           </div>
           {notes.length > 0 ? (
             <section className="flex flex-col gap-3">

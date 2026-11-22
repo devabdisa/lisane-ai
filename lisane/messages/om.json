@@ -71,6 +71,14 @@
     "leave": "Dhiisi",
     "completeTitle": "Tarkaanfichi xumurameera",
     "completeBody": "Tarkaanfiin itti aanu karaa kee irratti banaadha.",
+    "inARow": "{count} walitti aansuun",
+    "xpGain": "+{xp} XP",
+    "streakCount": "Walitti aansuun guyyaa {count}",
+    "gemLabel": "Adeemsa Gem",
+    "gemAmount": "{into} {goal} keessaa gara faaya itti aanuutti",
+    "gemCount": "Faaya: {count}",
+    "xpTotal": "XP {count, number}",
+    "gemFound": "Waan gatii guddaa qabu argatte.",
     "backToPath": "Gara daandiitti deebi'uu",
     "gateBody": "Tarkaanfiin kun garee gaaffii miti. Itti fuftee Speak keessatti marii shaakaluu dandeessa.",
     "moveOn": "Itti fufi",
@@ -161,7 +169,12 @@
   },
   "Progress": {
     "title": "Adeemsa kee",
-    "description": "Daqiiqawwan ati dubbatte, barumsa xumurtee fi itti fufiinsi guyyaa guyyaa keetii asitti argamu."
+    "description": "Daqiiqawwan ati dubbatte, barumsa xumurtee fi itti fufiinsi guyyaa guyyaa keetii asitti argamu.",
+    "xpValue": "{xp} XP",
+    "streakLabel": "Guyyoota walitti fufan",
+    "lessonsLabel": "Barnoonni dhumaniiru",
+    "dailyGoalLabel": "Galma guyyaa",
+    "dailyGoalMinutes": "daqiiqaa {count}"
   },
   "Profile": {
     "title": "Piroofayilii",
@@ -221,12 +234,48 @@
       "job_interview": "Gaaffii fi deebii hojii",
       "workplace": "Bakka hojii",
       "university": "Yuunivarsiitii",
-      "daily_conversation": "Haasawa guyyaa guyyaa"
+      "daily_conversation": "Haasawa guyyaa guyyaa",
+      "travel": "Imala",
+      "career_growth": "Guddina hojii"
     },
     "levels": {
       "beginner": "Jalqabaa",
       "a2": "A2",
-      "b1": "B1"
+      "b1": "B1",
+      "a1": "A1 · Bu’uuraa",
+      "b2": "B2 yookaan isaa ol",
+      "unsure": "Sirriitti hin beeku"
+    },
+    "setupProgress": "Adeemsa qindaa’inaa",
+    "languageHint": "Ibsaafi akeeka afaan kanaan argatta.",
+    "goalHint": "Haala ofitti amanamummaan dubbachuu barbaaddu filadhu.",
+    "levelHint": "Ibsa sadarkaa kee wajjin wal simu filadhu.",
+    "dailyHint": "Yeroo shaakalaa hojii guyyaa kee wajjin wal simu filadhu.",
+    "startTitle": "Eessaa jalqabuu barbaadda?",
+    "startHint": "Qindaa’ina erga xumurtee booda waan banuu barbaaddu filadhu.",
+    "englishOnlyHint": "Akeekaafi ibsa Afaan Ingiliziitiin argadhu.",
+    "finish": "Shaakala jalqabi",
+    "saving": "Olkaa’aa jira…",
+    "startLearn": "Daandii barnootaa hordofi",
+    "startLearnHint": "Barnoota gabaabaadhaan Afaan Ingilizii si fayyadu baradhu.",
+    "firstUnit": "Kutaa jalqabaa",
+    "startSpeak": "Marii jalqabi",
+    "startSpeakHint": "Saffisa siif mijatuun leenjisaa wajjin haasa’i.",
+    "goalDetails": {
+      "job_interview": "Waa’ee muuxannoofi dandeettii keetii dubbadhu.",
+      "workplace": "Walgahii irrattiifi hiriyoota hojii wajjin dubbadhu.",
+      "university": "Marii daree irratti hirmaadhu, waa’ee hojii manaa haasa’i.",
+      "daily_conversation": "Haasaa guyyaa guyyaa keessatti ofitti amanamummaan dubbadhu.",
+      "travel": "Kallattii gaafadhu, haala yeroo imalaa shaakali.",
+      "career_growth": "Yaada kee dhiheessi, namoota haaraa wajjin wal bari."
+    },
+    "levelDetails": {
+      "beginner": "Jechootaafi gaaleewwan muraasa nan beeka.",
+      "a1": "Of beeksisuufi gaaffii salphaa gaafachuu nan danda’a.",
+      "a2": "Mata duree ani beeku irratti gabaabinaan haasa’uu nan danda’a.",
+      "b1": "Haala ani beeku keessatti yaada koo ibsuu nan danda’a.",
+      "b2": "Mata dureewwan walxaxaa irratti mari’achuu nan danda’a, caalaatti akka uumamaatti dubbachuu barbaada.",
+      "unsure": "Haasaa salphaadhaan jalqabuu barbaada."
     }
   }
 }

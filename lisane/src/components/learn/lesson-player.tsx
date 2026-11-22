@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { getPathname, Link, useRouter } from "@/i18n/navigation";
 import { fontClassNames, getLanguage, isLanguageCode } from "@/config/languages";
 import type { LessonAttempt, LessonDTO, PublicExercise } from "@/lib/lesson";
+import { applyLessonResult, startLessonSession, type LessonReward } from "@/lib/lesson-session";
+import { GemStone } from "@/components/learn/gem-stone";
 import { cn } from "@/lib/cn";
 
 const levelKey = {
@@ -34,18 +36,34 @@ function LessonPlayer({ lesson }: { lesson: LessonDTO }) {
 
 function LessonRun({ lesson }: { lesson: LessonDTO }) {
   const [attempts, setAttempts] = useState<LessonAttempt[]>([]);
-  const index = attempts.length;
-  const exercise = lesson.exercises[index];
-  if (!exercise) return <LessonComplete />;
+  const [session, setSession] = useState(() => startLessonSession(lesson.exercises));
+  const [reward, setReward] = useState<LessonReward | null>(null);
+  const current = session.queue[0];
+  if (!current) return <LessonComplete reward={reward} />;
+
+  async function onContinue(attempt: LessonAttempt, correct: boolean) {
+    const all = [...attempts, attempt];
+    const next = applyLessonResult(session, correct);
+    if (next.queue.length === 0) {
+      const saved = await saveLesson(lesson.unitId, lesson.levelId, all);
+      if (!saved) return false;
+      setReward(saved);
+    }
+    setAttempts(all);
+    setSession(next);
+    return true;
+  }
+
   return (
     <Question
-      key={exercise.id}
+      key={`${current.exercise.id}-${current.misses}`}
       lesson={lesson}
-      exercise={exercise}
-      index={index}
-      total={lesson.exercises.length}
-      onSave={(attempt) => saveLesson(lesson.unitId, lesson.levelId, [...attempts, attempt])}
-      onAdvance={(attempt) => setAttempts((current) => current.length === index ? [...current, attempt] : current)}
+      exercise={current.exercise}
+      done={attempts.length}
+      remaining={session.queue.length}
+      streak={session.streak}
+      started={attempts.length > 0}
+      onContinue={onContinue}
     />
   );
 }
@@ -53,17 +71,19 @@ function LessonRun({ lesson }: { lesson: LessonDTO }) {
 function Question({
   lesson,
   exercise,
-  index,
-  total,
-  onSave,
-  onAdvance,
+  done,
+  remaining,
+  streak,
+  started,
+  onContinue,
 }: {
   lesson: LessonDTO;
   exercise: PublicExercise;
-  index: number;
-  total: number;
-  onSave: (attempt: LessonAttempt) => Promise<boolean>;
-  onAdvance: (attempt: LessonAttempt) => void;
+  done: number;
+  remaining: number;
+  streak: number;
+  started: boolean;
+  onContinue: (attempt: LessonAttempt, correct: boolean) => Promise<boolean>;
 }) {
   const t = useTranslations("Learn");
   const router = useRouter();
@@ -73,7 +93,9 @@ function Question({
   const [feedback, setFeedback] = useState<{ correct: boolean; answer: string; answerLanguage: string } | null>(null);
   const [checking, setChecking] = useState(false);
   const [problem, setProblem] = useState(false);
-  const answered = index + (feedback ? 1 : 0);
+  const answered = done + (feedback ? 1 : 0);
+  const total = done + remaining;
+  const row = feedback?.correct ? streak + 1 : streak;
 
   function leave() {
     router.push("/learn");
@@ -105,16 +127,11 @@ function Question({
 
   async function continueForward() {
     if (!attempt || !feedback || checking) return;
-    if (index + 1 < total) {
-      onAdvance(attempt);
-      return;
-    }
     setChecking(true);
     setProblem(false);
-    const saved = await onSave(attempt);
+    const saved = await onContinue(attempt, feedback.correct);
     setChecking(false);
-    if (saved) onAdvance(attempt);
-    else setProblem(true);
+    if (!saved) setProblem(true);
   }
 
   return (
@@ -122,7 +139,7 @@ function Question({
       <header className="flex items-center gap-3 px-4 pt-[max(1rem,env(safe-area-inset-top))]">
         <button
           type="button"
-          onClick={() => (index === 0 && !feedback ? leave() : dialogRef.current?.showModal())}
+          onClick={() => (started || feedback ? dialogRef.current?.showModal() : leave())}
           className="flex size-11 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg"
         >
           <span className="sr-only">{t("quit")}</span>
@@ -134,10 +151,11 @@ function Question({
           aria-valuemin={0}
           aria-valuemax={total}
           aria-valuenow={answered}
-          aria-label={t("lessonProgress", { current: Math.min(total, index + 1), total })}
+          aria-label={t("lessonProgress", { current: Math.min(total, done + 1), total })}
         >
-          <div className="h-full rounded-full bg-action transition-[width] duration-300" style={{ width: `${(answered / total) * 100}%` }} />
+          <div className="h-full rounded-full bg-action transition-[width] duration-300" style={{ width: `${total === 0 ? 0 : (answered / total) * 100}%` }} />
         </div>
+        {row >= 2 ? <p className="shrink-0 text-caption font-semibold">{t("inARow", { count: row })}</p> : null}
       </header>
       <div className="mx-auto flex min-h-0 w-full max-w-lg flex-1 flex-col px-4 pt-6">
         <h1 className="sr-only">{lesson.kind === "lesson" ? t("lessonNumber", { number: lesson.lessonNumber }) : t(levelKey[lesson.kind])}</h1>
@@ -205,19 +223,25 @@ function Question({
   );
 }
 
-function LessonComplete() {
+function LessonComplete({ reward }: { reward: LessonReward | null }) {
   const t = useTranslations("Learn");
   const pathHref = getPathname({ href: "/learn", locale: useLocale() });
   return (
     <div className="fixed inset-0 z-30 flex flex-col items-center justify-center gap-4 bg-canvas px-6 text-center">
-      <Mascot />
-      <h1 className="text-title font-semibold">{t("completeTitle")}</h1>
-      <p className="max-w-sm text-body text-fg-muted">{t("completeBody")}</p>
-      <Button
-        width="full"
-        className="max-w-sm"
-        onClick={() => window.location.assign(pathHref)}
-      >
+      <div className="flex size-36 items-center justify-center rounded-full bg-accent-host">
+        <GemStone fill={reward?.gemEarned ? 1 : reward?.gemFill ?? 0} className="size-24" label={t("gemLabel")} />
+      </div>
+      <h1 className="text-title font-semibold">{reward?.gemEarned ? t("gemFound") : t("completeTitle")}</h1>
+      {reward ? (
+        <div className="flex flex-col gap-1">
+          <p className="text-heading font-semibold">{t("xpGain", { xp: reward.xpGained })}</p>
+          <p className="text-body text-fg-muted">{t("gemAmount", { into: reward.gemInto, goal: reward.gemGoal })}</p>
+          {reward.streak > 0 ? <p className="text-body">{t("streakCount", { count: reward.streak })}</p> : null}
+        </div>
+      ) : (
+        <p className="max-w-sm text-body text-fg-muted">{t("completeBody")}</p>
+      )}
+      <Button width="full" className="max-w-sm" onClick={() => window.location.assign(pathHref)}>
         {t("backToPath")}
       </Button>
     </div>
@@ -273,10 +297,31 @@ async function saveLesson(unitId: string, levelId: string, attempts: LessonAttem
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ attempts }),
     });
-    return response.ok;
+    if (!response.ok) return null;
+    return readReward(await response.json().catch(() => null));
   } catch {
-    return false;
+    return null;
   }
+}
+
+function readReward(value: unknown): LessonReward | null {
+  if (!value || typeof value !== "object" || !("reward" in value)) return null;
+  const reward = (value as { reward?: unknown }).reward;
+  if (!reward || typeof reward !== "object") return null;
+  const item = reward as Partial<LessonReward>;
+  if (typeof item.xpGained !== "number" || typeof item.gemFill !== "number" || typeof item.streak !== "number") return null;
+  if (typeof item.gemInto !== "number" || typeof item.gemGoal !== "number" || typeof item.gemEarned !== "boolean") return null;
+  return {
+    xpGained: item.xpGained,
+    xp: typeof item.xp === "number" ? item.xp : item.xpGained,
+    gems: typeof item.gems === "number" ? item.gems : 0,
+    gemFill: item.gemFill,
+    gemInto: item.gemInto,
+    gemGoal: item.gemGoal,
+    streak: item.streak,
+    streakGrew: item.streakGrew === true,
+    gemEarned: item.gemEarned,
+  };
 }
 
 function readGrade(value: unknown) {

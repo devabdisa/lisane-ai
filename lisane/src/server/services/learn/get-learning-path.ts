@@ -5,7 +5,7 @@ import { getPrisma } from "@/server/db";
 
 export async function getLearningPath(userId: string): Promise<LearningPathDTO> {
   const db = getPrisma();
-  const [profile, rows] = await db.$transaction([
+  const [profile, rows] = await Promise.all([
     db.userProfile.findUnique({ where: { userId }, select: { supportLanguage: true } }),
     db.curriculumUnit.findMany({
       where: { active: true },
@@ -27,7 +27,7 @@ export async function getLearningPath(userId: string): Promise<LearningPathDTO> 
         },
       },
     }),
-  ], { isolationLevel: "RepeatableRead" });
+  ]);
 
   const units = rows.flatMap(({ levels, ...content }) => {
     if (!levels.length) return [];

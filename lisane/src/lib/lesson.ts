@@ -271,21 +271,30 @@ export function hasCompletedLesson(
   if (level.kind === "speaking-roleplay") return attempts.length === 0;
 
   let exerciseIds: string[];
-  let matchingIds: string[] = [];
+  const matchingIds = new Set<string>();
   if (level.kind === "personal-practice") {
     exerciseIds = unit.phrases.length >= 3 ? unit.phrases.map((phrase) => phrase.id) : [];
   } else {
     const exercises = level.lessons.flatMap((lesson) => lesson.exercises);
     exerciseIds = exercises.map((exercise) => exercise.id);
-    matchingIds = exercises.filter((exercise) => exercise.kind === "match-pairs").map((exercise) => exercise.id);
+    for (const exercise of exercises) {
+      if (exercise.kind === "match-pairs") matchingIds.add(exercise.id);
+    }
   }
-  const remaining = new Set(exerciseIds);
-  const matching = new Set(matchingIds);
-  if (!remaining.size || attempts.length !== remaining.size) return false;
+  const expected = new Set(exerciseIds);
+  const seen = new Set<string>();
+  const retryable = new Set<string>();
+  if (!expected.size || attempts.length < expected.size || attempts.length > expected.size * 2) return false;
 
-  return attempts.every((attempt) => {
-    if (!remaining.delete(attempt.exerciseId)) return false;
+  for (const attempt of attempts) {
+    const id = attempt.exerciseId;
+    if (!expected.has(id)) return false;
+    const isRetry = seen.has(id);
+    if (isRetry && !retryable.delete(id)) return false;
     const grade = gradeLessonAttempt(unit, level, language, attempt);
-    return grade.status === "graded" && (grade.correct || !matching.has(attempt.exerciseId));
-  });
+    if (grade.status !== "graded" || (matchingIds.has(id) && !grade.correct)) return false;
+    if (!isRetry && !grade.correct) retryable.add(id);
+    seen.add(id);
+  }
+  return seen.size === expected.size;
 }
