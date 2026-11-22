@@ -1,5 +1,5 @@
 import "server-only";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { spokenSupportOpeners, type SpokenSupportLanguage } from "@/lib/spoken-support";
 import { wavToPcm16 } from "@/lib/wav-pcm";
@@ -7,10 +7,19 @@ import { wavToPcm16 } from "@/lib/wav-pcm";
 const englishFollowUp = "What did you want to ask me?";
 const clips = new Map<SpokenSupportLanguage | "en", { mimeType: string; data: string } | null>();
 
+function clipFile(language: SpokenSupportLanguage | "en") {
+  const name = `language-${language}.wav`;
+  const candidates = [
+    join(process.cwd(), "public", "speak", name),
+    join(process.cwd(), "lisane", "public", "speak", name),
+  ];
+  return candidates.find((path) => existsSync(path)) ?? candidates[0];
+}
+
 function loadClip(language: SpokenSupportLanguage | "en") {
   if (!clips.has(language)) {
     try {
-      const wav = readFileSync(join(process.cwd(), "public", "speak", `language-${language}.wav`));
+      const wav = readFileSync(clipFile(language));
       const pcm = wavToPcm16(wav);
       if (!pcm.length) throw new Error("Empty support clip");
       clips.set(language, {

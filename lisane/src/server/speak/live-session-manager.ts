@@ -17,7 +17,7 @@ import {
   mergeStreamingTranscript,
   normalizeTranscriptText,
 } from "@/lib/live-transcript";
-import { requestedSpokenSupport } from "@/lib/spoken-support";
+import { requestedSpokenSupport, type SpokenSupportLanguage } from "@/lib/spoken-support";
 import { countAudiblePcm16Windows, MIN_AUDIBLE_WINDOWS } from "@/lib/voice-evidence";
 import { buildLiveSystemInstruction, type LiveProfileContext } from "@/prompts/speak-live";
 import {
@@ -104,6 +104,9 @@ type LiveSessionState = {
   stopRequested: boolean;
   pendingUserTranscript: string | null;
   latestAudibleTranscript: string;
+  requestedSupportLanguage: SpokenSupportLanguage | null;
+  supportOpeningText: string | null;
+  supportContextSent: boolean;
   assistantSupportReplied: boolean;
   pendingAssistantTranscript: string | null;
   pendingUserFinalTimer: ReturnType<typeof setTimeout> | null;
@@ -296,6 +299,9 @@ export class LiveSessionManager {
       stopRequested: false,
       pendingUserTranscript: null,
       latestAudibleTranscript: "",
+      requestedSupportLanguage: null,
+      supportOpeningText: null,
+      supportContextSent: false,
       assistantSupportReplied: false,
       pendingAssistantTranscript: null,
       pendingUserFinalTimer: null,
@@ -617,25 +623,57 @@ export class LiveSessionManager {
     state.assistantTurnInProgress = true;
     state.turnCounter += 1;
     state.currentAssistantTurnId = `t-${state.id}-${state.turnCounter}`;
-    const language = requestedSpokenSupport(state.latestAudibleTranscript);
-    const opening = language ? supportOpener(language) : null;
-    if (opening) {
-      state.assistantSupportReplied = true;
-      this.clearPendingAssistantFinalTimer(state);
-      state.pendingAssistantTranscript = null;
-      for (const audio of opening.audio) this.publish(state, { type: "assistant_audio", ...audio });
-      this.publish(state, {
-        type: "transcript",
-        speaker: "AI",
-        text: opening.text,
-        final: true,
-        turnId: state.currentAssistantTurnId,
-        source: "assistant_text",
-      });
-      this.finalizeAssistantTranscript(state.id, opening.text);
-      logInfo("voice.support_opening", { liveSessionId: state.id, language });
-    }
+    const language = state.requestedSupportLanguage ?? requestedSpokenSupport(state.latestAudibleTranscript);
+    if (language) this.playSupportOpening(state, language, false);
     return true;
+  }
+
+  // The prepared reply replaces Gemini for this turn. A late transcript still
+  // cuts off a refusal that has already started playing.
+  private playSupportOpening(state: LiveSessionState, language: SpokenSupportLanguage, replace: boolean) {
+    if (state.assistantSupportReplied) return;
+    const opening = supportOpener(language);
+    if (!opening) {
+      logError("voice.support_opening_unavailable", { liveSessionId: state.id, language });
+      return;
+    }
+
+    state.requestedSupportLanguage = language;
+    state.supportOpeningText = opening.text;
+    state.assistantSupportReplied = true;
+    this.clearPendingAssistantFinalTimer(state);
+    state.pendingAssistantTranscript = null;
+    if (!state.currentAssistantTurnId) {
+      state.turnCounter += 1;
+      state.currentAssistantTurnId = `t-${state.id}-${state.turnCounter}`;
+    }
+    if (replace) this.publish(state, { type: "assistant_playback_reset" });
+    for (const audio of opening.audio) this.publish(state, { type: "assistant_audio", ...audio });
+    this.publish(state, {
+      type: "transcript",
+      speaker: "AI",
+      text: opening.text,
+      final: true,
+      turnId: state.currentAssistantTurnId,
+      source: "assistant_text",
+    });
+    this.finalizeAssistantTranscript(state.id, opening.text);
+    logInfo("voice.support_opening", { liveSessionId: state.id, language, replace });
+  }
+
+  private rememberSpokenSupport(state: LiveSessionState) {
+    const text = state.supportOpeningText;
+    if (!text || !state.connection) return;
+    try {
+      // Gemini generated its own reply for this turn. Leave the spoken line
+      // as the reply it remembers, so the next turn continues the mix.
+      state.connection.sendClientContent({
+        turns: [{ role: "model", parts: [{ text }] }],
+        turnComplete: false,
+      });
+    } catch (error) {
+      logError("voice.support_context_failed", { liveSessionId: state.id, message: toErrorMessage(error) });
+    }
   }
 
   private markAssistantTurnComplete(state: LiveSessionState) {
@@ -644,6 +682,9 @@ export class LiveSessionManager {
     state.audibleInputWindows = 0;
     state.userTranscriptClosed = false;
     state.latestAudibleTranscript = "";
+    state.requestedSupportLanguage = null;
+    state.supportOpeningText = null;
+    state.supportContextSent = false;
     state.assistantSupportReplied = false;
     state.currentUserTurnId = null;
   }
@@ -686,6 +727,11 @@ export class LiveSessionManager {
       state.pendingUserTranscript = mergeStreamingTranscript(state.pendingUserTranscript, rawUserChunk);
       const normalizedUserTranscript = normalizeTranscriptText(state.pendingUserTranscript);
       state.latestAudibleTranscript = normalizedUserTranscript;
+      const requested = requestedSpokenSupport(normalizedUserTranscript);
+      if (requested) {
+        state.requestedSupportLanguage = requested;
+        if (state.assistantTurnInProgress) this.playSupportOpening(state, requested, true);
+      }
       const isExplicitFinal = Boolean(serverContent.inputTranscription?.finished);
       this.publish(state, {
         type: "transcript",
@@ -735,7 +781,13 @@ export class LiveSessionManager {
 
     if (state.assistantSupportReplied) {
       // Gemini still sees the whole turn. The learner hears the prepared answer once.
-      if (serverContent.turnComplete) this.completeAssistantOutput(state);
+      if (serverContent.turnComplete) {
+        if (!state.supportContextSent) {
+          state.supportContextSent = true;
+          this.rememberSpokenSupport(state);
+        }
+        this.completeAssistantOutput(state);
+      }
       return;
     }
 
@@ -1189,7 +1241,12 @@ export class LiveSessionManager {
     // Realtime audio, turn markers and transcripts are not replayed to a
     // reconnecting stream: the screen keeps its own transcript, and a replay
     // would duplicate learner turns.
-    if (event.type !== "assistant_audio" && event.type !== "assistant_turn_complete" && event.type !== "transcript") {
+    if (
+      event.type !== "assistant_audio" &&
+      event.type !== "assistant_playback_reset" &&
+      event.type !== "assistant_turn_complete" &&
+      event.type !== "transcript"
+    ) {
       state.eventHistory.push(event);
       if (state.eventHistory.length > LIVE_EVENT_HISTORY_LIMIT) {
         state.eventHistory.splice(0, state.eventHistory.length - LIVE_EVENT_HISTORY_LIMIT);
@@ -1228,10 +1285,18 @@ export class LiveSessionManager {
 
 // Sessions are in-memory, so the manager must survive dev hot reloads, and the
 // deployment must keep one live conversation on one server process.
-const globalForLive = globalThis as unknown as { lisaneLiveSessionManager?: LiveSessionManager };
+const LIVE_MANAGER_VERSION = 2;
+const globalForLive = globalThis as unknown as {
+  lisaneLiveSessionManager?: LiveSessionManager;
+  lisaneLiveSessionManagerVersion?: number;
+};
 
-export const liveSessionManager = globalForLive.lisaneLiveSessionManager ?? new LiveSessionManager();
+export const liveSessionManager =
+  globalForLive.lisaneLiveSessionManagerVersion === LIVE_MANAGER_VERSION && globalForLive.lisaneLiveSessionManager
+    ? globalForLive.lisaneLiveSessionManager
+    : new LiveSessionManager();
 
 if (process.env.NODE_ENV !== "production") {
   globalForLive.lisaneLiveSessionManager = liveSessionManager;
+  globalForLive.lisaneLiveSessionManagerVersion = LIVE_MANAGER_VERSION;
 }

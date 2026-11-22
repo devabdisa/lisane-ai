@@ -90,6 +90,10 @@ const liveAssistantTurnCompleteEventSchema = z.object({
   type: z.literal("assistant_turn_complete"),
 });
 
+const liveAssistantPlaybackResetEventSchema = z.object({
+  type: z.literal("assistant_playback_reset"),
+});
+
 const liveTranscriptSkippedEventSchema = z.object({
   type: z.literal("transcript_skipped"),
   reason: z.enum(["not_english"]),
@@ -123,6 +127,7 @@ export const liveRelayEventSchema = z.discriminatedUnion("type", [
   liveAssistantAudioEventSchema,
   liveAssistantTextEventSchema,
   liveAssistantTurnCompleteEventSchema,
+  liveAssistantPlaybackResetEventSchema,
   liveTranscriptSkippedEventSchema,
   liveGoAwayEventSchema,
   liveSessionMetaEventSchema,

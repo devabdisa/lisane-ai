@@ -12,6 +12,9 @@ test("explicit voice requests select the spoken support language", () => {
   assert.equal(requestedSpokenSupport("Please talk with me in Afaan Oromoo."), "om");
   assert.equal(requestedSpokenSupport("አማርኛ መናገር ትችያለሽ?"), "am");
   assert.equal(requestedSpokenSupport("Afaan Oromoo dubbachuu dandeessaa?"), "om");
+  assert.equal(requestedSpokenSupport("Can you speak another languages like amahric?"), "am");
+  assert.equal(requestedSpokenSupport("Do you know Amharic?"), "am");
+  assert.equal(requestedSpokenSupport("Are you able to speak Afaan Oromo?"), "om");
 });
 
 test("mentioning a language or asking about a translation does not trigger an opening", () => {

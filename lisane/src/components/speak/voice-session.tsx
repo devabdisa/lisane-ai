@@ -828,6 +828,19 @@ function VoiceSession() {
     scheduleAssistantSpeakingEnd("turn_complete", ASSISTANT_TURN_COMPLETE_GRACE_MS);
   }
 
+  function replaceAssistantPlayback() {
+    for (const node of playbackNodesRef.current) {
+      try {
+        node.stop();
+      } catch {
+        // The node may already have ended.
+      }
+    }
+    playbackNodesRef.current.clear();
+    resetJitterBuffer();
+    playbackCursorRef.current = audioContextRef.current?.currentTime ?? 0;
+  }
+
   function playAssistantAudio(base64Data: string, mimeType: string) {
     if (speakHelp.recording.current) speakHelp.cancel();
     dropPendingInputAudio("assistant_audio_received");
@@ -985,6 +998,11 @@ function VoiceSession() {
 
         if (event.type === "assistant_text") {
           upsertTranscript({ speaker: "AI", text: event.text, final: true, source: "assistant_text" });
+          return;
+        }
+
+        if (event.type === "assistant_playback_reset") {
+          replaceAssistantPlayback();
           return;
         }
 
