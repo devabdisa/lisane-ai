@@ -66,6 +66,13 @@ export default async function ProfilePage() {
           </Link>
         </Card>
       ) : null}
+      <Card>
+        <CardTitle>{t("speaking")}</CardTitle>
+        <p className="text-body text-fg-muted">{t("speakingHint")}</p>
+        <Link href="/plans" className="text-label font-semibold underline-offset-2 hover:underline">
+          {t("speakingPlans")}
+        </Link>
+      </Card>
       <Suspense
         fallback={
           <Card>

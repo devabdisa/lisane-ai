@@ -161,7 +161,9 @@
     "reviewTitle": "This conversation",
     "reviewEmpty": "You have not finished a conversation yet.",
     "reviewBack": "Speak again",
-    "reviewNotes": "Notes"
+    "reviewNotes": "Notes",
+    "limitReached": "Today's free speaking time is used up.",
+    "seePlans": "See speaking plans"
   },
   "Practice": {
     "title": "Practice",
@@ -176,6 +178,35 @@
     "dailyGoalLabel": "Daily goal",
     "dailyGoalMinutes": "{count} minutes"
   },
+  "Plans": {
+    "title": "Speaking time",
+    "freeLeft": "{minutes} free minutes left today. Lessons stay free.",
+    "plusActive": "Your Plus pass is active.",
+    "schoolActive": "You are speaking with {name}.",
+    "plusTitle": "Plus for 30 days",
+    "plusDetail": "30 minutes of speaking each day.",
+    "minutes30Title": "30 extra minutes",
+    "minutes30Detail": "Used after today's free time. They stay until you use them.",
+    "minutes90Title": "90 extra minutes",
+    "minutes90Detail": "A larger pack of speaking time.",
+    "schoolTitle": "School, 30 seats",
+    "schoolDetail": "One payment for a class, for 120 days.",
+    "price": "{amount} birr",
+    "schoolName": "School name",
+    "pay": "Pay with Chapa",
+    "paying": "Opening Chapa…",
+    "payFailed": "Chapa could not open. Try again.",
+    "joinLabel": "Have a school code?",
+    "join": "Join school",
+    "joined": "You joined {name}.",
+    "joinFailed": "That code could not be used.",
+    "yourCode": "School code: {code}",
+    "returnTitle": "Payment",
+    "returnPaid": "Payment confirmed. Your speaking time is open.",
+    "returnPending": "Chapa has not confirmed this payment yet.",
+    "startSpeaking": "Start speaking",
+    "backToPlans": "Back to plans"
+  },
   "Profile": {
     "title": "Profile",
     "description": "Your goals and settings will be here.",
@@ -186,7 +217,10 @@
     "level": "English level",
     "supportLanguage": "Support language",
     "dailyGoal": "Daily goal",
-    "editSetup": "Change answers"
+    "editSetup": "Change answers",
+    "speaking": "Speaking time",
+    "speakingHint": "Lessons stay free. Speaking time can be extended with Chapa.",
+    "speakingPlans": "See plans"
   },
   "LanguageSwitcher": {
     "label": "Language"

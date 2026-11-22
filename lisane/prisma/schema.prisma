@@ -24,6 +24,12 @@ model User {
   speakSessions SpeakSession[]
   levelProgress LevelProgress[]
   reward        LearnerReward?
+  payments      Payment[]
+  speakingPass  SpeakingPass?
+  speakingCredit SpeakingCredit?
+  dailySpeaking DailySpeaking[]
+  ownedOrganizations Organization[]
+  organizationMembership OrganizationMember?
 
   @@map("user")
 }
@@ -152,4 +158,76 @@ model LearnerReward {
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("learner_reward")
+}
+
+model Payment {
+  id                 String    @id @default(cuid())
+  userId             String
+  txRef              String    @unique
+  productId          String
+  amount             Int
+  currency           String    @default("ETB")
+  status             String    @default("PENDING")
+  organizationName   String?
+  createdAt          DateTime  @default(now())
+  paidAt             DateTime?
+  user               User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization       Organization?
+
+  @@index([userId, status])
+  @@map("payment")
+}
+
+model SpeakingPass {
+  userId    String   @id
+  expiresAt DateTime
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("speaking_pass")
+}
+
+model SpeakingCredit {
+  userId  String @id
+  seconds Int    @default(0)
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("speaking_credit")
+}
+
+model DailySpeaking {
+  userId  String
+  day     String
+  seconds Int    @default(0)
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, day])
+  @@map("daily_speaking")
+}
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  ownerId   String
+  joinCode  String   @unique
+  seats     Int
+  expiresAt DateTime
+  paymentId String   @unique
+  owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  payment   Payment  @relation(fields: [paymentId], references: [id], onDelete: Restrict)
+  members   OrganizationMember[]
+
+  @@index([ownerId])
+  @@map("organization")
+}
+
+model OrganizationMember {
+  organizationId String
+  userId         String
+  joinedAt       DateTime     @default(now())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([organizationId, userId])
+  @@unique([userId])
+  @@map("organization_member")
 }

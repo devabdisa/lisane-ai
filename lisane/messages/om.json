@@ -161,7 +161,9 @@
     "reviewTitle": "Mari'ii kana",
     "reviewEmpty": "Ati ammatti marii hin xumurre.",
     "reviewBack": "Ammas dubbadhu",
-    "reviewNotes": "Yaadannoo"
+    "reviewNotes": "Yaadannoo",
+    "limitReached": "Yeroon dubbii bilisaa kan har'aa dhumateera.",
+    "seePlans": "Karoora dubbachuu ilaali"
   },
   "Practice": {
     "title": "Shaakala",
@@ -176,6 +178,35 @@
     "dailyGoalLabel": "Galma guyyaa",
     "dailyGoalMinutes": "daqiiqaa {count}"
   },
+  "Plans": {
+    "title": "Yeroo dubbachuu",
+    "freeLeft": "{minutes} daqiiqaawwan bilisaa har'aaf hafan. Barumsonni bilisa ta'anii itti fufu.",
+    "plusActive": "Paasiin Plus keessan hojii irra jira.",
+    "schoolActive": "Isin {name} waliin dubbachaa jirtu.",
+    "plusTitle": "Plus guyyoota 30f",
+    "plusDetail": "Guyyaa guyyaatti daqiiqaa 30 dubbachuu.",
+    "minutes30Title": "Daqiiqaa 30 dabalataa",
+    "minutes30Detail": "Yeroo bilisaa har'aa booda itti fayyadamuun ni danda'ama. Hamma ati itti fayyadamtutti ni turu.",
+    "minutes90Title": "Daqiiqaa 90 dabalataa",
+    "minutes90Detail": "Paakeejii yeroo dubbii bal'aa.",
+    "schoolTitle": "Mana barumsaa, teessuma 30",
+    "schoolDetail": "Kaffaltii tokko kilasii tokkoof, guyyoota 120f.",
+    "price": "{amount} birrii",
+    "schoolName": "Maqaa mana barumsaa",
+    "pay": "Chapaan kaffali",
+    "paying": "Chapa banamaa jira...",
+    "payFailed": "Chaappaan banamuu hin dandeenye. Irra deebi'ii yaali.",
+    "joinLabel": "Koodii mana barumsaa qabdaa?",
+    "join": "Mana barumsaa seeni",
+    "joined": "{name} itti makamte.",
+    "joinFailed": "Koodiin sun fayyadamamuun hin danda'amne.",
+    "yourCode": "Koodii mana barumsaa: {code}",
+    "returnTitle": "Kaffaltii",
+    "returnPaid": "Kaffaltiin mirkanaa'eera. Yeroon dubbii keessanii banamaadha.",
+    "returnPending": "Chaappaan kaffaltii kana ammayyuu hin mirkaneessine.",
+    "startSpeaking": "Dubbachuu jalqabi",
+    "backToPlans": "Gara karoorawwaniitti deebi'i"
+  },
   "Profile": {
     "title": "Piroofayilii",
     "description": "Galmoonnii fi qindaa'inoonni kee asitti argamu.",
@@ -186,7 +217,10 @@
     "level": "Sadarkaa Ingiliffaa",
     "supportLanguage": "Afaan deeggarsaa",
     "dailyGoal": "Galma guyyaa",
-    "editSetup": "Deebiiwwan jijjiiri"
+    "editSetup": "Deebiiwwan jijjiiri",
+    "speaking": "Yeroo dubbachuu",
+    "speakingHint": "Barnoonni bilisa ta'anii itti fufu. Yeroo dubbii Chapa'n dheeressuun ni danda'ama.",
+    "speakingPlans": "Karooraawwan ilaali"
   },
   "LanguageSwitcher": {
     "label": "Afaan"

@@ -225,6 +225,38 @@ still listed here, so reviewed text is never overwritten.
 | `Progress.lessonsLabel` | Lessons finished | ትምህርቶች ተጠናቀቁ | quality: high |
 | `Progress.dailyGoalLabel` | Daily goal | የየቀኑ ግብ | quality: high |
 | `Progress.dailyGoalMinutes` | {count} minutes | {count} ደቂቃዎች | quality: high |
+| `Speak.limitReached` | Today's free speaking time is used up. | የዛሬው ነፃ የንግግር ጊዜ አልቋል። | quality: high |
+| `Speak.seePlans` | See speaking plans | የንግግር እቅዶችን ይመልከቱ | quality: high |
+| `Plans.title` | Speaking time | የንግግር ጊዜ | quality: high |
+| `Plans.freeLeft` | {minutes} free minutes left today. Lessons stay free. | {minutes} ነፃ ደቂቃዎች ቀርተውዎታል። ትምህርቶች ነፃ ሆነው ይቀጥላሉ። | quality: high |
+| `Plans.plusActive` | Your Plus pass is active. | የእርስዎ ፕላስ ፓስ ገቢር ሆኗል። | quality: high |
+| `Plans.schoolActive` | You are speaking with {name}. | ከ{name} ጋር እየተነጋገሩ ነው። | quality: high |
+| `Plans.plusTitle` | Plus for 30 days | ለ30 ቀናት ተጨማሪ | quality: high |
+| `Plans.plusDetail` | 30 minutes of speaking each day. | በየቀኑ ለ30 ደቂቃ መናገር። | quality: high |
+| `Plans.minutes30Title` | 30 extra minutes | ተጨማሪ 30 ደቂቃዎች | quality: high |
+| `Plans.minutes30Detail` | Used after today's free time. They stay until you use them. | ከዛሬ ነጻ ጊዜ በኋላ ጥቅም ላይ ውሏል። እስክትጠቀሙባቸው ድረስ ይቆያሉ። | quality: high |
+| `Plans.minutes90Title` | 90 extra minutes | 90 ተጨማሪ ደቂቃዎች | quality: high |
+| `Plans.minutes90Detail` | A larger pack of speaking time. | የተጨማሪ የንግግር ጊዜ ጥቅል። | quality: high |
+| `Plans.schoolTitle` | School, 30 seats | ትምህርት ቤት፣ 30 መቀመጫዎች | quality: high |
+| `Plans.schoolDetail` | One payment for a class, for 120 days. | ለአንድ ትምህርት ክፍያ፣ ለ120 ቀናት። | quality: high |
+| `Plans.price` | {amount} birr | {amount} ብር | quality: high |
+| `Plans.schoolName` | School name | የትምህርት ቤት ስም | quality: high |
+| `Plans.pay` | Pay with Chapa | በቻፓ ይክፈሉ። | quality: high |
+| `Plans.paying` | Opening Chapa… | ቻፓን በመክፈት ላይ… | quality: high |
+| `Plans.payFailed` | Chapa could not open. Try again. | ቻፓ ሊከፈት አልቻለም። እንደገና ይሞክሩ። | quality: high |
+| `Plans.joinLabel` | Have a school code? | የትምህርት ቤት ኮድ አለዎት? | quality: high |
+| `Plans.join` | Join school | ትምህርት ቤት ተቀላቀል | quality: high |
+| `Plans.joined` | You joined {name}. | {name}ን ተቀላቅለዋል። | quality: high |
+| `Plans.joinFailed` | That code could not be used. | ያ ኮድ ጥቅም ላይ ሊውል አልቻለም። | quality: high |
+| `Plans.yourCode` | School code: {code} | የትምህርት ቤት ኮድ: {code} | quality: high |
+| `Plans.returnTitle` | Payment | ክፍያ | quality: high |
+| `Plans.returnPaid` | Payment confirmed. Your speaking time is open. | ክፍያ ተረጋግጧል። የመናገር ጊዜዎ ክፍት ነው። | quality: high |
+| `Plans.returnPending` | Chapa has not confirmed this payment yet. | ቻፓ ይህንን ክፍያ እስካሁን አላረጋገጠም። | quality: high |
+| `Plans.startSpeaking` | Start speaking | መናገር ጀምር | quality: high |
+| `Plans.backToPlans` | Back to plans | ወደ ዕቅዶች ተመለስ | quality: high |
+| `Profile.speaking` | Speaking time | የንግግር ጊዜ | quality: high |
+| `Profile.speakingHint` | Lessons stay free. Speaking time can be extended with Chapa. | ትምህርቶች ነጻ ሆነው ይቆያሉ። የመናገር ጊዜ በቻፓ ሊራዘም ይችላል። | quality: high |
+| `Profile.speakingPlans` | See plans | ዕቅዶችን ይመልከቱ | quality: high |
 
 ## Afaan Oromo (om)
 
@@ -473,3 +505,35 @@ still listed here, so reviewed text is never overwritten.
 | `Progress.lessonsLabel` | Lessons finished | Barnoonni dhumaniiru | quality: high |
 | `Progress.dailyGoalLabel` | Daily goal | Galma guyyaa | quality: high |
 | `Progress.dailyGoalMinutes` | {count} minutes | daqiiqaa {count} | quality: high |
+| `Speak.limitReached` | Today's free speaking time is used up. | Yeroon dubbii bilisaa kan har'aa dhumateera. | quality: high |
+| `Speak.seePlans` | See speaking plans | Karoora dubbachuu ilaali | quality: high |
+| `Plans.title` | Speaking time | Yeroo dubbachuu | quality: high |
+| `Plans.freeLeft` | {minutes} free minutes left today. Lessons stay free. | {minutes} daqiiqaawwan bilisaa har'aaf hafan. Barumsonni bilisa ta'anii itti fufu. | quality: high |
+| `Plans.plusActive` | Your Plus pass is active. | Paasiin Plus keessan hojii irra jira. | quality: high |
+| `Plans.schoolActive` | You are speaking with {name}. | Isin {name} waliin dubbachaa jirtu. | quality: high |
+| `Plans.plusTitle` | Plus for 30 days | Plus guyyoota 30f | quality: high |
+| `Plans.plusDetail` | 30 minutes of speaking each day. | Guyyaa guyyaatti daqiiqaa 30 dubbachuu. | quality: high |
+| `Plans.minutes30Title` | 30 extra minutes | Daqiiqaa 30 dabalataa | quality: high |
+| `Plans.minutes30Detail` | Used after today's free time. They stay until you use them. | Yeroo bilisaa har'aa booda itti fayyadamuun ni danda'ama. Hamma ati itti fayyadamtutti ni turu. | quality: high |
+| `Plans.minutes90Title` | 90 extra minutes | Daqiiqaa 90 dabalataa | quality: high |
+| `Plans.minutes90Detail` | A larger pack of speaking time. | Paakeejii yeroo dubbii bal'aa. | quality: high |
+| `Plans.schoolTitle` | School, 30 seats | Mana barumsaa, teessuma 30 | quality: high |
+| `Plans.schoolDetail` | One payment for a class, for 120 days. | Kaffaltii tokko kilasii tokkoof, guyyoota 120f. | quality: high |
+| `Plans.price` | {amount} birr | {amount} birrii | quality: high |
+| `Plans.schoolName` | School name | Maqaa mana barumsaa | quality: high |
+| `Plans.pay` | Pay with Chapa | Chapaan kaffali | quality: high |
+| `Plans.paying` | Opening Chapa… | Chapa banamaa jira... | quality: high |
+| `Plans.payFailed` | Chapa could not open. Try again. | Chaappaan banamuu hin dandeenye. Irra deebi'ii yaali. | quality: high |
+| `Plans.joinLabel` | Have a school code? | Koodii mana barumsaa qabdaa? | quality: high |
+| `Plans.join` | Join school | Mana barumsaa seeni | quality: high |
+| `Plans.joined` | You joined {name}. | {name} itti makamte. | quality: high |
+| `Plans.joinFailed` | That code could not be used. | Koodiin sun fayyadamamuun hin danda'amne. | quality: high |
+| `Plans.yourCode` | School code: {code} | Koodii mana barumsaa: {code} | quality: high |
+| `Plans.returnTitle` | Payment | Kaffaltii | quality: high |
+| `Plans.returnPaid` | Payment confirmed. Your speaking time is open. | Kaffaltiin mirkanaa'eera. Yeroon dubbii keessanii banamaadha. | quality: high |
+| `Plans.returnPending` | Chapa has not confirmed this payment yet. | Chaappaan kaffaltii kana ammayyuu hin mirkaneessine. | quality: high |
+| `Plans.startSpeaking` | Start speaking | Dubbachuu jalqabi | quality: high |
+| `Plans.backToPlans` | Back to plans | Gara karoorawwaniitti deebi'i | quality: high |
+| `Profile.speaking` | Speaking time | Yeroo dubbachuu | quality: high |
+| `Profile.speakingHint` | Lessons stay free. Speaking time can be extended with Chapa. | Barnoonni bilisa ta'anii itti fufu. Yeroo dubbii Chapa'n dheeressuun ni danda'ama. | quality: high |
+| `Profile.speakingPlans` | See plans | Karooraawwan ilaali | quality: high |

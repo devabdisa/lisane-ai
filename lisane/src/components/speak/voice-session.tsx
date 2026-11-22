@@ -117,6 +117,7 @@ function VoiceSession() {
   const [hasSpokenThisManualTurn, setHasSpokenThisManualTurn] = useState(false);
   const [isAssistantSpeaking, setIsAssistantSpeaking] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [limited, setLimited] = useState(false);
   const [advisoryHint, setAdvisoryHint] = useState<string | null>(null);
   const [liveSessionId, setLiveSessionId] = useState<string | null>(null);
   const [transcript, setTranscript] = useState<TranscriptItem[]>([]);
@@ -1077,6 +1078,7 @@ function VoiceSession() {
     try {
       setIsStarting(true);
       setError(null);
+      setLimited(false);
       setAdvisoryHint(null);
       // A conversation cut off by a dropped connection comes back here.
       const saved = loadTranscriptForResume();
@@ -1149,6 +1151,9 @@ function VoiceSession() {
         (startError.name === "NotFoundError" || startError.name === "DevicesNotFoundError")
       ) {
         errorMessage = t("errorMicrophoneNotFound");
+      } else if (startError instanceof LiveClientError && startError.status === 402) {
+        errorMessage = t("limitReached");
+        setLimited(true);
       } else if (startError instanceof LiveClientError && startError.status === 429) {
         errorMessage = t("errorRateLimited");
       } else if (startError instanceof LiveClientError && startError.status >= 500) {
@@ -1493,13 +1498,19 @@ function VoiceSession() {
             <p className="text-label font-semibold">{t("errorTitle")}</p>
             <p className="text-label text-fg-muted">{error ?? t("errorUnavailable")}</p>
           </div>
-          <Button
-            hierarchy="secondary"
-            onClick={() => void handleStartVoicePractice()}
-            disabled={isStarting || isStopping}
-          >
-            {t("restart")}
-          </Button>
+          {limited ? (
+            <Button asChild>
+              <Link href="/plans">{t("seePlans")}</Link>
+            </Button>
+          ) : (
+            <Button
+              hierarchy="secondary"
+              onClick={() => void handleStartVoicePractice()}
+              disabled={isStarting || isStopping}
+            >
+              {t("restart")}
+            </Button>
+          )}
         </section>
       ) : null}
     </div>

@@ -431,7 +431,9 @@ export class LiveSessionManager {
 
   async stopSession(params: StopLiveSessionParams) {
     const state = this.getOwnedSession(params.liveSessionId, params.userId);
+    const usage = { speakSessionId: state.speakSessionId, startedAt: state.createdAt };
     await this.closeSession(state.id, params.reason ?? "stopped_by_user");
+    return usage;
   }
 
   private sendActivitySignal(state: LiveSessionState, type: "start" | "end") {

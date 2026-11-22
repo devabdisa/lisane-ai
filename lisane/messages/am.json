@@ -161,7 +161,9 @@
     "reviewTitle": "ይህ ውይይት",
     "reviewEmpty": "እስካሁን ውይይት አላጠናቀቁም።",
     "reviewBack": "እንደገና ተናገር",
-    "reviewNotes": "ማስታወሻዎች"
+    "reviewNotes": "ማስታወሻዎች",
+    "limitReached": "የዛሬው ነፃ የንግግር ጊዜ አልቋል።",
+    "seePlans": "የንግግር እቅዶችን ይመልከቱ"
   },
   "Practice": {
     "title": "ልምምድ",
@@ -176,6 +178,35 @@
     "dailyGoalLabel": "የየቀኑ ግብ",
     "dailyGoalMinutes": "{count} ደቂቃዎች"
   },
+  "Plans": {
+    "title": "የንግግር ጊዜ",
+    "freeLeft": "{minutes} ነፃ ደቂቃዎች ቀርተውዎታል። ትምህርቶች ነፃ ሆነው ይቀጥላሉ።",
+    "plusActive": "የእርስዎ ፕላስ ፓስ ገቢር ሆኗል።",
+    "schoolActive": "ከ{name} ጋር እየተነጋገሩ ነው።",
+    "plusTitle": "ለ30 ቀናት ተጨማሪ",
+    "plusDetail": "በየቀኑ ለ30 ደቂቃ መናገር።",
+    "minutes30Title": "ተጨማሪ 30 ደቂቃዎች",
+    "minutes30Detail": "ከዛሬ ነጻ ጊዜ በኋላ ጥቅም ላይ ውሏል። እስክትጠቀሙባቸው ድረስ ይቆያሉ።",
+    "minutes90Title": "90 ተጨማሪ ደቂቃዎች",
+    "minutes90Detail": "የተጨማሪ የንግግር ጊዜ ጥቅል።",
+    "schoolTitle": "ትምህርት ቤት፣ 30 መቀመጫዎች",
+    "schoolDetail": "ለአንድ ትምህርት ክፍያ፣ ለ120 ቀናት።",
+    "price": "{amount} ብር",
+    "schoolName": "የትምህርት ቤት ስም",
+    "pay": "በቻፓ ይክፈሉ።",
+    "paying": "ቻፓን በመክፈት ላይ…",
+    "payFailed": "ቻፓ ሊከፈት አልቻለም። እንደገና ይሞክሩ።",
+    "joinLabel": "የትምህርት ቤት ኮድ አለዎት?",
+    "join": "ትምህርት ቤት ተቀላቀል",
+    "joined": "{name}ን ተቀላቅለዋል።",
+    "joinFailed": "ያ ኮድ ጥቅም ላይ ሊውል አልቻለም።",
+    "yourCode": "የትምህርት ቤት ኮድ: {code}",
+    "returnTitle": "ክፍያ",
+    "returnPaid": "ክፍያ ተረጋግጧል። የመናገር ጊዜዎ ክፍት ነው።",
+    "returnPending": "ቻፓ ይህንን ክፍያ እስካሁን አላረጋገጠም።",
+    "startSpeaking": "መናገር ጀምር",
+    "backToPlans": "ወደ ዕቅዶች ተመለስ"
+  },
   "Profile": {
     "title": "መገለጫ",
     "description": "ግብዎችዎ እና ቅንብሮችዎ እዚህ ይሆናሉ።",
@@ -186,7 +217,10 @@
     "level": "የእንግሊዝኛ ደረጃ",
     "supportLanguage": "ቋንቋን ይደግፉ",
     "dailyGoal": "የዕለት ግብ",
-    "editSetup": "መልሶችን ይቀይሩ"
+    "editSetup": "መልሶችን ይቀይሩ",
+    "speaking": "የንግግር ጊዜ",
+    "speakingHint": "ትምህርቶች ነጻ ሆነው ይቆያሉ። የመናገር ጊዜ በቻፓ ሊራዘም ይችላል።",
+    "speakingPlans": "ዕቅዶችን ይመልከቱ"
   },
   "LanguageSwitcher": {
     "label": "ቋንቋ"

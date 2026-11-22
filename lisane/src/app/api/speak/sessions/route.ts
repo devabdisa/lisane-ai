@@ -7,6 +7,7 @@ import { enforceRouteRateLimit } from "@/server/rate-limit/route-rate-limit";
 import { getProfile } from "@/server/services/profile/profile";
 import { invalidInputResponse, unauthenticatedResponse } from "@/server/speak/live-route-response";
 import { liveSessionManager } from "@/server/speak/live-session-manager";
+import { SpeakingLimitError, assertSpeakingAllowance } from "@/server/services/payments/payments";
 
 export async function POST(request: Request) {
   const user = await getAppUser();
@@ -22,6 +23,18 @@ export async function POST(request: Request) {
     ...AI_RATE_LIMIT_RULES.liveStart,
   });
   if (limited) return limited;
+
+  try {
+    await assertSpeakingAllowance(user.id);
+  } catch (error) {
+    if (error instanceof SpeakingLimitError) {
+      return Response.json(
+        { error: { code: "limit_reached", message: "Speaking time for today is used up." } },
+        { status: 402 },
+      );
+    }
+    throw error;
+  }
 
   const profile = await getProfile(user.id).catch(() => null);
   const supportLanguage =

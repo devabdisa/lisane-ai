@@ -5,6 +5,8 @@ import { AI_RATE_LIMIT_RULES } from "@/server/ai/usage-guardrails";
 import { enforceRouteRateLimit } from "@/server/rate-limit/route-rate-limit";
 import { getProfile } from "@/server/services/profile/profile";
 import { helpSayPhrase } from "@/server/services/speak/help-say";
+import { speakingLimits } from "@/config/plans";
+import { SpeakingLimitError, assertSpeakingAllowance, recordSpeaking } from "@/server/services/payments/payments";
 import { invalidInputResponse, unauthenticatedResponse } from "@/server/speak/live-route-response";
 
 export async function POST(request: Request) {
@@ -25,6 +27,15 @@ export async function POST(request: Request) {
   });
   if (limited) return limited;
 
+  try {
+    await assertSpeakingAllowance(user.id, speakingLimits.lessonSpeechSeconds);
+  } catch (error) {
+    if (error instanceof SpeakingLimitError) {
+      return Response.json({ error: { code: "limit_reached", message: "Speaking time for today is used up." } }, { status: 402 });
+    }
+    throw error;
+  }
+
   const profile = await getProfile(user.id);
   const supportLanguage = profile?.supportLanguage;
   if (!supportLanguage || !speechLanguage(supportLanguage)) {
@@ -38,7 +49,10 @@ export async function POST(request: Request) {
       ...parsed.data,
       signal: request.signal,
     });
-    if (result) return Response.json(result);
+    if (result) {
+      await recordSpeaking(user.id, speakingLimits.lessonSpeechSeconds);
+      return Response.json(result);
+    }
     return Response.json(
       { error: { code: "unclear_audio", message: "Try saying one clear sentence." } },
       { status: 422 },

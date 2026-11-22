@@ -6,7 +6,9 @@ import { requireEnv } from "@/lib/env";
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
 function hasCurrentModels(client: PrismaClient) {
-  return typeof client.curriculumUnit?.findMany === "function" && typeof client.learnerReward?.upsert === "function";
+  return typeof client.curriculumUnit?.findMany === "function"
+    && typeof client.learnerReward?.upsert === "function"
+    && typeof client.payment?.findMany === "function";
 }
 
 // Neon’s pooled host is fine for single queries, but it will not start a

@@ -3,6 +3,8 @@ import { lessonRecordingMaxBytes, lessonSpeechRequestSchema } from "@/schemas/le
 import { AI_RATE_LIMIT_RULES } from "@/server/ai/usage-guardrails";
 import { enforceRouteRateLimit } from "@/server/rate-limit/route-rate-limit";
 import { transcribeLessonSentence } from "@/server/services/learn/lesson-speech";
+import { speakingLimits } from "@/config/plans";
+import { SpeakingLimitError, assertSpeakingAllowance, recordSpeaking } from "@/server/services/payments/payments";
 
 const privateResponse = { "Cache-Control": "private, no-store" };
 
@@ -50,6 +52,15 @@ export async function POST(request: Request, context: { params: Promise<{ unitId
   });
   if (limited) return limited;
 
+  try {
+    await assertSpeakingAllowance(user.id, speakingLimits.lessonSpeechSeconds);
+  } catch (error) {
+    if (error instanceof SpeakingLimitError) {
+      return errorResponse(402, "limit_reached", "Speaking time for today is used up.");
+    }
+    throw error;
+  }
+
   const pcm = await readRecording(request).catch(() => null);
   if (!pcm) return errorResponse(400, "invalid_audio", "Send a short lesson recording.");
 
@@ -57,7 +68,10 @@ export async function POST(request: Request, context: { params: Promise<{ unitId
     const result = await transcribeLessonSentence({ userId: user.id, pcm, ...parsed.data });
     if (result.status === "missing") return errorResponse(404, "not_found", "That speaking question is not in this lesson.");
     if (result.status === "locked") return errorResponse(403, "locked", "Finish the step above before this one.");
-    if (result.status === "transcribed") return Response.json({ transcript: result.transcript }, { headers: privateResponse });
+    if (result.status === "transcribed") {
+      await recordSpeaking(user.id, speakingLimits.lessonSpeechSeconds);
+      return Response.json({ transcript: result.transcript }, { headers: privateResponse });
+    }
     return errorResponse(422, "unclear_audio", "Try saying the sentence again.");
   } catch (error) {
     console.info("Lesson speech unavailable", { error: error instanceof Error ? error.name : "unknown" });
