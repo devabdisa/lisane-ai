@@ -1,0 +1,656 @@
+{
+  "id": "describe-your-experience",
+  "section": "b1",
+  "position": 1,
+  "review": {
+    "en": "draft",
+    "am": "draft",
+    "om": "draft"
+  },
+  "guidebook": {
+    "en": {
+      "title": "Describe your experience",
+      "goal": "Talk about your role, how long you have worked, and what you want to learn.",
+      "introduction": "These sentences help you talk about work you already know. Keep each answer to one idea.",
+      "notes": [
+        {
+          "explanation": "Have worked talks about time up to now.",
+          "examples": [
+            "years",
+            "current-role",
+            "responsibility"
+          ]
+        },
+        {
+          "explanation": "A challenge can be honest and short.",
+          "examples": [
+            "challenge",
+            "achievement",
+            "colleague"
+          ]
+        },
+        {
+          "explanation": "End with what you want next.",
+          "examples": [
+            "future",
+            "proud"
+          ]
+        }
+      ]
+    },
+    "am": {
+      "title": "ልምድዎን ይግለጹ",
+      "goal": "ስለ ሚናዎ፣ ለምን ያህል ጊዜ እንደሠሩ እና ምን መማር እንደሚፈልጉ ይናገሩ።",
+      "introduction": "እነዚህ ዓረፍተ ነገሮች የሚያውቁትን ሥራ ለመናገር ይረዳሉ። እያንዳንዱን መልስ በአንድ ሐሳብ ይጠብቁ።",
+      "notes": [
+        {
+          "explanation": "Have worked እስከ አሁን ድረስ ስላለው ጊዜ ይናገራል።",
+          "examples": [
+            "years",
+            "current-role",
+            "responsibility"
+          ]
+        },
+        {
+          "explanation": "ፈተና ታማኝ እና አጭር ሊሆን ይችላል።",
+          "examples": [
+            "challenge",
+            "achievement",
+            "colleague"
+          ]
+        },
+        {
+          "explanation": "ቀጥሎ በሚፈልጉት ይጨርሱ።",
+          "examples": [
+            "future",
+            "proud"
+          ]
+        }
+      ]
+    },
+    "om": {
+      "title": "Muuxannoo kee ibsi",
+      "goal": "Waa'ee gahee kee, yeroo hangam hojjettu fi waan barachuu barbaaddu dubbadhu.",
+      "introduction": "Jechoonni kun hojii duraan beektu irratti dubbachuuf si gargaaru. Deebii tokko tokko yaada tokko qofa haa qabaatu.",
+      "notes": [
+        {
+          "explanation": "Have worked yeroo hamma ammaatti ibsa.",
+          "examples": [
+            "years",
+            "current-role",
+            "responsibility"
+          ]
+        },
+        {
+          "explanation": "Rakkoon tokko dhugaa fi gabaabaa ta'uu danda'a.",
+          "examples": [
+            "challenge",
+            "achievement",
+            "colleague"
+          ]
+        },
+        {
+          "explanation": "Waan itti aanu barbaadduun xumuri.",
+          "examples": [
+            "future",
+            "proud"
+          ]
+        }
+      ]
+    }
+  },
+  "phrases": [
+    {
+      "id": "current-role",
+      "english": {
+        "text": "I work as a sales assistant."
+      },
+      "meaning": {
+        "en": {
+          "text": "My job title is sales assistant."
+        },
+        "am": {
+          "text": "የሽያጭ ረዳት ሆኜ እሠራለሁ።"
+        },
+        "om": {
+          "text": "Gargaaraa gurgurtaa ta'ee hojjedha."
+        }
+      },
+      "hint": {
+        "en": "As names your role.",
+        "am": "As ሚናዎን ይሰይማል።",
+        "om": "As gahee kee moggaasa."
+      }
+    },
+    {
+      "id": "years",
+      "english": {
+        "text": "I have worked here for two years."
+      },
+      "meaning": {
+        "en": {
+          "text": "Two years is how long I have been here."
+        },
+        "am": {
+          "text": "እዚህ ለሁለት ዓመት ሠርቻለሁ።"
+        },
+        "om": {
+          "text": "Waggaa lama as hojjedheera."
+        }
+      },
+      "hint": {
+        "en": "For two years names the length of time.",
+        "am": "For two years የጊዜውን ርዝመት ይሰይማል።",
+        "om": "For two years dheerina yeroo ibsa."
+      }
+    },
+    {
+      "id": "responsibility",
+      "english": {
+        "text": "I help customers every day."
+      },
+      "meaning": {
+        "en": {
+          "text": "Helping customers is my daily work."
+        },
+        "am": {
+          "text": "በየቀኑ ደንበኞችን እረዳለሁ።"
+        },
+        "om": {
+          "text": "Guyyaa guyyaan maamiltoota gargaara."
+        }
+      },
+      "hint": {
+        "en": "Every day says how often.",
+        "am": "Every day ምን ያህል ጊዜ እንደሆነ ይነግራል።",
+        "om": "Every day yeroo meeqa akka ta'e hima."
+      }
+    },
+    {
+      "id": "achievement",
+      "english": {
+        "text": "I learned to use the register."
+      },
+      "meaning": {
+        "en": {
+          "text": "Using the register is a skill I gained."
+        },
+        "am": {
+          "text": "መዝገቡን መጠቀም ተምሬያለሁ።"
+        },
+        "om": {
+          "text": "Galmeessa fayyadamuun baradheera."
+        }
+      },
+      "hint": {
+        "en": "Learned shows a skill you gained.",
+        "am": "Learned ያገኙትን ክህሎት ያሳያል።",
+        "om": "Learned dandeettii argatte agarsiisa."
+      }
+    },
+    {
+      "id": "challenge",
+      "english": {
+        "text": "The busy days are hard."
+      },
+      "meaning": {
+        "en": {
+          "text": "Busy days are difficult."
+        },
+        "am": {
+          "text": "የተጨናነቁ ቀናት ከባድ ናቸው።"
+        },
+        "om": {
+          "text": "Guyyaan hojii baay'ee ulfaataadha."
+        }
+      },
+      "hint": {
+        "en": "Hard names the difficulty.",
+        "am": "Hard ችግሩን ይሰይማል።",
+        "om": "Hard rakkina moggaasa."
+      }
+    },
+    {
+      "id": "future",
+      "english": {
+        "text": "I want to learn more."
+      },
+      "meaning": {
+        "en": {
+          "text": "I hope to keep learning."
+        },
+        "am": {
+          "text": "የበለጠ መማር እፈልጋለሁ።"
+        },
+        "om": {
+          "text": "Caalaatti barachuu barbaada."
+        }
+      },
+      "hint": {
+        "en": "More points to the next step.",
+        "am": "More ቀጣዩን እርምጃ ያመለክታል።",
+        "om": "More tarkaanfii itti aanu agarsiisa."
+      }
+    },
+    {
+      "id": "colleague",
+      "english": {
+        "text": "My colleagues help me."
+      },
+      "meaning": {
+        "en": {
+          "text": "The people I work with support me."
+        },
+        "am": {
+          "text": "የሥራ ባልደረቦቼ ይረዱኛል።"
+        },
+        "om": {
+          "text": "Hojjetoonni koo na gargaaru."
+        }
+      },
+      "hint": {
+        "en": "Colleagues are the people you work with.",
+        "am": "Colleagues አብረውዎት የሚሠሩ ሰዎች ናቸው።",
+        "om": "Colleagues namoota waliin hojjettu."
+      }
+    },
+    {
+      "id": "proud",
+      "english": {
+        "text": "I am proud of my work."
+      },
+      "meaning": {
+        "en": {
+          "text": "My work makes me feel good."
+        },
+        "am": {
+          "text": "በሥራዬ እኮራለሁ።"
+        },
+        "om": {
+          "text": "Hojii kootiin boona."
+        }
+      },
+      "hint": {
+        "en": "Of my work names what you feel proud of.",
+        "am": "Of my work የሚኮሩበትን ይሰይማል።",
+        "om": "Of my work waan itti boontu moggaasa."
+      }
+    }
+  ],
+  "levels": [
+    {
+      "kind": "lesson",
+      "id": "recognise-the-phrases",
+      "lessons": [
+        {
+          "id": "understand-the-phrases",
+          "exercises": [
+            {
+              "id": "recognise-01",
+              "kind": "select-meaning",
+              "phraseId": "current-role",
+              "distractorPhraseIds": [
+                "years",
+                "responsibility"
+              ]
+            },
+            {
+              "id": "recognise-02",
+              "kind": "select-meaning",
+              "phraseId": "years",
+              "distractorPhraseIds": [
+                "current-role",
+                "achievement"
+              ]
+            },
+            {
+              "id": "recognise-03",
+              "kind": "select-meaning",
+              "phraseId": "responsibility",
+              "distractorPhraseIds": [
+                "challenge",
+                "current-role"
+              ]
+            },
+            {
+              "id": "recognise-04",
+              "kind": "match-pairs",
+              "phraseIds": [
+                "current-role",
+                "years",
+                "responsibility",
+                "achievement"
+              ]
+            },
+            {
+              "id": "recognise-05",
+              "kind": "listen-and-pick",
+              "phraseId": "achievement",
+              "distractorPhraseIds": [
+                "current-role",
+                "challenge"
+              ]
+            },
+            {
+              "id": "recognise-06",
+              "kind": "select-meaning",
+              "phraseId": "challenge",
+              "distractorPhraseIds": [
+                "future",
+                "years"
+              ]
+            },
+            {
+              "id": "recognise-07",
+              "kind": "select-meaning",
+              "phraseId": "future",
+              "distractorPhraseIds": [
+                "colleague",
+                "responsibility"
+              ]
+            },
+            {
+              "id": "recognise-08",
+              "kind": "listen-and-pick",
+              "phraseId": "colleague",
+              "distractorPhraseIds": [
+                "proud",
+                "current-role"
+              ]
+            },
+            {
+              "id": "recognise-09",
+              "kind": "match-pairs",
+              "phraseIds": [
+                "challenge",
+                "future",
+                "colleague"
+              ]
+            },
+            {
+              "id": "recognise-10",
+              "kind": "listen-and-pick",
+              "phraseId": "proud",
+              "distractorPhraseIds": [
+                "years",
+                "future"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "lesson",
+      "id": "build-the-phrases",
+      "lessons": [
+        {
+          "id": "build-the-sentences",
+          "exercises": [
+            {
+              "id": "build-01",
+              "kind": "word-bank-translate",
+              "phraseId": "current-role",
+              "direction": "support-to-english"
+            },
+            {
+              "id": "build-02",
+              "kind": "fill-blank",
+              "phraseId": "years",
+              "before": "I have worked here for two ",
+              "after": ".",
+              "answer": "years",
+              "distractors": [
+                "days",
+                "jobs"
+              ]
+            },
+            {
+              "id": "build-03",
+              "kind": "word-bank-translate",
+              "phraseId": "responsibility",
+              "direction": "english-to-support"
+            },
+            {
+              "id": "build-04",
+              "kind": "word-bank-translate",
+              "phraseId": "achievement",
+              "direction": "support-to-english"
+            },
+            {
+              "id": "build-05",
+              "kind": "select-meaning",
+              "phraseId": "challenge",
+              "distractorPhraseIds": [
+                "current-role",
+                "proud"
+              ]
+            },
+            {
+              "id": "build-06",
+              "kind": "fill-blank",
+              "phraseId": "future",
+              "before": "I want to learn ",
+              "after": ".",
+              "answer": "more",
+              "distractors": [
+                "less",
+                "now"
+              ]
+            },
+            {
+              "id": "build-07",
+              "kind": "word-bank-translate",
+              "phraseId": "colleague",
+              "direction": "support-to-english"
+            },
+            {
+              "id": "build-08",
+              "kind": "fill-blank",
+              "phraseId": "proud",
+              "before": "I am proud of my ",
+              "after": ".",
+              "answer": "work",
+              "distractors": [
+                "home",
+                "bus"
+              ]
+            },
+            {
+              "id": "build-09",
+              "kind": "select-meaning",
+              "phraseId": "years",
+              "distractorPhraseIds": [
+                "responsibility",
+                "challenge"
+              ]
+            },
+            {
+              "id": "build-10",
+              "kind": "word-bank-translate",
+              "phraseId": "future",
+              "direction": "english-to-support"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "lesson",
+      "id": "say-the-phrases",
+      "lessons": [
+        {
+          "id": "say-them-aloud",
+          "exercises": [
+            {
+              "id": "say-01",
+              "kind": "listen-and-pick",
+              "phraseId": "current-role",
+              "distractorPhraseIds": [
+                "years",
+                "responsibility"
+              ]
+            },
+            {
+              "id": "say-02",
+              "kind": "speak-sentence",
+              "phraseId": "current-role"
+            },
+            {
+              "id": "say-03",
+              "kind": "type-what-you-hear",
+              "phraseId": "responsibility"
+            },
+            {
+              "id": "say-04",
+              "kind": "speak-sentence",
+              "phraseId": "achievement"
+            },
+            {
+              "id": "say-05",
+              "kind": "fill-blank",
+              "phraseId": "challenge",
+              "before": "The busy days are ",
+              "after": ".",
+              "answer": "hard",
+              "distractors": [
+                "easy",
+                "long"
+              ]
+            },
+            {
+              "id": "say-06",
+              "kind": "speak-sentence",
+              "phraseId": "challenge"
+            },
+            {
+              "id": "say-07",
+              "kind": "speak-sentence",
+              "phraseId": "future"
+            },
+            {
+              "id": "say-08",
+              "kind": "type-what-you-hear",
+              "phraseId": "colleague"
+            },
+            {
+              "id": "say-09",
+              "kind": "speak-sentence",
+              "phraseId": "proud"
+            },
+            {
+              "id": "say-10",
+              "kind": "speak-sentence",
+              "phraseId": "years"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "personal-practice",
+      "id": "revisit-the-phrases"
+    },
+    {
+      "kind": "speaking-roleplay",
+      "id": "use-the-phrases-aloud",
+      "setup": "You are a hiring manager. Ask the learner about their current work, one hard part of the job, and what they want to learn next. One question at a time.",
+      "learnerTask": {
+        "en": "Describe your work. Say your role, how long you have worked, one hard part, and what you want to learn.",
+        "am": "ሥራዎን ይግለጹ። ሚናዎን፣ ለምን ያህል ጊዜ እንደሠሩ፣ አንድ ከባድ ነገር እና ምን መማር እንደሚፈልጉ ይናገሩ።",
+        "om": "Hojii kee ibsi. Gahee kee, yeroo hangam hojjettu, rakkoo tokko fi waan barachuu barbaaddu himi."
+      },
+      "phraseIds": [
+        "current-role",
+        "years",
+        "responsibility",
+        "challenge",
+        "future",
+        "proud"
+      ]
+    },
+    {
+      "kind": "unit-review",
+      "id": "review-the-unit",
+      "lessons": [
+        {
+          "id": "review-the-phrases",
+          "exercises": [
+            {
+              "id": "review-01",
+              "kind": "select-meaning",
+              "phraseId": "proud",
+              "distractorPhraseIds": [
+                "current-role",
+                "achievement"
+              ]
+            },
+            {
+              "id": "review-02",
+              "kind": "match-pairs",
+              "phraseIds": [
+                "years",
+                "responsibility",
+                "challenge",
+                "future"
+              ]
+            },
+            {
+              "id": "review-03",
+              "kind": "listen-and-pick",
+              "phraseId": "future",
+              "distractorPhraseIds": [
+                "colleague",
+                "years"
+              ]
+            },
+            {
+              "id": "review-04",
+              "kind": "word-bank-translate",
+              "phraseId": "achievement",
+              "direction": "support-to-english"
+            },
+            {
+              "id": "review-05",
+              "kind": "fill-blank",
+              "phraseId": "current-role",
+              "before": "I work as a sales ",
+              "after": ".",
+              "answer": "assistant",
+              "distractors": [
+                "customer",
+                "shop"
+              ]
+            },
+            {
+              "id": "review-06",
+              "kind": "word-bank-translate",
+              "phraseId": "challenge",
+              "direction": "english-to-support"
+            },
+            {
+              "id": "review-07",
+              "kind": "type-what-you-hear",
+              "phraseId": "years"
+            },
+            {
+              "id": "review-08",
+              "kind": "speak-sentence",
+              "phraseId": "responsibility"
+            },
+            {
+              "id": "review-09",
+              "kind": "speak-sentence",
+              "phraseId": "colleague"
+            },
+            {
+              "id": "review-10",
+              "kind": "speak-sentence",
+              "phraseId": "proud"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

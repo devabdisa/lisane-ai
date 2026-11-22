@@ -1,0 +1,656 @@
+{
+  "id": "ask-for-help-at-work",
+  "section": "a1",
+  "position": 1,
+  "review": {
+    "en": "draft",
+    "am": "draft",
+    "om": "draft"
+  },
+  "guidebook": {
+    "en": {
+      "title": "Ask for help at work",
+      "goal": "Ask for help, say you do not understand, and thank someone.",
+      "introduction": "On a new job you will need help. These phrases keep the conversation polite and clear.",
+      "notes": [
+        {
+          "explanation": "Can and could make a request softer.",
+          "examples": [
+            "need-help",
+            "say-again",
+            "ask-manager"
+          ]
+        },
+        {
+          "explanation": "Use these when you miss what someone said.",
+          "examples": [
+            "dont-understand",
+            "one-moment",
+            "where-is"
+          ]
+        },
+        {
+          "explanation": "Close the request by thanking the person.",
+          "examples": [
+            "thank-help",
+            "this-way"
+          ]
+        }
+      ]
+    },
+    "am": {
+      "title": "በሥራ ቦታ እርዳታ ይጠይቁ",
+      "goal": "እርዳታ ይጠይቁ፣ እንዳልገባዎት ይናገሩ እና ያመስግኑ።",
+      "introduction": "በአዲስ ሥራ እርዳታ ያስፈልግዎታል። እነዚህ ሐረጎች ውይይቱን ጨዋ እና ግልጽ ያደርጉታል።",
+      "notes": [
+        {
+          "explanation": "Can እና could ጥያቄውን ለስላሳ ያደርጉታል።",
+          "examples": [
+            "need-help",
+            "say-again",
+            "ask-manager"
+          ]
+        },
+        {
+          "explanation": "ሰው የተናገረው ሳይሰማዎት እነዚህን ይጠቀሙ።",
+          "examples": [
+            "dont-understand",
+            "one-moment",
+            "where-is"
+          ]
+        },
+        {
+          "explanation": "ጥያቄውን ሰውየውን በማመስገን ይዝጉ።",
+          "examples": [
+            "thank-help",
+            "this-way"
+          ]
+        }
+      ]
+    },
+    "om": {
+      "title": "Bakka hojiitti gargaarsa gaafadhu",
+      "goal": "Gargaarsa gaafadhu, akka hin hubanne himi, akkasumas galateeffadhu.",
+      "introduction": "Hojii haaraa irratti gargaarsi si barbaachisa. Jechoonni kun haasawa kee ifa fi naafayaa taasisa.",
+      "notes": [
+        {
+          "explanation": "Can fi could gaaffii kee laafisa.",
+          "examples": [
+            "need-help",
+            "say-again",
+            "ask-manager"
+          ]
+        },
+        {
+          "explanation": "Waan nama tokko jedhe yoo hin hubanne kanatti fayyadami.",
+          "examples": [
+            "dont-understand",
+            "one-moment",
+            "where-is"
+          ]
+        },
+        {
+          "explanation": "Gaaffii kee nama sana galateeffachuun xumuri.",
+          "examples": [
+            "thank-help",
+            "this-way"
+          ]
+        }
+      ]
+    }
+  },
+  "phrases": [
+    {
+      "id": "need-help",
+      "english": {
+        "text": "Can you help me?"
+      },
+      "meaning": {
+        "en": {
+          "text": "Please give me some help."
+        },
+        "am": {
+          "text": "ሊረዱኝ ይችላሉ?"
+        },
+        "om": {
+          "text": "Na gargaaruu dandeessaa?"
+        }
+      },
+      "hint": {
+        "en": "Can you starts a polite request.",
+        "am": "Can you ጨዋ ጥያቄ ይጀምራል።",
+        "om": "Can you gaaffii naafayaa jalqaba."
+      }
+    },
+    {
+      "id": "dont-understand",
+      "english": {
+        "text": "I don't understand."
+      },
+      "meaning": {
+        "en": {
+          "text": "The meaning is not clear to me."
+        },
+        "am": {
+          "text": "አልገባኝም።"
+        },
+        "om": {
+          "text": "Hin hubadhu."
+        }
+      },
+      "hint": {
+        "en": "Say this when the meaning is not clear.",
+        "am": "ሐሳቡ ግልጽ ካልሆነ ይህንን ይበሉ።",
+        "om": "Hiikaa yoo hin ifne kana jedhi."
+      }
+    },
+    {
+      "id": "say-again",
+      "english": {
+        "text": "Could you say that again?"
+      },
+      "meaning": {
+        "en": {
+          "text": "Please repeat that."
+        },
+        "am": {
+          "text": "እንደገና ሊሉኝ ይችላሉ?"
+        },
+        "om": {
+          "text": "Ammas naaf himuu dandeessaa?"
+        }
+      },
+      "hint": {
+        "en": "Again asks for a repeat.",
+        "am": "Again ድገማ ይጠይቃል።",
+        "om": "Again irra deebi'ii gaafata."
+      }
+    },
+    {
+      "id": "where-is",
+      "english": {
+        "text": "Where is the office?"
+      },
+      "meaning": {
+        "en": {
+          "text": "I need the location of the office."
+        },
+        "am": {
+          "text": "ቢሮው የት ነው?"
+        },
+        "om": {
+          "text": "Waajjirri eessa?"
+        }
+      },
+      "hint": {
+        "en": "Where asks for a place.",
+        "am": "Where ቦታ ይጠይቃል።",
+        "om": "Where bakka gaafata."
+      }
+    },
+    {
+      "id": "this-way",
+      "english": {
+        "text": "It's this way."
+      },
+      "meaning": {
+        "en": {
+          "text": "The direction is here."
+        },
+        "am": {
+          "text": "ወደዚህ ነው።"
+        },
+        "om": {
+          "text": "Karaa kanaan."
+        }
+      },
+      "hint": {
+        "en": "Use this when you show a direction.",
+        "am": "አቅጣጫ ሲያሳዩ ይህንን ይጠቀሙ።",
+        "om": "Kallattii agarsiistu kanaan fayyadami."
+      }
+    },
+    {
+      "id": "ask-manager",
+      "english": {
+        "text": "May I ask my manager?"
+      },
+      "meaning": {
+        "en": {
+          "text": "I want permission to speak to my manager."
+        },
+        "am": {
+          "text": "ሥራ አስኪያጄን ልጠይቅ?"
+        },
+        "om": {
+          "text": "Bulchaa koo gaafadhaa?"
+        }
+      },
+      "hint": {
+        "en": "May I asks for permission.",
+        "am": "May I ፈቃድ ይጠይቃል።",
+        "om": "May I hayyama gaafata."
+      }
+    },
+    {
+      "id": "thank-help",
+      "english": {
+        "text": "Thank you for your help."
+      },
+      "meaning": {
+        "en": {
+          "text": "I am grateful for the help."
+        },
+        "am": {
+          "text": "ስለ እርዳታዎ አመሰግናለሁ።"
+        },
+        "om": {
+          "text": "Gargaarsa keetiif galatoomi."
+        }
+      },
+      "hint": {
+        "en": "For your help names the reason.",
+        "am": "For your help ምክንያቱን ይሰይማል።",
+        "om": "For your help sababa ibsa."
+      }
+    },
+    {
+      "id": "one-moment",
+      "english": {
+        "text": "One moment, please."
+      },
+      "meaning": {
+        "en": {
+          "text": "Please wait a short time."
+        },
+        "am": {
+          "text": "አንድ ደቂቃ እባክዎ።"
+        },
+        "om": {
+          "text": "Turtii xiqqoo, maaloo."
+        }
+      },
+      "hint": {
+        "en": "Please keeps the pause polite.",
+        "am": "Please ማቆምዎን ጨዋ ያደርገዋል።",
+        "om": "Please yeroo dhaabatu naafayaa taasisa."
+      }
+    }
+  ],
+  "levels": [
+    {
+      "kind": "lesson",
+      "id": "recognise-the-phrases",
+      "lessons": [
+        {
+          "id": "understand-the-phrases",
+          "exercises": [
+            {
+              "id": "recognise-01",
+              "kind": "select-meaning",
+              "phraseId": "need-help",
+              "distractorPhraseIds": [
+                "dont-understand",
+                "say-again"
+              ]
+            },
+            {
+              "id": "recognise-02",
+              "kind": "select-meaning",
+              "phraseId": "dont-understand",
+              "distractorPhraseIds": [
+                "need-help",
+                "where-is"
+              ]
+            },
+            {
+              "id": "recognise-03",
+              "kind": "select-meaning",
+              "phraseId": "say-again",
+              "distractorPhraseIds": [
+                "this-way",
+                "need-help"
+              ]
+            },
+            {
+              "id": "recognise-04",
+              "kind": "match-pairs",
+              "phraseIds": [
+                "need-help",
+                "dont-understand",
+                "say-again",
+                "where-is"
+              ]
+            },
+            {
+              "id": "recognise-05",
+              "kind": "listen-and-pick",
+              "phraseId": "where-is",
+              "distractorPhraseIds": [
+                "need-help",
+                "this-way"
+              ]
+            },
+            {
+              "id": "recognise-06",
+              "kind": "select-meaning",
+              "phraseId": "this-way",
+              "distractorPhraseIds": [
+                "ask-manager",
+                "dont-understand"
+              ]
+            },
+            {
+              "id": "recognise-07",
+              "kind": "select-meaning",
+              "phraseId": "ask-manager",
+              "distractorPhraseIds": [
+                "thank-help",
+                "say-again"
+              ]
+            },
+            {
+              "id": "recognise-08",
+              "kind": "listen-and-pick",
+              "phraseId": "thank-help",
+              "distractorPhraseIds": [
+                "one-moment",
+                "need-help"
+              ]
+            },
+            {
+              "id": "recognise-09",
+              "kind": "match-pairs",
+              "phraseIds": [
+                "this-way",
+                "ask-manager",
+                "thank-help"
+              ]
+            },
+            {
+              "id": "recognise-10",
+              "kind": "listen-and-pick",
+              "phraseId": "one-moment",
+              "distractorPhraseIds": [
+                "dont-understand",
+                "ask-manager"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "lesson",
+      "id": "build-the-phrases",
+      "lessons": [
+        {
+          "id": "build-the-sentences",
+          "exercises": [
+            {
+              "id": "build-01",
+              "kind": "word-bank-translate",
+              "phraseId": "need-help",
+              "direction": "support-to-english"
+            },
+            {
+              "id": "build-02",
+              "kind": "fill-blank",
+              "phraseId": "dont-understand",
+              "before": "I don't ",
+              "after": ".",
+              "answer": "understand",
+              "distractors": [
+                "know",
+                "hear"
+              ]
+            },
+            {
+              "id": "build-03",
+              "kind": "word-bank-translate",
+              "phraseId": "say-again",
+              "direction": "english-to-support"
+            },
+            {
+              "id": "build-04",
+              "kind": "word-bank-translate",
+              "phraseId": "where-is",
+              "direction": "support-to-english"
+            },
+            {
+              "id": "build-05",
+              "kind": "select-meaning",
+              "phraseId": "this-way",
+              "distractorPhraseIds": [
+                "need-help",
+                "one-moment"
+              ]
+            },
+            {
+              "id": "build-06",
+              "kind": "fill-blank",
+              "phraseId": "ask-manager",
+              "before": "May I ask my ",
+              "after": "?",
+              "answer": "manager",
+              "distractors": [
+                "office",
+                "help"
+              ]
+            },
+            {
+              "id": "build-07",
+              "kind": "word-bank-translate",
+              "phraseId": "thank-help",
+              "direction": "support-to-english"
+            },
+            {
+              "id": "build-08",
+              "kind": "fill-blank",
+              "phraseId": "one-moment",
+              "before": "One moment, ",
+              "after": ".",
+              "answer": "please",
+              "distractors": [
+                "thanks",
+                "again"
+              ]
+            },
+            {
+              "id": "build-09",
+              "kind": "select-meaning",
+              "phraseId": "dont-understand",
+              "distractorPhraseIds": [
+                "say-again",
+                "this-way"
+              ]
+            },
+            {
+              "id": "build-10",
+              "kind": "word-bank-translate",
+              "phraseId": "ask-manager",
+              "direction": "english-to-support"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "lesson",
+      "id": "say-the-phrases",
+      "lessons": [
+        {
+          "id": "say-them-aloud",
+          "exercises": [
+            {
+              "id": "say-01",
+              "kind": "listen-and-pick",
+              "phraseId": "need-help",
+              "distractorPhraseIds": [
+                "dont-understand",
+                "say-again"
+              ]
+            },
+            {
+              "id": "say-02",
+              "kind": "speak-sentence",
+              "phraseId": "need-help"
+            },
+            {
+              "id": "say-03",
+              "kind": "type-what-you-hear",
+              "phraseId": "say-again"
+            },
+            {
+              "id": "say-04",
+              "kind": "speak-sentence",
+              "phraseId": "where-is"
+            },
+            {
+              "id": "say-05",
+              "kind": "fill-blank",
+              "phraseId": "this-way",
+              "before": "It's ",
+              "after": ".",
+              "answer": "this way",
+              "distractors": [
+                "that way",
+                "upstairs"
+              ]
+            },
+            {
+              "id": "say-06",
+              "kind": "speak-sentence",
+              "phraseId": "this-way"
+            },
+            {
+              "id": "say-07",
+              "kind": "speak-sentence",
+              "phraseId": "ask-manager"
+            },
+            {
+              "id": "say-08",
+              "kind": "type-what-you-hear",
+              "phraseId": "thank-help"
+            },
+            {
+              "id": "say-09",
+              "kind": "speak-sentence",
+              "phraseId": "one-moment"
+            },
+            {
+              "id": "say-10",
+              "kind": "speak-sentence",
+              "phraseId": "dont-understand"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "personal-practice",
+      "id": "revisit-the-phrases"
+    },
+    {
+      "kind": "speaking-roleplay",
+      "id": "use-the-phrases-aloud",
+      "setup": "You are a patient coworker. The learner is new and needs help finding the office. Answer simply and let them ask you to repeat.",
+      "learnerTask": {
+        "en": "You are new at work. Ask for help, say if you do not understand, and thank your coworker.",
+        "am": "በሥራ አዲስ ነዎት። እርዳታ ይጠይቁ፣ ካልገባዎት ይናገሩ እና የሥራ ባልደረባዎን ያመስግኑ።",
+        "om": "Bakka hojii haaraa dha. Gargaarsa gaafadhu, yoo hin hubanne himi, hojjetaa kee galateeffadhu."
+      },
+      "phraseIds": [
+        "need-help",
+        "dont-understand",
+        "say-again",
+        "where-is",
+        "thank-help",
+        "one-moment"
+      ]
+    },
+    {
+      "kind": "unit-review",
+      "id": "review-the-unit",
+      "lessons": [
+        {
+          "id": "review-the-phrases",
+          "exercises": [
+            {
+              "id": "review-01",
+              "kind": "select-meaning",
+              "phraseId": "one-moment",
+              "distractorPhraseIds": [
+                "need-help",
+                "where-is"
+              ]
+            },
+            {
+              "id": "review-02",
+              "kind": "match-pairs",
+              "phraseIds": [
+                "dont-understand",
+                "say-again",
+                "this-way",
+                "ask-manager"
+              ]
+            },
+            {
+              "id": "review-03",
+              "kind": "listen-and-pick",
+              "phraseId": "ask-manager",
+              "distractorPhraseIds": [
+                "thank-help",
+                "dont-understand"
+              ]
+            },
+            {
+              "id": "review-04",
+              "kind": "word-bank-translate",
+              "phraseId": "where-is",
+              "direction": "support-to-english"
+            },
+            {
+              "id": "review-05",
+              "kind": "fill-blank",
+              "phraseId": "need-help",
+              "before": "Can you help ",
+              "after": "?",
+              "answer": "me",
+              "distractors": [
+                "us",
+                "him"
+              ]
+            },
+            {
+              "id": "review-06",
+              "kind": "word-bank-translate",
+              "phraseId": "this-way",
+              "direction": "english-to-support"
+            },
+            {
+              "id": "review-07",
+              "kind": "type-what-you-hear",
+              "phraseId": "dont-understand"
+            },
+            {
+              "id": "review-08",
+              "kind": "speak-sentence",
+              "phraseId": "say-again"
+            },
+            {
+              "id": "review-09",
+              "kind": "speak-sentence",
+              "phraseId": "thank-help"
+            },
+            {
+              "id": "review-10",
+              "kind": "speak-sentence",
+              "phraseId": "one-moment"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

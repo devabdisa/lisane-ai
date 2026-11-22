@@ -1,0 +1,656 @@
+{
+  "id": "describe-your-day",
+  "section": "intro",
+  "position": 2,
+  "review": {
+    "en": "draft",
+    "am": "draft",
+    "om": "draft"
+  },
+  "guidebook": {
+    "en": {
+      "title": "Describe your day",
+      "goal": "Say when you wake up, go to work, and come home.",
+      "introduction": "A coworker asks about your day. Learn a few short sentences for times and places.",
+      "notes": [
+        {
+          "explanation": "Say the time with at. Then you can ask the other person.",
+          "examples": [
+            "wake-up",
+            "start-time",
+            "ask-start"
+          ]
+        },
+        {
+          "explanation": "By names how you travel. In the evening says when you go home.",
+          "examples": [
+            "commute",
+            "evening",
+            "finish-time"
+          ]
+        },
+        {
+          "explanation": "At home and at noon name the place or time of a meal.",
+          "examples": [
+            "breakfast",
+            "lunch"
+          ]
+        }
+      ]
+    },
+    "am": {
+      "title": "ቀንዎን ይግለጹ",
+      "goal": "መቼ እንደሚነሱ፣ ወደ ሥራ እንደሚሄዱ እና ወደ ቤት እንደሚመለሱ ይናገሩ።",
+      "introduction": "የሥራ ባልደረባ ስለ ቀንዎ ይጠይቃል። ለሰዓት እና ለቦታ ጥቂት አጫጭር ዓረፍተ ነገሮችን ይማሩ።",
+      "notes": [
+        {
+          "explanation": "ሰዓቱን at በማለት ይናገሩ። ከዚያም ሌላውን ሰው መጠየቅ ይችላሉ።",
+          "examples": [
+            "wake-up",
+            "start-time",
+            "ask-start"
+          ]
+        },
+        {
+          "explanation": "By መጓዝዎን ይገልጻል። In the evening መቼ ወደ ቤት እንደሚሄዱ ይናገራል።",
+          "examples": [
+            "commute",
+            "evening",
+            "finish-time"
+          ]
+        },
+        {
+          "explanation": "At home እና at noon የምግብ ቦታ ወይም ሰዓት ይሰይማሉ።",
+          "examples": [
+            "breakfast",
+            "lunch"
+          ]
+        }
+      ]
+    },
+    "om": {
+      "title": "Guyyaa kee ibsi",
+      "goal": "Yeroo kaatu, gara hojiitti deemtu fi gara manaatti deebitu himi.",
+      "introduction": "Hojjetaan waa'ee guyyaa kee si gaafata. Jechoota gabaabaa yeroo fi bakka ibsan muraasa baradhu.",
+      "notes": [
+        {
+          "explanation": "Sa'aatii at jedhii himi. Sana booda nama biraa gaafachuu dandeessa.",
+          "examples": [
+            "wake-up",
+            "start-time",
+            "ask-start"
+          ]
+        },
+        {
+          "explanation": "By akka deemtu ibsa. In the evening yeroo gara manaatti deebitu hima.",
+          "examples": [
+            "commute",
+            "evening",
+            "finish-time"
+          ]
+        },
+        {
+          "explanation": "At home fi at noon bakka ykn yeroo nyaataa moggaasa.",
+          "examples": [
+            "breakfast",
+            "lunch"
+          ]
+        }
+      ]
+    }
+  },
+  "phrases": [
+    {
+      "id": "wake-up",
+      "english": {
+        "text": "I wake up at six."
+      },
+      "meaning": {
+        "en": {
+          "text": "I get out of bed at 6."
+        },
+        "am": {
+          "text": "ስድስት ሰዓት እነሳለሁ።"
+        },
+        "om": {
+          "text": "Sa'aatii ja'atti ka'a."
+        }
+      },
+      "hint": {
+        "en": "Use at before the hour.",
+        "am": "ከሰዓቱ በፊት at ይጠቀሙ።",
+        "om": "Sa'aatii dura at fayyadami."
+      }
+    },
+    {
+      "id": "breakfast",
+      "english": {
+        "text": "I eat breakfast at home."
+      },
+      "meaning": {
+        "en": {
+          "text": "I have my morning meal at home."
+        },
+        "am": {
+          "text": "ቁርስ በቤት እበላለሁ።"
+        },
+        "om": {
+          "text": "Ijaaja mana keessatti nyaadha."
+        }
+      },
+      "hint": {
+        "en": "At home names the place.",
+        "am": "At home ቦታውን ይሰይማል።",
+        "om": "At home bakka ibsa."
+      }
+    },
+    {
+      "id": "commute",
+      "english": {
+        "text": "I go to work by bus."
+      },
+      "meaning": {
+        "en": {
+          "text": "The bus takes me to work."
+        },
+        "am": {
+          "text": "ወደ ሥራ በአውቶቡስ እሄዳለሁ።"
+        },
+        "om": {
+          "text": "Gara hojiitti awutoobusiin deema."
+        }
+      },
+      "hint": {
+        "en": "By names the transport.",
+        "am": "By መጓጓዣውን ይሰይማል።",
+        "om": "By geejjibaa moggaasa."
+      }
+    },
+    {
+      "id": "start-time",
+      "english": {
+        "text": "I start work at eight."
+      },
+      "meaning": {
+        "en": {
+          "text": "My work begins at 8."
+        },
+        "am": {
+          "text": "ስምንት ሰዓት ሥራ እጀምራለሁ።"
+        },
+        "om": {
+          "text": "Hojii sa'aatii saddeettiitti jalqaba."
+        }
+      },
+      "hint": {
+        "en": "Use this for the hour you begin.",
+        "am": "ሥራ ለሚጀምሩበት ሰዓት ይህንን ይጠቀሙ።",
+        "om": "Sa'aatii hojii itti eegaltuuf kanaan fayyadami."
+      }
+    },
+    {
+      "id": "lunch",
+      "english": {
+        "text": "I eat lunch at noon."
+      },
+      "meaning": {
+        "en": {
+          "text": "I have my midday meal at 12."
+        },
+        "am": {
+          "text": "ቀትር ላይ ምሳ እበላለሁ።"
+        },
+        "om": {
+          "text": "Laaqana guyyaa walakkaa nyaadha."
+        }
+      },
+      "hint": {
+        "en": "Noon is the middle of the day.",
+        "am": "Noon የቀኑ መሃል ነው።",
+        "om": "Noon walakkaa guyyaati."
+      }
+    },
+    {
+      "id": "finish-time",
+      "english": {
+        "text": "I finish work at five."
+      },
+      "meaning": {
+        "en": {
+          "text": "My work ends at 5."
+        },
+        "am": {
+          "text": "አምስት ሰዓት ሥራ እጨርሳለሁ።"
+        },
+        "om": {
+          "text": "Hojii sa'aatii shanitti xumura."
+        }
+      },
+      "hint": {
+        "en": "Finish means the workday ends.",
+        "am": "Finish የሥራ ቀን ማለቁን ይገልጻል።",
+        "om": "Finish hojiin guyyaa akka xumuramu ibsa."
+      }
+    },
+    {
+      "id": "evening",
+      "english": {
+        "text": "I go home in the evening."
+      },
+      "meaning": {
+        "en": {
+          "text": "I return home later in the day."
+        },
+        "am": {
+          "text": "ማታ ወደ ቤት እመለሳለሁ።"
+        },
+        "om": {
+          "text": "Galgala gara manaatti deebi'a."
+        }
+      },
+      "hint": {
+        "en": "In the evening names the time of day.",
+        "am": "In the evening የቀኑን ሰዓት ይሰይማል።",
+        "om": "In the evening yeroo guyyaa ibsa."
+      }
+    },
+    {
+      "id": "ask-start",
+      "english": {
+        "text": "What time do you start?"
+      },
+      "meaning": {
+        "en": {
+          "text": "When do you begin?"
+        },
+        "am": {
+          "text": "ስንት ሰዓት ይጀምራሉ?"
+        },
+        "om": {
+          "text": "Sa'aatii meeqa hojii jalqabdu?"
+        }
+      },
+      "hint": {
+        "en": "Use this to ask about someone's start time.",
+        "am": "የሰውን የመጀመሪያ ሰዓት ለመጠየቅ ይህንን ይጠቀሙ።",
+        "om": "Yeroo nama biraa gaafachuuf kanaan fayyadami."
+      }
+    }
+  ],
+  "levels": [
+    {
+      "kind": "lesson",
+      "id": "recognise-the-phrases",
+      "lessons": [
+        {
+          "id": "understand-the-phrases",
+          "exercises": [
+            {
+              "id": "recognise-01",
+              "kind": "select-meaning",
+              "phraseId": "wake-up",
+              "distractorPhraseIds": [
+                "breakfast",
+                "commute"
+              ]
+            },
+            {
+              "id": "recognise-02",
+              "kind": "select-meaning",
+              "phraseId": "breakfast",
+              "distractorPhraseIds": [
+                "wake-up",
+                "start-time"
+              ]
+            },
+            {
+              "id": "recognise-03",
+              "kind": "select-meaning",
+              "phraseId": "commute",
+              "distractorPhraseIds": [
+                "lunch",
+                "wake-up"
+              ]
+            },
+            {
+              "id": "recognise-04",
+              "kind": "match-pairs",
+              "phraseIds": [
+                "wake-up",
+                "breakfast",
+                "commute",
+                "start-time"
+              ]
+            },
+            {
+              "id": "recognise-05",
+              "kind": "listen-and-pick",
+              "phraseId": "start-time",
+              "distractorPhraseIds": [
+                "wake-up",
+                "lunch"
+              ]
+            },
+            {
+              "id": "recognise-06",
+              "kind": "select-meaning",
+              "phraseId": "lunch",
+              "distractorPhraseIds": [
+                "finish-time",
+                "breakfast"
+              ]
+            },
+            {
+              "id": "recognise-07",
+              "kind": "select-meaning",
+              "phraseId": "finish-time",
+              "distractorPhraseIds": [
+                "evening",
+                "commute"
+              ]
+            },
+            {
+              "id": "recognise-08",
+              "kind": "listen-and-pick",
+              "phraseId": "evening",
+              "distractorPhraseIds": [
+                "ask-start",
+                "wake-up"
+              ]
+            },
+            {
+              "id": "recognise-09",
+              "kind": "match-pairs",
+              "phraseIds": [
+                "lunch",
+                "finish-time",
+                "evening"
+              ]
+            },
+            {
+              "id": "recognise-10",
+              "kind": "listen-and-pick",
+              "phraseId": "ask-start",
+              "distractorPhraseIds": [
+                "breakfast",
+                "finish-time"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "lesson",
+      "id": "build-the-phrases",
+      "lessons": [
+        {
+          "id": "build-the-sentences",
+          "exercises": [
+            {
+              "id": "build-01",
+              "kind": "word-bank-translate",
+              "phraseId": "wake-up",
+              "direction": "support-to-english"
+            },
+            {
+              "id": "build-02",
+              "kind": "fill-blank",
+              "phraseId": "breakfast",
+              "before": "I eat breakfast at ",
+              "after": ".",
+              "answer": "home",
+              "distractors": [
+                "work",
+                "noon"
+              ]
+            },
+            {
+              "id": "build-03",
+              "kind": "word-bank-translate",
+              "phraseId": "commute",
+              "direction": "english-to-support"
+            },
+            {
+              "id": "build-04",
+              "kind": "word-bank-translate",
+              "phraseId": "start-time",
+              "direction": "support-to-english"
+            },
+            {
+              "id": "build-05",
+              "kind": "select-meaning",
+              "phraseId": "lunch",
+              "distractorPhraseIds": [
+                "wake-up",
+                "ask-start"
+              ]
+            },
+            {
+              "id": "build-06",
+              "kind": "fill-blank",
+              "phraseId": "finish-time",
+              "before": "I finish work at ",
+              "after": ".",
+              "answer": "five",
+              "distractors": [
+                "six",
+                "four"
+              ]
+            },
+            {
+              "id": "build-07",
+              "kind": "word-bank-translate",
+              "phraseId": "evening",
+              "direction": "support-to-english"
+            },
+            {
+              "id": "build-08",
+              "kind": "fill-blank",
+              "phraseId": "ask-start",
+              "before": "What time do you ",
+              "after": "?",
+              "answer": "start",
+              "distractors": [
+                "finish",
+                "eat"
+              ]
+            },
+            {
+              "id": "build-09",
+              "kind": "select-meaning",
+              "phraseId": "breakfast",
+              "distractorPhraseIds": [
+                "commute",
+                "lunch"
+              ]
+            },
+            {
+              "id": "build-10",
+              "kind": "word-bank-translate",
+              "phraseId": "finish-time",
+              "direction": "english-to-support"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "lesson",
+      "id": "say-the-phrases",
+      "lessons": [
+        {
+          "id": "say-them-aloud",
+          "exercises": [
+            {
+              "id": "say-01",
+              "kind": "listen-and-pick",
+              "phraseId": "wake-up",
+              "distractorPhraseIds": [
+                "breakfast",
+                "commute"
+              ]
+            },
+            {
+              "id": "say-02",
+              "kind": "speak-sentence",
+              "phraseId": "wake-up"
+            },
+            {
+              "id": "say-03",
+              "kind": "type-what-you-hear",
+              "phraseId": "commute"
+            },
+            {
+              "id": "say-04",
+              "kind": "speak-sentence",
+              "phraseId": "start-time"
+            },
+            {
+              "id": "say-05",
+              "kind": "fill-blank",
+              "phraseId": "lunch",
+              "before": "I eat lunch at ",
+              "after": ".",
+              "answer": "noon",
+              "distractors": [
+                "night",
+                "home"
+              ]
+            },
+            {
+              "id": "say-06",
+              "kind": "speak-sentence",
+              "phraseId": "lunch"
+            },
+            {
+              "id": "say-07",
+              "kind": "speak-sentence",
+              "phraseId": "finish-time"
+            },
+            {
+              "id": "say-08",
+              "kind": "type-what-you-hear",
+              "phraseId": "evening"
+            },
+            {
+              "id": "say-09",
+              "kind": "speak-sentence",
+              "phraseId": "ask-start"
+            },
+            {
+              "id": "say-10",
+              "kind": "speak-sentence",
+              "phraseId": "breakfast"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "personal-practice",
+      "id": "revisit-the-phrases"
+    },
+    {
+      "kind": "speaking-roleplay",
+      "id": "use-the-phrases-aloud",
+      "setup": "You are a friendly coworker. Ask about the learner's day one question at a time: when they wake up, how they get to work, and when they go home. Keep your questions short.",
+      "learnerTask": {
+        "en": "A coworker asks about your day. Say when you wake up, how you go to work, and when you go home.",
+        "am": "የሥራ ባልደረባ ስለ ቀንዎ ይጠይቃል። መቼ እንደሚነሱ፣ ወደ ሥራ እንዴት እንደሚሄዱ እና መቼ ወደ ቤት እንደሚመለሱ ይናገሩ።",
+        "om": "Hojjetaan waa'ee guyyaa kee si gaafata. Yeroo kaatu, akka gara hojiitti deemtu fi yeroo gara manaatti deebitu himi."
+      },
+      "phraseIds": [
+        "wake-up",
+        "commute",
+        "start-time",
+        "finish-time",
+        "evening",
+        "ask-start"
+      ]
+    },
+    {
+      "kind": "unit-review",
+      "id": "review-the-unit",
+      "lessons": [
+        {
+          "id": "review-the-phrases",
+          "exercises": [
+            {
+              "id": "review-01",
+              "kind": "select-meaning",
+              "phraseId": "ask-start",
+              "distractorPhraseIds": [
+                "wake-up",
+                "start-time"
+              ]
+            },
+            {
+              "id": "review-02",
+              "kind": "match-pairs",
+              "phraseIds": [
+                "breakfast",
+                "commute",
+                "lunch",
+                "finish-time"
+              ]
+            },
+            {
+              "id": "review-03",
+              "kind": "listen-and-pick",
+              "phraseId": "finish-time",
+              "distractorPhraseIds": [
+                "evening",
+                "breakfast"
+              ]
+            },
+            {
+              "id": "review-04",
+              "kind": "word-bank-translate",
+              "phraseId": "start-time",
+              "direction": "support-to-english"
+            },
+            {
+              "id": "review-05",
+              "kind": "fill-blank",
+              "phraseId": "wake-up",
+              "before": "I wake up at ",
+              "after": ".",
+              "answer": "six",
+              "distractors": [
+                "seven",
+                "nine"
+              ]
+            },
+            {
+              "id": "review-06",
+              "kind": "word-bank-translate",
+              "phraseId": "lunch",
+              "direction": "english-to-support"
+            },
+            {
+              "id": "review-07",
+              "kind": "type-what-you-hear",
+              "phraseId": "breakfast"
+            },
+            {
+              "id": "review-08",
+              "kind": "speak-sentence",
+              "phraseId": "commute"
+            },
+            {
+              "id": "review-09",
+              "kind": "speak-sentence",
+              "phraseId": "evening"
+            },
+            {
+              "id": "review-10",
+              "kind": "speak-sentence",
+              "phraseId": "ask-start"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

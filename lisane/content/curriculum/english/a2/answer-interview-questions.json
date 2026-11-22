@@ -1,0 +1,656 @@
+{
+  "id": "answer-interview-questions",
+  "section": "a2",
+  "position": 1,
+  "review": {
+    "en": "draft",
+    "am": "draft",
+    "om": "draft"
+  },
+  "guidebook": {
+    "en": {
+      "title": "Answer interview questions",
+      "goal": "Say why you want the job, name a strength, and ask one question.",
+      "introduction": "A short interview uses a few clear answers. You do not need a long story.",
+      "notes": [
+        {
+          "explanation": "I want and I can answer the first questions.",
+          "examples": [
+            "why-job",
+            "available",
+            "question-back"
+          ]
+        },
+        {
+          "explanation": "These name how you work with other people.",
+          "examples": [
+            "strength",
+            "team",
+            "learn-fast"
+          ]
+        },
+        {
+          "explanation": "A past job can be one short sentence.",
+          "examples": [
+            "experience",
+            "thank-interview"
+          ]
+        }
+      ]
+    },
+    "am": {
+      "title": "የቃለ መጠይቅ ጥያቄዎችን ይመልሱ",
+      "goal": "ሥራውን ለምን እንደሚፈልጉ ይናገሩ፣ አንድ ጥንካሬ ይጥቀሱ እና አንድ ጥያቄ ይጠይቁ።",
+      "introduction": "አጭር ቃለ መጠይቅ ጥቂት ግልጽ መልሶችን ይጠቀማል። ረጅም ታሪክ አያስፈልግም።",
+      "notes": [
+        {
+          "explanation": "I want እና I can የመጀመሪያዎቹን ጥያቄዎች ይመልሳሉ።",
+          "examples": [
+            "why-job",
+            "available",
+            "question-back"
+          ]
+        },
+        {
+          "explanation": "እነዚህ ከሰዎች ጋር እንዴት እንደሚሠሩ ይገልጻሉ።",
+          "examples": [
+            "strength",
+            "team",
+            "learn-fast"
+          ]
+        },
+        {
+          "explanation": "ያለፈ ሥራ አንድ አጭር ዓረፍተ ነገር ሊሆን ይችላል።",
+          "examples": [
+            "experience",
+            "thank-interview"
+          ]
+        }
+      ]
+    },
+    "om": {
+      "title": "Gaaffii af-gaaffii deebisi",
+      "goal": "Maaliif hojii kana barbaaddu himi, cimina kee tokko ibsi, gaaffii tokko gaafadhu.",
+      "introduction": "Af-gaaffiin gabaabaan deebii ifa muraasa fayyadama. Seenaa dheeraa hin barbaachisu.",
+      "notes": [
+        {
+          "explanation": "I want fi I can gaaffii jalqabaa deebisu.",
+          "examples": [
+            "why-job",
+            "available",
+            "question-back"
+          ]
+        },
+        {
+          "explanation": "Isaan kun nama biraa waliin akka hojjettu ibsu.",
+          "examples": [
+            "strength",
+            "team",
+            "learn-fast"
+          ]
+        },
+        {
+          "explanation": "Hojii darbe tokko jecha gabaabaa tokko ta'uu danda'a.",
+          "examples": [
+            "experience",
+            "thank-interview"
+          ]
+        }
+      ]
+    }
+  },
+  "phrases": [
+    {
+      "id": "why-job",
+      "english": {
+        "text": "I want this job."
+      },
+      "meaning": {
+        "en": {
+          "text": "This is the job I hope to get."
+        },
+        "am": {
+          "text": "ይህን ሥራ እፈልጋለሁ።"
+        },
+        "om": {
+          "text": "Hojii kana barbaada."
+        }
+      },
+      "hint": {
+        "en": "Want names what you hope for.",
+        "am": "Want የሚፈልጉትን ይሰይማል።",
+        "om": "Want waan barbaaddu moggaasa."
+      }
+    },
+    {
+      "id": "strength",
+      "english": {
+        "text": "I am a careful worker."
+      },
+      "meaning": {
+        "en": {
+          "text": "I work with care."
+        },
+        "am": {
+          "text": "ጥንቃቄ ያለኝ ሠራተኛ ነኝ።"
+        },
+        "om": {
+          "text": "Hojjetaa of eeggannoo qabuun dha."
+        }
+      },
+      "hint": {
+        "en": "Careful describes how you work.",
+        "am": "Careful እንዴት እንደሚሠሩ ይገልጻል።",
+        "om": "Careful akka hojjettu ibsa."
+      }
+    },
+    {
+      "id": "team",
+      "english": {
+        "text": "I work well with people."
+      },
+      "meaning": {
+        "en": {
+          "text": "I cooperate with other people."
+        },
+        "am": {
+          "text": "ከሰዎች ጋር በደንብ እሠራለሁ።"
+        },
+        "om": {
+          "text": "Nama waliin gaariitti hojjedha."
+        }
+      },
+      "hint": {
+        "en": "With people names your team.",
+        "am": "With people ቡድንዎን ይሰይማል።",
+        "om": "With people garee kee ibsa."
+      }
+    },
+    {
+      "id": "experience",
+      "english": {
+        "text": "I worked in a shop."
+      },
+      "meaning": {
+        "en": {
+          "text": "A shop was my past workplace."
+        },
+        "am": {
+          "text": "በሱቅ ውስጥ ሠርቻለሁ።"
+        },
+        "om": {
+          "text": "Suuqii keessatti hojjedheera."
+        }
+      },
+      "hint": {
+        "en": "Worked is the past of work.",
+        "am": "Worked የ work ያለፈ ጊዜ ነው።",
+        "om": "Worked yeroo darbe hojjechuudha."
+      }
+    },
+    {
+      "id": "learn-fast",
+      "english": {
+        "text": "I learn quickly."
+      },
+      "meaning": {
+        "en": {
+          "text": "I pick things up fast."
+        },
+        "am": {
+          "text": "በፍጥነት እማራለሁ።"
+        },
+        "om": {
+          "text": "Dafnee baradha."
+        }
+      },
+      "hint": {
+        "en": "Quickly tells the speed.",
+        "am": "Quickly ፍጥነቱን ይነግራል።",
+        "om": "Quickly saffisa hima."
+      }
+    },
+    {
+      "id": "question-back",
+      "english": {
+        "text": "May I ask a question?"
+      },
+      "meaning": {
+        "en": {
+          "text": "I would like to ask something."
+        },
+        "am": {
+          "text": "ጥያቄ ልጠይቅ?"
+        },
+        "om": {
+          "text": "Gaaffii gaafadhaa?"
+        }
+      },
+      "hint": {
+        "en": "Use this near the end of the interview.",
+        "am": "ይህንን ወደ ቃለ መጠይቁ መጨረሻ ይጠቀሙ።",
+        "om": "Xumura af-gaaffii irratti kanaan fayyadami."
+      }
+    },
+    {
+      "id": "available",
+      "english": {
+        "text": "I can start on Monday."
+      },
+      "meaning": {
+        "en": {
+          "text": "Monday is the day I can begin."
+        },
+        "am": {
+          "text": "ሰኞ መጀመር እችላለሁ።"
+        },
+        "om": {
+          "text": "Wiixata jalqabuu nan danda'a."
+        }
+      },
+      "hint": {
+        "en": "On Monday names the day.",
+        "am": "On Monday ቀኑን ይሰይማል።",
+        "om": "On Monday guyyaa moggaasa."
+      }
+    },
+    {
+      "id": "thank-interview",
+      "english": {
+        "text": "Thank you for your time."
+      },
+      "meaning": {
+        "en": {
+          "text": "I appreciate the time you gave me."
+        },
+        "am": {
+          "text": "ስለ ጊዜዎ አመሰግናለሁ።"
+        },
+        "om": {
+          "text": "Yeroo keetiif galatoomi."
+        }
+      },
+      "hint": {
+        "en": "Say this when the interview ends.",
+        "am": "ቃለ መጠይቁ ሲያልቅ ይህንን ይበሉ።",
+        "om": "Af-gaaffiin yoo xumuramu kana jedhi."
+      }
+    }
+  ],
+  "levels": [
+    {
+      "kind": "lesson",
+      "id": "recognise-the-phrases",
+      "lessons": [
+        {
+          "id": "understand-the-phrases",
+          "exercises": [
+            {
+              "id": "recognise-01",
+              "kind": "select-meaning",
+              "phraseId": "why-job",
+              "distractorPhraseIds": [
+                "strength",
+                "team"
+              ]
+            },
+            {
+              "id": "recognise-02",
+              "kind": "select-meaning",
+              "phraseId": "strength",
+              "distractorPhraseIds": [
+                "why-job",
+                "experience"
+              ]
+            },
+            {
+              "id": "recognise-03",
+              "kind": "select-meaning",
+              "phraseId": "team",
+              "distractorPhraseIds": [
+                "learn-fast",
+                "why-job"
+              ]
+            },
+            {
+              "id": "recognise-04",
+              "kind": "match-pairs",
+              "phraseIds": [
+                "why-job",
+                "strength",
+                "team",
+                "experience"
+              ]
+            },
+            {
+              "id": "recognise-05",
+              "kind": "listen-and-pick",
+              "phraseId": "experience",
+              "distractorPhraseIds": [
+                "why-job",
+                "learn-fast"
+              ]
+            },
+            {
+              "id": "recognise-06",
+              "kind": "select-meaning",
+              "phraseId": "learn-fast",
+              "distractorPhraseIds": [
+                "question-back",
+                "strength"
+              ]
+            },
+            {
+              "id": "recognise-07",
+              "kind": "select-meaning",
+              "phraseId": "question-back",
+              "distractorPhraseIds": [
+                "available",
+                "team"
+              ]
+            },
+            {
+              "id": "recognise-08",
+              "kind": "listen-and-pick",
+              "phraseId": "available",
+              "distractorPhraseIds": [
+                "thank-interview",
+                "why-job"
+              ]
+            },
+            {
+              "id": "recognise-09",
+              "kind": "match-pairs",
+              "phraseIds": [
+                "learn-fast",
+                "question-back",
+                "available"
+              ]
+            },
+            {
+              "id": "recognise-10",
+              "kind": "listen-and-pick",
+              "phraseId": "thank-interview",
+              "distractorPhraseIds": [
+                "strength",
+                "question-back"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "lesson",
+      "id": "build-the-phrases",
+      "lessons": [
+        {
+          "id": "build-the-sentences",
+          "exercises": [
+            {
+              "id": "build-01",
+              "kind": "word-bank-translate",
+              "phraseId": "why-job",
+              "direction": "support-to-english"
+            },
+            {
+              "id": "build-02",
+              "kind": "fill-blank",
+              "phraseId": "strength",
+              "before": "I am a careful ",
+              "after": ".",
+              "answer": "worker",
+              "distractors": [
+                "job",
+                "shop"
+              ]
+            },
+            {
+              "id": "build-03",
+              "kind": "word-bank-translate",
+              "phraseId": "team",
+              "direction": "english-to-support"
+            },
+            {
+              "id": "build-04",
+              "kind": "word-bank-translate",
+              "phraseId": "experience",
+              "direction": "support-to-english"
+            },
+            {
+              "id": "build-05",
+              "kind": "select-meaning",
+              "phraseId": "learn-fast",
+              "distractorPhraseIds": [
+                "why-job",
+                "thank-interview"
+              ]
+            },
+            {
+              "id": "build-06",
+              "kind": "fill-blank",
+              "phraseId": "question-back",
+              "before": "May I ask a ",
+              "after": "?",
+              "answer": "question",
+              "distractors": [
+                "time",
+                "job"
+              ]
+            },
+            {
+              "id": "build-07",
+              "kind": "word-bank-translate",
+              "phraseId": "available",
+              "direction": "support-to-english"
+            },
+            {
+              "id": "build-08",
+              "kind": "fill-blank",
+              "phraseId": "thank-interview",
+              "before": "Thank you for your ",
+              "after": ".",
+              "answer": "time",
+              "distractors": [
+                "help",
+                "job"
+              ]
+            },
+            {
+              "id": "build-09",
+              "kind": "select-meaning",
+              "phraseId": "strength",
+              "distractorPhraseIds": [
+                "team",
+                "learn-fast"
+              ]
+            },
+            {
+              "id": "build-10",
+              "kind": "word-bank-translate",
+              "phraseId": "question-back",
+              "direction": "english-to-support"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "lesson",
+      "id": "say-the-phrases",
+      "lessons": [
+        {
+          "id": "say-them-aloud",
+          "exercises": [
+            {
+              "id": "say-01",
+              "kind": "listen-and-pick",
+              "phraseId": "why-job",
+              "distractorPhraseIds": [
+                "strength",
+                "team"
+              ]
+            },
+            {
+              "id": "say-02",
+              "kind": "speak-sentence",
+              "phraseId": "why-job"
+            },
+            {
+              "id": "say-03",
+              "kind": "type-what-you-hear",
+              "phraseId": "team"
+            },
+            {
+              "id": "say-04",
+              "kind": "speak-sentence",
+              "phraseId": "experience"
+            },
+            {
+              "id": "say-05",
+              "kind": "fill-blank",
+              "phraseId": "learn-fast",
+              "before": "I learn ",
+              "after": ".",
+              "answer": "quickly",
+              "distractors": [
+                "slowly",
+                "well"
+              ]
+            },
+            {
+              "id": "say-06",
+              "kind": "speak-sentence",
+              "phraseId": "learn-fast"
+            },
+            {
+              "id": "say-07",
+              "kind": "speak-sentence",
+              "phraseId": "question-back"
+            },
+            {
+              "id": "say-08",
+              "kind": "type-what-you-hear",
+              "phraseId": "available"
+            },
+            {
+              "id": "say-09",
+              "kind": "speak-sentence",
+              "phraseId": "thank-interview"
+            },
+            {
+              "id": "say-10",
+              "kind": "speak-sentence",
+              "phraseId": "strength"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "personal-practice",
+      "id": "revisit-the-phrases"
+    },
+    {
+      "kind": "speaking-roleplay",
+      "id": "use-the-phrases-aloud",
+      "setup": "You are a calm interviewer. Ask why the learner wants the job, how they work with people, and when they can start. Ask one short question at a time.",
+      "learnerTask": {
+        "en": "You are in a short interview. Say why you want the job, name one strength, and thank the interviewer.",
+        "am": "በአጭር ቃለ መጠይቅ ላይ ነዎት። ሥራውን ለምን እንደሚፈልጉ ይናገሩ፣ አንድ ጥንካሬ ይጥቀሱ እና ቃለ መጠይቅ አድራጊውን ያመስግኑ።",
+        "om": "Af-gaaffii gabaabaa irratti jirta. Maaliif hojii kana barbaaddu himi, cimina tokko ibsi, nama af-gaaffii galateeffadhu."
+      },
+      "phraseIds": [
+        "why-job",
+        "strength",
+        "team",
+        "experience",
+        "available",
+        "thank-interview"
+      ]
+    },
+    {
+      "kind": "unit-review",
+      "id": "review-the-unit",
+      "lessons": [
+        {
+          "id": "review-the-phrases",
+          "exercises": [
+            {
+              "id": "review-01",
+              "kind": "select-meaning",
+              "phraseId": "thank-interview",
+              "distractorPhraseIds": [
+                "why-job",
+                "experience"
+              ]
+            },
+            {
+              "id": "review-02",
+              "kind": "match-pairs",
+              "phraseIds": [
+                "strength",
+                "team",
+                "learn-fast",
+                "question-back"
+              ]
+            },
+            {
+              "id": "review-03",
+              "kind": "listen-and-pick",
+              "phraseId": "question-back",
+              "distractorPhraseIds": [
+                "available",
+                "strength"
+              ]
+            },
+            {
+              "id": "review-04",
+              "kind": "word-bank-translate",
+              "phraseId": "experience",
+              "direction": "support-to-english"
+            },
+            {
+              "id": "review-05",
+              "kind": "fill-blank",
+              "phraseId": "why-job",
+              "before": "I want this ",
+              "after": ".",
+              "answer": "job",
+              "distractors": [
+                "shop",
+                "time"
+              ]
+            },
+            {
+              "id": "review-06",
+              "kind": "word-bank-translate",
+              "phraseId": "learn-fast",
+              "direction": "english-to-support"
+            },
+            {
+              "id": "review-07",
+              "kind": "type-what-you-hear",
+              "phraseId": "strength"
+            },
+            {
+              "id": "review-08",
+              "kind": "speak-sentence",
+              "phraseId": "team"
+            },
+            {
+              "id": "review-09",
+              "kind": "speak-sentence",
+              "phraseId": "available"
+            },
+            {
+              "id": "review-10",
+              "kind": "speak-sentence",
+              "phraseId": "thank-interview"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

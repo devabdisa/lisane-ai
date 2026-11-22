@@ -54,6 +54,7 @@ if (missing.length) {
     }
     await writeFile(file, Buffer.from(audio.data, "base64"), { flag: "wx" });
     console.log(`Generated ${path}`);
+    await new Promise((resolve) => setTimeout(resolve, 2500));
   }
 }
 console.log(`Lesson audio ready for ${sentences.size} English sentences.`);

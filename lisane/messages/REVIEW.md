@@ -257,6 +257,7 @@ still listed here, so reviewed text is never overwritten.
 | `Profile.speaking` | Speaking time | የንግግር ጊዜ | quality: high |
 | `Profile.speakingHint` | Lessons stay free. Speaking time can be extended with Chapa. | ትምህርቶች ነጻ ሆነው ይቆያሉ። የመናገር ጊዜ በቻፓ ሊራዘም ይችላል። | quality: high |
 | `Profile.speakingPlans` | See plans | ዕቅዶችን ይመልከቱ | quality: high |
+| `Navigation.plans` | Plans | ዕቅዶች | quality: high |
 
 ## Afaan Oromo (om)
 
@@ -537,3 +538,4 @@ still listed here, so reviewed text is never overwritten.
 | `Profile.speaking` | Speaking time | Yeroo dubbachuu | quality: high |
 | `Profile.speakingHint` | Lessons stay free. Speaking time can be extended with Chapa. | Barnoonni bilisa ta'anii itti fufu. Yeroo dubbii Chapa'n dheeressuun ni danda'ama. | quality: high |
 | `Profile.speakingPlans` | See plans | Karooraawwan ilaali | quality: high |
+| `Navigation.plans` | Plans | Karoora | quality: high |
