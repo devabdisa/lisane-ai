@@ -99,6 +99,7 @@ export async function startCheckout(params: {
   productId: string;
   locale: string;
   organizationName?: string;
+  returnOrigin?: string;
 }) {
   const product = paymentProduct(params.productId);
   if (!product) return { status: "invalid" as const };
@@ -116,6 +117,7 @@ export async function startCheckout(params: {
   });
   const [firstName, ...rest] = params.name.trim().split(/\s+/);
   const origin = appOrigin();
+  const returnOrigin = (params.returnOrigin ?? origin).replace(/\/$/, "");
   try {
     const checkoutUrl = await initializeChapa({
       amount: product.amountEtb,
@@ -124,7 +126,7 @@ export async function startCheckout(params: {
       lastName: rest.join(" ") || "Lisane",
       txRef,
       callbackUrl: `${origin}/api/payments/chapa`,
-      returnUrl: `${origin}/${params.locale}/plans/return?tx_ref=${encodeURIComponent(txRef)}`,
+      returnUrl: `${returnOrigin}/${params.locale}/plans/return?tx_ref=${encodeURIComponent(txRef)}`,
       title: "Lisane AI",
     });
     return { status: "ready" as const, checkoutUrl };

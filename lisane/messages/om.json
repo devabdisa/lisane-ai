@@ -182,6 +182,9 @@
   "Plans": {
     "title": "Yeroo dubbachuu",
     "freeLeft": "{minutes} daqiiqaawwan bilisaa har'aaf hafan. Barumsonni bilisa ta'anii itti fufu.",
+    "minutesNow": "Har'a daqiiqaa {minutes} hafe",
+    "payAmount": "Birr {amount} kaffalaa",
+    "chapaNext": "Chapan itti aansee banama. Yeroon dubbii kaffaltiin mirkanaa'een jalqaba.",
     "plusActive": "Paasiin Plus keessan hojii irra jira.",
     "schoolActive": "Isin {name} waliin dubbachaa jirtu.",
     "plusTitle": "Plus guyyoota 30f",

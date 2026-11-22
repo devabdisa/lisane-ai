@@ -182,6 +182,9 @@
   "Plans": {
     "title": "Speaking time",
     "freeLeft": "{minutes} free minutes left today. Lessons stay free.",
+    "minutesNow": "{minutes} min left today",
+    "payAmount": "Pay {amount} birr",
+    "chapaNext": "Chapa opens next. Speaking time starts when the payment is confirmed.",
     "plusActive": "Your Plus pass is active.",
     "schoolActive": "You are speaking with {name}.",
     "plusTitle": "Plus for 30 days",

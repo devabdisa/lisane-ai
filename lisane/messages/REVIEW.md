@@ -254,6 +254,9 @@ still listed here, so reviewed text is never overwritten.
 | `Plans.returnPending` | Chapa has not confirmed this payment yet. | ቻፓ ይህንን ክፍያ እስካሁን አላረጋገጠም። | quality: high |
 | `Plans.startSpeaking` | Start speaking | መናገር ጀምር | quality: high |
 | `Plans.backToPlans` | Back to plans | ወደ ዕቅዶች ተመለስ | quality: high |
+| `Plans.minutesNow` | {minutes} min left today | ዛሬ {minutes} ደቂቃ ቀርቷል | quality: high |
+| `Plans.payAmount` | Pay {amount} birr | {amount} ብር ይክፈሉ | quality: high |
+| `Plans.chapaNext` | Chapa opens next. Speaking time starts when the payment is confirmed. | ቻፓ በመቀጠል ይከፈታል። ክፍያው ሲረጋገጥ የመናገር ጊዜ ይጀምራል። | quality: high |
 | `Profile.speaking` | Speaking time | የንግግር ጊዜ | quality: high |
 | `Profile.speakingHint` | Lessons stay free. Speaking time can be extended with Chapa. | ትምህርቶች ነጻ ሆነው ይቆያሉ። የመናገር ጊዜ በቻፓ ሊራዘም ይችላል። | quality: high |
 | `Profile.speakingPlans` | See plans | ዕቅዶችን ይመልከቱ | quality: high |
@@ -535,6 +538,9 @@ still listed here, so reviewed text is never overwritten.
 | `Plans.returnPending` | Chapa has not confirmed this payment yet. | Chaappaan kaffaltii kana ammayyuu hin mirkaneessine. | quality: high |
 | `Plans.startSpeaking` | Start speaking | Dubbachuu jalqabi | quality: high |
 | `Plans.backToPlans` | Back to plans | Gara karoorawwaniitti deebi'i | quality: high |
+| `Plans.minutesNow` | {minutes} min left today | Har'a daqiiqaa {minutes} hafe | quality: high |
+| `Plans.payAmount` | Pay {amount} birr | Birr {amount} kaffalaa | quality: high |
+| `Plans.chapaNext` | Chapa opens next. Speaking time starts when the payment is confirmed. | Chapan itti aansee banama. Yeroon dubbii kaffaltiin mirkanaa'een jalqaba. | quality: high |
 | `Profile.speaking` | Speaking time | Yeroo dubbachuu | quality: high |
 | `Profile.speakingHint` | Lessons stay free. Speaking time can be extended with Chapa. | Barnoonni bilisa ta'anii itti fufu. Yeroo dubbii Chapa'n dheeressuun ni danda'ama. | quality: high |
 | `Profile.speakingPlans` | See plans | Karooraawwan ilaali | quality: high |

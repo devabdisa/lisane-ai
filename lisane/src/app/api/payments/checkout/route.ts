@@ -5,6 +5,19 @@ import { enforceRouteRateLimit } from "@/server/rate-limit/route-rate-limit";
 import { startCheckout } from "@/server/services/payments/payments";
 import { z } from "zod";
 
+function browserReturnOrigin(request: Request) {
+  const host = (request.headers.get("x-forwarded-host") ?? request.headers.get("host") ?? "").split(",")[0]?.trim() ?? "";
+  if (!/^[a-zA-Z0-9.-]+(?::\d+)?$/.test(host)) return undefined;
+  const hostname = host.split(":")[0] ?? "";
+  const local =
+    hostname === "localhost" ||
+    hostname === "127.0.0.1" ||
+    /^(?:10|192\.168|172\.(?:1[6-9]|2\d|3[01]))(?:\.|$)/.test(hostname);
+  if (!local) return undefined;
+  const forwarded = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim();
+  return `${forwarded === "https" ? "https" : "http"}://${host}`;
+}
+
 const bodySchema = z.object({
   productId: z.string(),
   locale: z.string(),
@@ -32,6 +45,7 @@ export async function POST(request: Request) {
     productId: product.id,
     locale: parsed.data.locale,
     organizationName: parsed.data.organizationName,
+    returnOrigin: browserReturnOrigin(request),
   });
   if (result.status === "invalid") {
     return Response.json({ error: { code: "invalid_input", message: "Add the school name and try again." } }, { status: 400 });

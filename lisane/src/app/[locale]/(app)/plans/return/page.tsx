@@ -1,8 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { PageHeader } from "@/components/shell/page-header";
 import { Link } from "@/i18n/navigation";
+import { cn } from "@/lib/cn";
 import { requireAppUser } from "@/lib/require-app-user";
 import { getPrisma } from "@/server/db";
 import { grantVerifiedPayment } from "@/server/services/payments/payments";
@@ -22,14 +22,14 @@ export default async function PaymentReturnPage({ searchParams }: { searchParams
   return (
     <>
       <PageHeader title={t("returnTitle")} />
-      <main className="mx-auto flex w-full max-w-xl flex-col gap-4 px-4 pb-6">
-        <Card>
+      <main className="mx-auto flex w-full max-w-xl flex-col gap-4 px-4 pb-8">
+        <section className={cn("flex flex-col gap-4 rounded-16 p-6", confirmed ? "bg-accent-host text-white" : "border border-line bg-card text-fg")}>
           <p className="text-heading font-semibold">{confirmed ? t("returnPaid") : t("returnPending")}</p>
-          {school ? <p className="text-body">{t("yourCode", { code: school.joinCode })}</p> : null}
+          {school ? <p className="text-body font-semibold">{t("yourCode", { code: school.joinCode })}</p> : null}
           <Button asChild width="full">
             <Link href={confirmed ? "/speak" : "/plans"}>{confirmed ? t("startSpeaking") : t("backToPlans")}</Link>
           </Button>
-        </Card>
+        </section>
       </main>
     </>
   );

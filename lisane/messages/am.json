@@ -182,6 +182,9 @@
   "Plans": {
     "title": "የንግግር ጊዜ",
     "freeLeft": "{minutes} ነፃ ደቂቃዎች ቀርተውዎታል። ትምህርቶች ነፃ ሆነው ይቀጥላሉ።",
+    "minutesNow": "ዛሬ {minutes} ደቂቃ ቀርቷል",
+    "payAmount": "{amount} ብር ይክፈሉ",
+    "chapaNext": "ቻፓ በመቀጠል ይከፈታል። ክፍያው ሲረጋገጥ የመናገር ጊዜ ይጀምራል።",
     "plusActive": "የእርስዎ ፕላስ ፓስ ገቢር ሆኗል።",
     "schoolActive": "ከ{name} ጋር እየተነጋገሩ ነው።",
     "plusTitle": "ለ30 ቀናት ተጨማሪ",
