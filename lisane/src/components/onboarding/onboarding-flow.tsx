@@ -56,7 +56,8 @@ function OnboardingFlow({ profile, firstUnit }: { profile: ProfileDTO | null; fi
     if (!answers.success) {
       const field = String(answers.error.issues[0]?.path[0] ?? "");
       const stepForField = { supportLanguage: "language", goal: "goal", englishLevel: "level", dailyGoalMinutes: "daily" }[field];
-      if (stepForField) setStepIndex(steps.indexOf(stepForField as (typeof steps)[number]));
+      const index = steps.findIndex((item) => item === stepForField);
+      if (index >= 0) setStepIndex(index);
       setError(true);
       setPending(false);
       return;
